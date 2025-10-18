@@ -60,7 +60,7 @@ func (cb GoRustBuffer) AsReader() *bytes.Reader {
 
 func (cb GoRustBuffer) Free() {
 	rustCall(func(status *C.RustCallStatus) bool {
-		C.ffi_loro_rustbuffer_free(cb.inner, status)
+		C.ffi_loro_ffi_rustbuffer_free(cb.inner, status)
 		return false
 	})
 }
@@ -85,7 +85,7 @@ func bytesToRustBuffer(b []byte) C.RustBuffer {
 	}
 
 	return rustCall(func(status *C.RustCallStatus) C.RustBuffer {
-		return C.ffi_loro_rustbuffer_from_bytes(foreign, status)
+		return C.ffi_loro_ffi_rustbuffer_from_bytes(foreign, status)
 	})
 }
 
@@ -353,7 +353,7 @@ func uniffiCheckChecksums() {
 	bindingsContractVersion := 26
 	// Get the scaffolding contract version by calling the into the dylib
 	scaffoldingContractVersion := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.ffi_loro_uniffi_contract_version()
+		return C.ffi_loro_ffi_uniffi_contract_version()
 	})
 	if bindingsContractVersion != int(scaffoldingContractVersion) {
 		// If this happens try cleaning and rebuilding your project
@@ -361,3035 +361,3350 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_func_decode_import_blob_meta()
+			return C.uniffi_loro_ffi_checksum_func_decode_import_blob_meta()
 		})
-		if checksum != 2769 {
+		if checksum != 59767 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_func_decode_import_blob_meta: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_func_decode_import_blob_meta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_func_get_version()
+			return C.uniffi_loro_ffi_checksum_func_get_version()
 		})
-		if checksum != 3250 {
+		if checksum != 39468 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_func_get_version: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_func_get_version: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_apply()
+			return C.uniffi_loro_ffi_checksum_method_awareness_apply()
 		})
-		if checksum != 41900 {
+		if checksum != 32695 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_apply: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_apply: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_encode()
+			return C.uniffi_loro_ffi_checksum_method_awareness_encode()
 		})
-		if checksum != 37443 {
+		if checksum != 4426 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_encode: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_encode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_encode_all()
+			return C.uniffi_loro_ffi_checksum_method_awareness_encode_all()
 		})
-		if checksum != 38982 {
+		if checksum != 29690 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_encode_all: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_encode_all: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_get_all_states()
+			return C.uniffi_loro_ffi_checksum_method_awareness_get_all_states()
 		})
-		if checksum != 30017 {
+		if checksum != 24946 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_get_all_states: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_get_all_states: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_get_local_state()
+			return C.uniffi_loro_ffi_checksum_method_awareness_get_local_state()
 		})
-		if checksum != 59706 {
+		if checksum != 47648 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_get_local_state: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_get_local_state: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_peer()
+			return C.uniffi_loro_ffi_checksum_method_awareness_peer()
 		})
-		if checksum != 10202 {
+		if checksum != 7626 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_peer: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_peer: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_remove_outdated()
+			return C.uniffi_loro_ffi_checksum_method_awareness_remove_outdated()
 		})
-		if checksum != 1483 {
+		if checksum != 59591 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_remove_outdated: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_remove_outdated: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_awareness_set_local_state()
+			return C.uniffi_loro_ffi_checksum_method_awareness_set_local_state()
 		})
-		if checksum != 517 {
+		if checksum != 12712 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_awareness_set_local_state: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_awareness_set_local_state: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_changeancestorstraveler_travel()
+			return C.uniffi_loro_ffi_checksum_method_changeancestorstraveler_travel()
 		})
-		if checksum != 17239 {
+		if checksum != 43603 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_changeancestorstraveler_travel: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_changeancestorstraveler_travel: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_changemodifier_set_message()
+			return C.uniffi_loro_ffi_checksum_method_changemodifier_set_message()
 		})
-		if checksum != 44190 {
+		if checksum != 11943 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_changemodifier_set_message: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_changemodifier_set_message: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_changemodifier_set_timestamp()
+			return C.uniffi_loro_ffi_checksum_method_changemodifier_set_timestamp()
 		})
-		if checksum != 6652 {
+		if checksum != 5014 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_changemodifier_set_timestamp: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_changemodifier_set_timestamp: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_fork()
+			return C.uniffi_loro_ffi_checksum_method_configure_fork()
 		})
-		if checksum != 57176 {
+		if checksum != 3880 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_fork: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_fork: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_merge_interval()
+			return C.uniffi_loro_ffi_checksum_method_configure_merge_interval()
 		})
-		if checksum != 43546 {
+		if checksum != 19914 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_merge_interval: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_merge_interval: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_record_timestamp()
+			return C.uniffi_loro_ffi_checksum_method_configure_record_timestamp()
 		})
-		if checksum != 41033 {
+		if checksum != 47148 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_record_timestamp: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_record_timestamp: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_set_merge_interval()
+			return C.uniffi_loro_ffi_checksum_method_configure_set_merge_interval()
 		})
-		if checksum != 4893 {
+		if checksum != 59151 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_set_merge_interval: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_set_merge_interval: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_set_record_timestamp()
+			return C.uniffi_loro_ffi_checksum_method_configure_set_record_timestamp()
 		})
-		if checksum != 30145 {
+		if checksum != 41593 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_set_record_timestamp: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_set_record_timestamp: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_configure_text_style_config()
+			return C.uniffi_loro_ffi_checksum_method_configure_text_style_config()
 		})
-		if checksum != 50151 {
+		if checksum != 13969 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_configure_text_style_config: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_configure_text_style_config: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_containeridlike_as_container_id()
+			return C.uniffi_loro_ffi_checksum_method_containeridlike_as_container_id()
 		})
-		if checksum != 41081 {
+		if checksum != 5805 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_containeridlike_as_container_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_containeridlike_as_container_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_diffbatch_get_diff()
+			return C.uniffi_loro_ffi_checksum_method_cursor_encode()
 		})
-		if checksum != 42707 {
+		if checksum != 36128 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_diffbatch_get_diff: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_cursor_encode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_diffbatch_push()
+			return C.uniffi_loro_ffi_checksum_method_diffbatch_get_diff()
 		})
-		if checksum != 56678 {
+		if checksum != 5540 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_diffbatch_push: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_diffbatch_get_diff: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_apply()
+			return C.uniffi_loro_ffi_checksum_method_diffbatch_push()
 		})
-		if checksum != 27412 {
+		if checksum != 17472 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_apply: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_diffbatch_push: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_delete()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_apply()
 		})
-		if checksum != 37001 {
+		if checksum != 1107 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_apply: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_encode()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_delete()
 		})
-		if checksum != 35731 {
+		if checksum != 9629 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_encode: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_delete: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_encode_all()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_encode()
 		})
-		if checksum != 1587 {
+		if checksum != 27800 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_encode_all: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_encode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_get()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_encode_all()
 		})
-		if checksum != 37668 {
+		if checksum != 45592 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_get: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_encode_all: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_get_all_states()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_get()
 		})
-		if checksum != 11717 {
+		if checksum != 23330 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_get_all_states: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_get: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_keys()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_get_all_states()
 		})
-		if checksum != 27585 {
+		if checksum != 26188 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_keys: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_get_all_states: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_remove_outdated()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_keys()
 		})
-		if checksum != 35095 {
+		if checksum != 19682 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_remove_outdated: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_keys: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_set()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_remove_outdated()
 		})
-		if checksum != 21774 {
+		if checksum != 55398 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_set: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_remove_outdated: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_subscribe()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_set()
 		})
-		if checksum != 54930 {
+		if checksum != 7799 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_subscribe: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_set: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralstore_subscribe_local_update()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_subscribe()
 		})
-		if checksum != 54586 {
+		if checksum != 1473 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralstore_subscribe_local_update: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_ephemeralsubscriber_on_ephemeral_event()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralstore_subscribe_local_update()
 		})
-		if checksum != 33183 {
+		if checksum != 1506 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_ephemeralsubscriber_on_ephemeral_event: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralstore_subscribe_local_update: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_firstcommitfrompeercallback_on_first_commit_from_peer()
+			return C.uniffi_loro_ffi_checksum_method_ephemeralsubscriber_on_ephemeral_event()
 		})
-		if checksum != 51977 {
+		if checksum != 21232 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_firstcommitfrompeercallback_on_first_commit_from_peer: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_ephemeralsubscriber_on_ephemeral_event: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_fractionalindex_to_string()
+			return C.uniffi_loro_ffi_checksum_method_firstcommitfrompeercallback_on_first_commit_from_peer()
 		})
-		if checksum != 57024 {
+		if checksum != 54327 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_fractionalindex_to_string: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_firstcommitfrompeercallback_on_first_commit_from_peer: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_frontiers_encode()
+			return C.uniffi_loro_ffi_checksum_method_fractionalindex_to_string()
 		})
-		if checksum != 48230 {
+		if checksum != 5688 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_frontiers_encode: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_fractionalindex_to_string: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_frontiers_eq()
+			return C.uniffi_loro_ffi_checksum_method_frontiers_encode()
 		})
-		if checksum != 20207 {
+		if checksum != 14564 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_frontiers_eq: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_frontiers_encode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_localephemerallistener_on_ephemeral_update()
+			return C.uniffi_loro_ffi_checksum_method_frontiers_eq()
 		})
-		if checksum != 59317 {
+		if checksum != 19191 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_localephemerallistener_on_ephemeral_update: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_frontiers_eq: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_localupdatecallback_on_local_update()
+			return C.uniffi_loro_ffi_checksum_method_frontiers_is_empty()
 		})
-		if checksum != 21789 {
+		if checksum != 14722 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_localupdatecallback_on_local_update: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_frontiers_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_decrement()
+			return C.uniffi_loro_ffi_checksum_method_frontiers_to_vec()
 		})
-		if checksum != 53919 {
+		if checksum != 15210 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_decrement: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_frontiers_to_vec: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_doc()
+			return C.uniffi_loro_ffi_checksum_method_localephemerallistener_on_ephemeral_update()
 		})
-		if checksum != 54846 {
+		if checksum != 58755 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_localephemerallistener_on_ephemeral_update: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_localupdatecallback_on_local_update()
 		})
-		if checksum != 22021 {
+		if checksum != 56990 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_localupdatecallback_on_local_update: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_get_value()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_decrement()
 		})
-		if checksum != 44616 {
+		if checksum != 56450 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_decrement: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_id()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_doc()
 		})
-		if checksum != 31148 {
+		if checksum != 18968 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_doc: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_increment()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_get_attached()
 		})
-		if checksum != 47367 {
+		if checksum != 28917 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_increment: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_get_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_get_value()
 		})
-		if checksum != 51768 {
+		if checksum != 43671 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_get_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorocounter_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_id()
 		})
-		if checksum != 12079 {
+		if checksum != 35406 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorocounter_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_apply_diff()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_increment()
 		})
-		if checksum != 45393 {
+		if checksum != 60293 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_apply_diff: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_increment: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_attach()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_is_attached()
 		})
-		if checksum != 7252 {
+		if checksum != 28676 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_attach: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_check_state_correctness_slow()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_is_deleted()
 		})
-		if checksum != 43878 {
+		if checksum != 38594 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_check_state_correctness_slow: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_checkout()
+			return C.uniffi_loro_ffi_checksum_method_lorocounter_subscribe()
 		})
-		if checksum != 415 {
+		if checksum != 60261 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_checkout: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorocounter_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_checkout_to_latest()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_apply_diff()
 		})
-		if checksum != 2349 {
+		if checksum != 15296 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_checkout_to_latest: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_apply_diff: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_clear_next_commit_options()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_attach()
 		})
-		if checksum != 45217 {
+		if checksum != 48074 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_clear_next_commit_options: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_attach: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_cmp_with_frontiers()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_check_state_correctness_slow()
 		})
-		if checksum != 31942 {
+		if checksum != 53663 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_cmp_with_frontiers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_check_state_correctness_slow: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_commit()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_checkout()
 		})
-		if checksum != 53174 {
+		if checksum != 61916 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_commit: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_checkout: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_commit_with()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_checkout_to_latest()
 		})
-		if checksum != 29999 {
+		if checksum != 62670 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_commit_with: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_checkout_to_latest: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_compact_change_store()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_clear_next_commit_options()
 		})
-		if checksum != 26224 {
+		if checksum != 21764 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_compact_change_store: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_clear_next_commit_options: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_config()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_cmp_with_frontiers()
 		})
-		if checksum != 3400 {
+		if checksum != 41551 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_config: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_cmp_with_frontiers: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_config_default_text_style()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_commit()
 		})
-		if checksum != 15083 {
+		if checksum != 25168 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_config_default_text_style: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_commit: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_config_text_style()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_commit_with()
 		})
-		if checksum != 52393 {
+		if checksum != 65138 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_config_text_style: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_commit_with: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_delete_root_container()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_compact_change_store()
 		})
-		if checksum != 40125 {
+		if checksum != 59461 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_delete_root_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_compact_change_store: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_detach()
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_config()
+		})
+		if checksum != 33471 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_config: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_config_default_text_style()
+		})
+		if checksum != 10240 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_config_default_text_style: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_config_text_style()
+		})
+		if checksum != 17307 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_config_text_style: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_delete_root_container()
+		})
+		if checksum != 4559 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_delete_root_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_detach()
+		})
+		if checksum != 24925 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_detach: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_diff()
+		})
+		if checksum != 53647 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_diff: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_json_in_id_span()
+		})
+		if checksum != 4524 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_json_in_id_span: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_json_updates()
+		})
+		if checksum != 27055 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_json_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_json_updates_without_peer_compression()
+		})
+		if checksum != 42286 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_json_updates_without_peer_compression: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_shallow_snapshot()
+		})
+		if checksum != 20071 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_shallow_snapshot: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot()
+		})
+		if checksum != 28510 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot_at()
+		})
+		if checksum != 37996 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot_at: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_state_only()
+		})
+		if checksum != 29117 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_state_only: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_updates()
+		})
+		if checksum != 2490 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_updates_in_range()
+		})
+		if checksum != 62352 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_updates_in_range: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_find_id_spans_between()
+		})
+		if checksum != 1704 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_find_id_spans_between: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_fork()
+		})
+		if checksum != 42814 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_fork: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_fork_at()
+		})
+		if checksum != 26280 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_fork_at: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_free_diff_calculator()
+		})
+		if checksum != 59630 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_free_diff_calculator: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_free_history_cache()
+		})
+		if checksum != 3470 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_free_history_cache: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_frontiers_to_vv()
+		})
+		if checksum != 11507 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_frontiers_to_vv: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_by_path()
+		})
+		if checksum != 41531 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_by_path: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_by_str_path()
+		})
+		if checksum != 12043 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_by_str_path: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_change()
+		})
+		if checksum != 11256 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_change: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_changed_containers_in()
+		})
+		if checksum != 34378 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_changed_containers_in: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_counter()
+		})
+		if checksum != 60124 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_counter: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_cursor_pos()
+		})
+		if checksum != 47 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_cursor_pos: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_deep_value()
+		})
+		if checksum != 38910 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_deep_value: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_deep_value_with_id()
+		})
+		if checksum != 64810 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_deep_value_with_id: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_list()
+		})
+		if checksum != 55819 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_list: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_map()
+		})
+		if checksum != 4871 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_map: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_movable_list()
+		})
+		if checksum != 17784 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_movable_list: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_path_to_container()
+		})
+		if checksum != 13102 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_path_to_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_pending_txn_len()
+		})
+		if checksum != 37770 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_pending_txn_len: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_text()
+		})
+		if checksum != 15375 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_text: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_tree()
+		})
+		if checksum != 30197 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_tree: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_value()
+		})
+		if checksum != 14086 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_value: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_has_container()
+		})
+		if checksum != 21303 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_has_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_has_history_cache()
+		})
+		if checksum != 18486 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_has_history_cache: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_import()
+		})
+		if checksum != 35043 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_import: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_import_batch()
+		})
+		if checksum != 39938 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_import_batch: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_import_json_updates()
+		})
+		if checksum != 58091 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_import_json_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_import_with()
+		})
+		if checksum != 21187 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_import_with: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_is_detached()
+		})
+		if checksum != 19296 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_is_detached: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_is_shallow()
+		})
+		if checksum != 52920 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_is_shallow: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_jsonpath()
+		})
+		if checksum != 58280 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_jsonpath: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_len_changes()
+		})
+		if checksum != 43389 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_len_changes: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_len_ops()
+		})
+		if checksum != 1966 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_len_ops: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_minimize_frontiers()
+		})
+		if checksum != 47301 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_minimize_frontiers: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_oplog_frontiers()
+		})
+		if checksum != 35760 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_oplog_frontiers: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_oplog_vv()
+		})
+		if checksum != 35992 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_oplog_vv: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_peer_id()
+		})
+		if checksum != 5346 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_peer_id: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_redact_json_updates()
+		})
+		if checksum != 33049 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_redact_json_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_revert_to()
+		})
+		if checksum != 13908 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_revert_to: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_change_merge_interval()
+		})
+		if checksum != 35421 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_change_merge_interval: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_hide_empty_root_containers()
+		})
+		if checksum != 61757 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_hide_empty_root_containers: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_message()
+		})
+		if checksum != 47832 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_message: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_options()
+		})
+		if checksum != 53420 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_options: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_origin()
+		})
+		if checksum != 17826 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_origin: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_timestamp()
+		})
+		if checksum != 12708 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_next_commit_timestamp: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_peer_id()
+		})
+		if checksum != 59162 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_peer_id: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_set_record_timestamp()
+		})
+		if checksum != 30166 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_set_record_timestamp: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_shallow_since_vv()
+		})
+		if checksum != 62947 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_shallow_since_vv: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_state_frontiers()
+		})
+		if checksum != 3671 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_state_frontiers: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_state_vv()
+		})
+		if checksum != 14064 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_state_vv: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe()
+		})
+		if checksum != 33289 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe_first_commit_from_peer()
+		})
+		if checksum != 65444 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_first_commit_from_peer: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe_local_update()
+		})
+		if checksum != 46483 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_local_update: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe_pre_commit()
+		})
+		if checksum != 8982 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_pre_commit: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe_root()
+		})
+		if checksum != 64208 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_root: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_travel_change_ancestors()
+		})
+		if checksum != 39975 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_travel_change_ancestors: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_vv_to_frontiers()
+		})
+		if checksum != 45843 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_vv_to_frontiers: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_clear()
+		})
+		if checksum != 59547 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_clear: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_delete()
+		})
+		if checksum != 34888 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_delete: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_doc()
+		})
+		if checksum != 53175 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_doc: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get()
+		})
+		if checksum != 5256 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get_attached()
+		})
+		if checksum != 45494 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get_attached: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get_cursor()
+		})
+		if checksum != 37701 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get_cursor: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get_deep_value()
+		})
+		if checksum != 41115 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get_deep_value: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get_id_at()
+		})
+		if checksum != 29299 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get_id_at: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_get_value()
+		})
+		if checksum != 35537 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_get_value: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_id()
+		})
+		if checksum != 43156 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_id: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert()
+		})
+		if checksum != 8265 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_counter_container()
+		})
+		if checksum != 32924 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_counter_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_list_container()
+		})
+		if checksum != 3124 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_list_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_map_container()
+		})
+		if checksum != 8686 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_map_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_movable_list_container()
 		})
 		if checksum != 61399 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_detach: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_movable_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_diff()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_text_container()
 		})
-		if checksum != 38416 {
+		if checksum != 58385 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_diff: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_text_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_json_in_id_span()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_insert_tree_container()
 		})
-		if checksum != 26608 {
+		if checksum != 39269 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_json_in_id_span: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_insert_tree_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_json_updates()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_is_attached()
 		})
-		if checksum != 15152 {
+		if checksum != 51464 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_json_updates: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_json_updates_without_peer_compression()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_is_deleted()
 		})
-		if checksum != 23184 {
+		if checksum != 17142 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_json_updates_without_peer_compression: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_shallow_snapshot()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_is_empty()
 		})
-		if checksum != 27927 {
+		if checksum != 3297 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_shallow_snapshot: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_snapshot()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_len()
 		})
-		if checksum != 61274 {
+		if checksum != 31562 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_snapshot: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_len: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_snapshot_at()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_pop()
 		})
-		if checksum != 64602 {
+		if checksum != 46637 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_snapshot_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_pop: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_state_only()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_push()
 		})
-		if checksum != 16747 {
+		if checksum != 48242 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_state_only: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_push: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_updates()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_subscribe()
 		})
-		if checksum != 57637 {
+		if checksum != 37781 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_updates: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_export_updates_in_range()
+			return C.uniffi_loro_ffi_checksum_method_lorolist_to_vec()
 		})
-		if checksum != 22491 {
+		if checksum != 48551 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_export_updates_in_range: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorolist_to_vec: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_find_id_spans_between()
+			return C.uniffi_loro_ffi_checksum_method_loromap_clear()
 		})
-		if checksum != 1313 {
+		if checksum != 36823 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_find_id_spans_between: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_clear: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_fork()
+			return C.uniffi_loro_ffi_checksum_method_loromap_delete()
 		})
-		if checksum != 45665 {
+		if checksum != 1727 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_fork: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_delete: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_fork_at()
+			return C.uniffi_loro_ffi_checksum_method_loromap_doc()
 		})
-		if checksum != 40377 {
+		if checksum != 23666 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_fork_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_doc: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_free_diff_calculator()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get()
 		})
-		if checksum != 32937 {
+		if checksum != 3814 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_free_diff_calculator: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_free_history_cache()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_attached()
 		})
-		if checksum != 22144 {
+		if checksum != 56597 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_free_history_cache: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_frontiers_to_vv()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_deep_value()
 		})
-		if checksum != 11123 {
+		if checksum != 63734 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_frontiers_to_vv: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_deep_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_by_path()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_last_editor()
 		})
-		if checksum != 35945 {
+		if checksum != 57747 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_by_path: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_last_editor: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_by_str_path()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_counter_container()
 		})
-		if checksum != 6739 {
+		if checksum != 54451 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_by_str_path: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_counter_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_change()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_list_container()
 		})
-		if checksum != 17896 {
+		if checksum != 65040 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_change: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_changed_containers_in()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_map_container()
 		})
-		if checksum != 52454 {
+		if checksum != 8641 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_changed_containers_in: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_map_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_counter()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_movable_list_container()
 		})
-		if checksum != 12597 {
+		if checksum != 43140 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_counter: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_movable_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_cursor_pos()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_text_container()
 		})
-		if checksum != 30480 {
+		if checksum != 26168 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_cursor_pos: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_text_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_deep_value()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_or_create_tree_container()
 		})
-		if checksum != 3404 {
+		if checksum != 3661 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_deep_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_or_create_tree_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_deep_value_with_id()
+			return C.uniffi_loro_ffi_checksum_method_loromap_get_value()
 		})
-		if checksum != 49124 {
+		if checksum != 22622 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_deep_value_with_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_get_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_list()
+			return C.uniffi_loro_ffi_checksum_method_loromap_id()
 		})
-		if checksum != 9609 {
+		if checksum != 57881 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_list: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_map()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert()
 		})
-		if checksum != 63137 {
+		if checksum != 34158 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_map: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_movable_list()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_counter_container()
 		})
-		if checksum != 7302 {
+		if checksum != 6141 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_movable_list: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_counter_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_path_to_container()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_list_container()
 		})
-		if checksum != 62623 {
+		if checksum != 42123 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_path_to_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_pending_txn_len()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_map_container()
 		})
-		if checksum != 15050 {
+		if checksum != 17066 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_pending_txn_len: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_map_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_text()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_movable_list_container()
 		})
-		if checksum != 56069 {
+		if checksum != 57381 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_text: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_movable_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_tree()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_text_container()
 		})
-		if checksum != 54189 {
+		if checksum != 28951 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_tree: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_text_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_get_value()
+			return C.uniffi_loro_ffi_checksum_method_loromap_insert_tree_container()
 		})
-		if checksum != 29857 {
+		if checksum != 57059 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_insert_tree_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_has_container()
+			return C.uniffi_loro_ffi_checksum_method_loromap_is_attached()
 		})
-		if checksum != 41856 {
+		if checksum != 41489 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_has_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_has_history_cache()
+			return C.uniffi_loro_ffi_checksum_method_loromap_is_deleted()
 		})
-		if checksum != 53741 {
+		if checksum != 32195 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_has_history_cache: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_import()
+			return C.uniffi_loro_ffi_checksum_method_loromap_is_empty()
 		})
-		if checksum != 11528 {
+		if checksum != 41904 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_import: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_import_batch()
+			return C.uniffi_loro_ffi_checksum_method_loromap_keys()
 		})
-		if checksum != 34010 {
+		if checksum != 52242 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_import_batch: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_keys: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_import_json_updates()
+			return C.uniffi_loro_ffi_checksum_method_loromap_len()
 		})
-		if checksum != 57379 {
+		if checksum != 39413 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_import_json_updates: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_len: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_import_with()
+			return C.uniffi_loro_ffi_checksum_method_loromap_subscribe()
 		})
-		if checksum != 12897 {
+		if checksum != 52134 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_import_with: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_is_detached()
+			return C.uniffi_loro_ffi_checksum_method_loromap_values()
 		})
-		if checksum != 30909 {
+		if checksum != 59291 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_is_detached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromap_values: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_is_shallow()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_clear()
 		})
-		if checksum != 53044 {
+		if checksum != 12048 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_is_shallow: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_clear: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_jsonpath()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_delete()
 		})
-		if checksum != 15996 {
+		if checksum != 9110 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_jsonpath: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_delete: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_len_changes()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_doc()
 		})
-		if checksum != 62401 {
+		if checksum != 61310 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_len_changes: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_doc: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_len_ops()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get()
 		})
-		if checksum != 11644 {
+		if checksum != 8877 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_len_ops: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_log_estimate_size()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_attached()
 		})
-		if checksum != 19429 {
+		if checksum != 42721 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_log_estimate_size: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_minimize_frontiers()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_creator_at()
 		})
-		if checksum != 39579 {
+		if checksum != 27128 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_minimize_frontiers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_creator_at: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_oplog_frontiers()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_cursor()
 		})
-		if checksum != 49043 {
+		if checksum != 62502 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_oplog_frontiers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_cursor: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_oplog_vv()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_deep_value()
 		})
-		if checksum != 56754 {
+		if checksum != 8622 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_oplog_vv: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_deep_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_peer_id()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_last_editor_at()
 		})
-		if checksum != 35449 {
+		if checksum != 37091 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_peer_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_last_editor_at: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_revert_to()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_last_mover_at()
 		})
-		if checksum != 48346 {
+		if checksum != 63909 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_revert_to: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_last_mover_at: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_change_merge_interval()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_get_value()
 		})
-		if checksum != 55133 {
+		if checksum != 33102 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_change_merge_interval: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_get_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_hide_empty_root_containers()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_id()
 		})
-		if checksum != 34137 {
+		if checksum != 25848 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_hide_empty_root_containers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_next_commit_message()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert()
 		})
-		if checksum != 18940 {
+		if checksum != 47936 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_next_commit_message: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_next_commit_options()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_counter_container()
 		})
-		if checksum != 13250 {
+		if checksum != 38234 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_next_commit_options: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_counter_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_next_commit_origin()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_list_container()
 		})
-		if checksum != 27549 {
+		if checksum != 50065 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_next_commit_origin: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_next_commit_timestamp()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_map_container()
 		})
-		if checksum != 30492 {
+		if checksum != 61365 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_next_commit_timestamp: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_map_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_peer_id()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_movable_list_container()
 		})
-		if checksum != 29379 {
+		if checksum != 23331 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_peer_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_movable_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_set_record_timestamp()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_text_container()
 		})
-		if checksum != 15945 {
+		if checksum != 57512 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_set_record_timestamp: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_text_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_shallow_since_vv()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_insert_tree_container()
 		})
-		if checksum != 13449 {
+		if checksum != 12645 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_shallow_since_vv: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_insert_tree_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_state_frontiers()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_is_attached()
 		})
-		if checksum != 17079 {
+		if checksum != 58545 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_state_frontiers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_state_vv()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_is_deleted()
 		})
-		if checksum != 1627 {
+		if checksum != 34830 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_state_vv: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_subscribe()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_is_empty()
 		})
-		if checksum != 7981 {
+		if checksum != 37813 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_subscribe: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_subscribe_first_commit_from_peer()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_len()
 		})
-		if checksum != 45629 {
+		if checksum != 30817 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_subscribe_first_commit_from_peer: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_len: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_subscribe_local_update()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_mov()
 		})
-		if checksum != 58652 {
+		if checksum != 19397 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_subscribe_local_update: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_mov: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_subscribe_pre_commit()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_pop()
 		})
-		if checksum != 54832 {
+		if checksum != 7553 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_subscribe_pre_commit: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_pop: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_subscribe_root()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_push()
 		})
-		if checksum != 16564 {
+		if checksum != 61369 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_subscribe_root: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_push: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_travel_change_ancestors()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set()
 		})
-		if checksum != 39918 {
+		if checksum != 26682 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_travel_change_ancestors: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorodoc_vv_to_frontiers()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_counter_container()
 		})
-		if checksum != 47960 {
+		if checksum != 47882 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorodoc_vv_to_frontiers: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_counter_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_clear()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_list_container()
 		})
-		if checksum != 61243 {
+		if checksum != 48467 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_clear: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_delete()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_map_container()
 		})
-		if checksum != 40414 {
+		if checksum != 18279 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_map_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_doc()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_movable_list_container()
 		})
-		if checksum != 4182 {
+		if checksum != 58356 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_movable_list_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_text_container()
 		})
-		if checksum != 36174 {
+		if checksum != 17337 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_text_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_set_tree_container()
 		})
-		if checksum != 5208 {
+		if checksum != 10601 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_set_tree_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get_cursor()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_subscribe()
 		})
-		if checksum != 42636 {
+		if checksum != 31212 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get_cursor: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get_deep_value()
+			return C.uniffi_loro_ffi_checksum_method_loromovablelist_to_vec()
 		})
-		if checksum != 9355 {
+		if checksum != 22764 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get_deep_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_loromovablelist_to_vec: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get_id_at()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_apply_delta()
 		})
-		if checksum != 63640 {
+		if checksum != 31013 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get_id_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_apply_delta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_get_value()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_char_at()
 		})
-		if checksum != 14384 {
+		if checksum != 49891 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_char_at: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_id()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_delete()
 		})
-		if checksum != 33887 {
+		if checksum != 50707 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_delete: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_delete_utf8()
 		})
-		if checksum != 19544 {
+		if checksum != 47178 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_delete_utf8: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_counter_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_doc()
 		})
-		if checksum != 41569 {
+		if checksum != 37119 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_counter_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_doc: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_get_attached()
 		})
-		if checksum != 42165 {
+		if checksum != 36679 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_get_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_map_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_get_cursor()
 		})
-		if checksum != 25622 {
+		if checksum != 14735 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_map_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_get_cursor: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_movable_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_get_editor_at_unicode_pos()
 		})
-		if checksum != 23559 {
+		if checksum != 20823 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_movable_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_get_editor_at_unicode_pos: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_text_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_get_richtext_value()
 		})
-		if checksum != 26631 {
+		if checksum != 41287 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_text_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_get_richtext_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_insert_tree_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_id()
 		})
-		if checksum != 15665 {
+		if checksum != 15221 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_insert_tree_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_insert()
 		})
-		if checksum != 60548 {
+		if checksum != 28264 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_insert: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_insert_utf8()
 		})
-		if checksum != 44383 {
+		if checksum != 16771 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_insert_utf8: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_is_empty()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_is_attached()
 		})
-		if checksum != 13469 {
+		if checksum != 58046 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_is_empty: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_len()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_is_deleted()
 		})
-		if checksum != 22800 {
+		if checksum != 31785 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_len: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_pop()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_is_empty()
 		})
-		if checksum != 20748 {
+		if checksum != 46465 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_pop: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_push()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_len_unicode()
 		})
-		if checksum != 32091 {
+		if checksum != 20282 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_push: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_len_unicode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorolist_to_vec()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_len_utf16()
 		})
-		if checksum != 34199 {
+		if checksum != 31093 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorolist_to_vec: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_len_utf16: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_clear()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_len_utf8()
 		})
-		if checksum != 22445 {
+		if checksum != 7703 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_clear: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_len_utf8: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_delete()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_mark()
 		})
-		if checksum != 54675 {
+		if checksum != 24092 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_mark: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_doc()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_push_str()
 		})
-		if checksum != 4684 {
+		if checksum != 46599 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_push_str: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_slice()
 		})
-		if checksum != 57695 {
+		if checksum != 10385 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_slice: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_splice()
 		})
-		if checksum != 22266 {
+		if checksum != 53391 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_splice: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_deep_value()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_subscribe()
 		})
-		if checksum != 23748 {
+		if checksum != 55608 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_deep_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_last_editor()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_to_delta()
 		})
-		if checksum != 54864 {
+		if checksum != 49666 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_last_editor: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_to_delta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_counter_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_to_string()
 		})
-		if checksum != 34280 {
+		if checksum != 28280 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_counter_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_to_string: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_unmark()
 		})
-		if checksum != 51559 {
+		if checksum != 47537 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_unmark: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_map_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_update()
 		})
-		if checksum != 8592 {
+		if checksum != 25715 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_map_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_update: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_movable_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotext_update_by_line()
 		})
-		if checksum != 15746 {
+		if checksum != 58900 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_movable_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_update_by_line: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_text_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_children()
 		})
-		if checksum != 13374 {
+		if checksum != 34358 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_text_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_children: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_or_create_tree_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_children_num()
 		})
-		if checksum != 4760 {
+		if checksum != 8923 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_or_create_tree_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_children_num: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_get_value()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_contains()
 		})
-		if checksum != 7268 {
+		if checksum != 37670 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_contains: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_id()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_create()
 		})
-		if checksum != 65486 {
+		if checksum != 38374 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_create: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_create_at()
 		})
-		if checksum != 748 {
+		if checksum != 47251 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_create_at: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_counter_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_delete()
 		})
-		if checksum != 5567 {
+		if checksum != 46062 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_counter_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_delete: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_disable_fractional_index()
 		})
-		if checksum != 52804 {
+		if checksum != 6413 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_disable_fractional_index: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_map_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_doc()
 		})
-		if checksum != 36523 {
+		if checksum != 46210 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_map_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_doc: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_movable_list_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_enable_fractional_index()
 		})
-		if checksum != 21076 {
+		if checksum != 60734 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_movable_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_enable_fractional_index: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_text_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_fractional_index()
 		})
-		if checksum != 50348 {
+		if checksum != 14495 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_text_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_fractional_index: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_insert_tree_container()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_get_attached()
 		})
-		if checksum != 59771 {
+		if checksum != 59293 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_insert_tree_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_get_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_get_last_move_id()
 		})
-		if checksum != 6283 {
+		if checksum != 40233 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_get_last_move_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_get_meta()
 		})
-		if checksum != 20980 {
+		if checksum != 33850 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_get_meta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_is_empty()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_get_value()
 		})
-		if checksum != 38768 {
+		if checksum != 1865 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_is_empty: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_get_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_keys()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_get_value_with_meta()
 		})
-		if checksum != 11621 {
+		if checksum != 15594 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_keys: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_get_value_with_meta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_len()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_id()
 		})
-		if checksum != 38088 {
+		if checksum != 16524 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_len: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromap_values()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_is_attached()
 		})
-		if checksum != 46629 {
+		if checksum != 57971 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromap_values: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_is_attached: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_clear()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_is_deleted()
 		})
-		if checksum != 17252 {
+		if checksum != 34560 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_clear: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_is_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_delete()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_is_fractional_index_enabled()
 		})
-		if checksum != 51786 {
+		if checksum != 28969 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_is_fractional_index_enabled: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_doc()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_is_node_deleted()
 		})
-		if checksum != 13729 {
+		if checksum != 16024 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_is_node_deleted: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_mov()
 		})
-		if checksum != 10599 {
+		if checksum != 20249 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_mov: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_mov_after()
 		})
-		if checksum != 53503 {
+		if checksum != 21386 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_mov_after: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_creator_at()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_mov_before()
 		})
-		if checksum != 21542 {
+		if checksum != 13866 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_creator_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_mov_before: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_cursor()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_mov_to()
 		})
-		if checksum != 118 {
+		if checksum != 32503 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_cursor: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_mov_to: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_deep_value()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_nodes()
 		})
-		if checksum != 18542 {
+		if checksum != 19191 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_deep_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_nodes: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_last_editor_at()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_parent()
 		})
-		if checksum != 8998 {
+		if checksum != 19692 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_last_editor_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_parent: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_last_mover_at()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_roots()
 		})
-		if checksum != 26603 {
+		if checksum != 6925 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_last_mover_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_roots: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_get_value()
+			return C.uniffi_loro_ffi_checksum_method_lorotree_subscribe()
 		})
-		if checksum != 50843 {
+		if checksum != 4481 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotree_subscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_id()
+			return C.uniffi_loro_ffi_checksum_method_lorounknown_id()
 		})
-		if checksum != 9803 {
+		if checksum != 45333 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorounknown_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert()
+			return C.uniffi_loro_ffi_checksum_method_lorovaluelike_as_loro_value()
 		})
-		if checksum != 28537 {
+		if checksum != 45291 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_lorovaluelike_as_loro_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_counter_container()
+			return C.uniffi_loro_ffi_checksum_method_onpop_on_pop()
 		})
-		if checksum != 56222 {
+		if checksum != 48967 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_counter_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_onpop_on_pop: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_list_container()
+			return C.uniffi_loro_ffi_checksum_method_onpush_on_push()
 		})
-		if checksum != 47190 {
+		if checksum != 12923 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_onpush_on_push: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_map_container()
+			return C.uniffi_loro_ffi_checksum_method_precommitcallback_on_pre_commit()
 		})
-		if checksum != 57810 {
+		if checksum != 57839 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_map_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_precommitcallback_on_pre_commit: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_movable_list_container()
+			return C.uniffi_loro_ffi_checksum_method_styleconfigmap_get()
 		})
-		if checksum != 6019 {
+		if checksum != 5813 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_movable_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_styleconfigmap_get: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_text_container()
+			return C.uniffi_loro_ffi_checksum_method_styleconfigmap_insert()
 		})
-		if checksum != 48945 {
+		if checksum != 64615 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_text_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_styleconfigmap_insert: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_insert_tree_container()
+			return C.uniffi_loro_ffi_checksum_method_subscriber_on_diff()
 		})
-		if checksum != 33670 {
+		if checksum != 37249 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_insert_tree_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_subscriber_on_diff: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_subscription_detach()
 		})
-		if checksum != 50724 {
+		if checksum != 63099 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_subscription_detach: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_subscription_unsubscribe()
 		})
-		if checksum != 37438 {
+		if checksum != 46858 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_subscription_unsubscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_is_empty()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_add_exclude_origin_prefix()
 		})
-		if checksum != 44651 {
+		if checksum != 63740 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_is_empty: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_add_exclude_origin_prefix: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_len()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_can_redo()
 		})
-		if checksum != 28945 {
+		if checksum != 35475 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_len: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_can_redo: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_mov()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_can_undo()
 		})
-		if checksum != 8301 {
+		if checksum != 42348 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_mov: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_can_undo: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_pop()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_group_end()
 		})
-		if checksum != 52086 {
+		if checksum != 37541 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_pop: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_group_end: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_push()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_group_start()
 		})
-		if checksum != 2828 {
+		if checksum != 64372 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_push: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_group_start: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_peer()
 		})
-		if checksum != 27054 {
+		if checksum != 45180 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_peer: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_counter_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_record_new_checkpoint()
 		})
-		if checksum != 1414 {
+		if checksum != 12209 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_counter_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_record_new_checkpoint: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_list_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_redo()
 		})
-		if checksum != 20393 {
+		if checksum != 52607 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_redo: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_map_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_redo_count()
 		})
-		if checksum != 20297 {
+		if checksum != 12383 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_map_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_redo_count: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_movable_list_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_set_max_undo_steps()
 		})
-		if checksum != 52254 {
+		if checksum != 20261 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_movable_list_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_set_max_undo_steps: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_text_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_set_merge_interval()
 		})
-		if checksum != 31935 {
+		if checksum != 34577 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_text_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_set_merge_interval: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_set_tree_container()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_set_on_pop()
 		})
-		if checksum != 8298 {
+		if checksum != 54502 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_set_tree_container: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_set_on_pop: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_loromovablelist_to_vec()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_set_on_push()
 		})
-		if checksum != 28826 {
+		if checksum != 23722 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_loromovablelist_to_vec: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_set_on_push: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_apply_delta()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_top_redo_meta()
 		})
-		if checksum != 32084 {
+		if checksum != 15306 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_apply_delta: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_top_redo_meta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_delete()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_top_redo_value()
 		})
-		if checksum != 47933 {
+		if checksum != 57224 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_top_redo_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_delete_utf8()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_top_undo_meta()
 		})
-		if checksum != 44384 {
+		if checksum != 26343 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_delete_utf8: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_top_undo_meta: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_doc()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_top_undo_value()
 		})
-		if checksum != 41195 {
+		if checksum != 42818 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_top_undo_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_undo()
 		})
-		if checksum != 16919 {
+		if checksum != 51407 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_undo: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_get_cursor()
+			return C.uniffi_loro_ffi_checksum_method_undomanager_undo_count()
 		})
-		if checksum != 57876 {
+		if checksum != 43432 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_get_cursor: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_undomanager_undo_count: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_get_editor_at_unicode_pos()
+			return C.uniffi_loro_ffi_checksum_method_unsubscriber_on_unsubscribe()
 		})
-		if checksum != 24596 {
+		if checksum != 64065 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_get_editor_at_unicode_pos: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_unsubscriber_on_unsubscribe: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_get_richtext_value()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_container()
 		})
-		if checksum != 45999 {
+		if checksum != 16799 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_get_richtext_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_id()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_counter()
 		})
-		if checksum != 30925 {
+		if checksum != 36547 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_counter: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_insert()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_list()
 		})
-		if checksum != 10847 {
+		if checksum != 46429 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_insert: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_list: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_insert_utf8()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_map()
 		})
-		if checksum != 8484 {
+		if checksum != 40964 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_insert_utf8: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_map: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_movable_list()
 		})
-		if checksum != 45378 {
+		if checksum != 56652 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_movable_list: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_text()
 		})
-		if checksum != 31871 {
+		if checksum != 7756 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_text: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_is_empty()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_tree()
 		})
-		if checksum != 7961 {
+		if checksum != 13237 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_is_empty: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_tree: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_len_unicode()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_unknown()
 		})
-		if checksum != 46650 {
+		if checksum != 3157 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_len_unicode: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_loro_unknown: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_len_utf16()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_as_value()
 		})
-		if checksum != 18865 {
+		if checksum != 16217 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_len_utf16: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_as_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_len_utf8()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_container_type()
 		})
-		if checksum != 29025 {
+		if checksum != 14339 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_len_utf8: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_container_type: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_mark()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_is_container()
 		})
-		if checksum != 42690 {
+		if checksum != 13147 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_mark: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_is_container: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_push_str()
+			return C.uniffi_loro_ffi_checksum_method_valueorcontainer_is_value()
 		})
-		if checksum != 2374 {
+		if checksum != 20846 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_push_str: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_valueorcontainer_is_value: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_slice()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_clear()
 		})
-		if checksum != 43152 {
+		if checksum != 22575 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_slice: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_clear: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_splice()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_contains_id()
 		})
-		if checksum != 30467 {
+		if checksum != 4971 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_splice: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_contains_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_to_delta()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_contains_id_span()
 		})
-		if checksum != 15868 {
+		if checksum != 52504 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_to_delta: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_contains_id_span: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_to_string()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_contains_ops_between()
 		})
-		if checksum != 63765 {
+		if checksum != 61529 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_to_string: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_contains_ops_between: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_unmark()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_extends_to_include_id_span()
 		})
-		if checksum != 14351 {
+		if checksum != 16625 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_unmark: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_extends_to_include_id_span: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_update()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_get()
 		})
-		if checksum != 16538 {
+		if checksum != 50783 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_update: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_get: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotext_update_by_line()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_get_all_ranges()
 		})
-		if checksum != 29301 {
+		if checksum != 20760 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotext_update_by_line: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_get_all_ranges: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_children()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_get_peers()
 		})
-		if checksum != 4750 {
+		if checksum != 40505 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_children: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_get_peers: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_children_num()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_has_overlap_with()
 		})
-		if checksum != 50997 {
+		if checksum != 65383 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_children_num: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_has_overlap_with: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_contains()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_insert()
 		})
-		if checksum != 62174 {
+		if checksum != 44262 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_contains: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_insert: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_create()
+			return C.uniffi_loro_ffi_checksum_method_versionrange_is_empty()
 		})
-		if checksum != 55490 {
+		if checksum != 60658 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_create: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionrange_is_empty: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_create_at()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_diff()
 		})
-		if checksum != 64751 {
+		if checksum != 2647 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_create_at: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_diff: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_delete()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_encode()
 		})
-		if checksum != 36355 {
+		if checksum != 6292 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_delete: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_encode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_disable_fractional_index()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_eq()
 		})
-		if checksum != 52853 {
+		if checksum != 43362 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_disable_fractional_index: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_eq: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_doc()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_extend_to_include_vv()
 		})
-		if checksum != 23287 {
+		if checksum != 31287 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_doc: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_extend_to_include_vv: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_enable_fractional_index()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_get_last()
 		})
-		if checksum != 39633 {
+		if checksum != 2350 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_enable_fractional_index: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_get_last: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_fractional_index()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_get_missing_span()
 		})
-		if checksum != 51036 {
+		if checksum != 31140 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_fractional_index: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_get_missing_span: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_get_attached()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_includes_id()
 		})
-		if checksum != 57142 {
+		if checksum != 60251 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_get_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_includes_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_get_last_move_id()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_includes_vv()
 		})
-		if checksum != 12557 {
+		if checksum != 39671 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_get_last_move_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_includes_vv: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_get_meta()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_intersect_span()
 		})
-		if checksum != 3068 {
+		if checksum != 53818 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_get_meta: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_intersect_span: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_get_value()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_merge()
 		})
-		if checksum != 44704 {
+		if checksum != 25828 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_get_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_merge: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_get_value_with_meta()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_partial_cmp()
 		})
-		if checksum != 7497 {
+		if checksum != 25946 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_get_value_with_meta: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_partial_cmp: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_id()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_set_end()
 		})
-		if checksum != 4862 {
+		if checksum != 54771 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_set_end: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_is_attached()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_set_last()
 		})
-		if checksum != 37303 {
+		if checksum != 28435 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_is_attached: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_set_last: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_is_deleted()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_to_hashmap()
 		})
-		if checksum != 8644 {
+		if checksum != 56398 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_is_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_to_hashmap: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_is_fractional_index_enabled()
+			return C.uniffi_loro_ffi_checksum_method_versionvector_try_update_last()
 		})
-		if checksum != 19364 {
+		if checksum != 58412 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_is_fractional_index_enabled: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_method_versionvector_try_update_last: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_is_node_deleted()
+			return C.uniffi_loro_ffi_checksum_constructor_awareness_new()
 		})
-		if checksum != 7339 {
+		if checksum != 18821 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_is_node_deleted: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_awareness_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_mov()
+			return C.uniffi_loro_ffi_checksum_constructor_cursor_decode()
 		})
-		if checksum != 33288 {
+		if checksum != 31913 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_mov: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_cursor_decode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_mov_after()
+			return C.uniffi_loro_ffi_checksum_constructor_cursor_new()
 		})
-		if checksum != 48871 {
+		if checksum != 32460 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_mov_after: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_cursor_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_mov_before()
+			return C.uniffi_loro_ffi_checksum_constructor_diffbatch_new()
 		})
-		if checksum != 39654 {
+		if checksum != 22613 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_mov_before: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_diffbatch_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_mov_to()
+			return C.uniffi_loro_ffi_checksum_constructor_ephemeralstore_new()
 		})
-		if checksum != 21629 {
+		if checksum != 38977 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_mov_to: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_ephemeralstore_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_nodes()
+			return C.uniffi_loro_ffi_checksum_constructor_fractionalindex_from_bytes()
 		})
-		if checksum != 31738 {
+		if checksum != 9241 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_nodes: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_fractionalindex_from_bytes: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_parent()
+			return C.uniffi_loro_ffi_checksum_constructor_fractionalindex_from_hex_string()
 		})
-		if checksum != 6903 {
+		if checksum != 44261 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_parent: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_fractionalindex_from_hex_string: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorotree_roots()
+			return C.uniffi_loro_ffi_checksum_constructor_frontiers_decode()
 		})
-		if checksum != 60881 {
+		if checksum != 45600 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorotree_roots: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_frontiers_decode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorounknown_id()
+			return C.uniffi_loro_ffi_checksum_constructor_frontiers_from_id()
 		})
-		if checksum != 65156 {
+		if checksum != 7560 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorounknown_id: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_frontiers_from_id: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_lorovaluelike_as_loro_value()
+			return C.uniffi_loro_ffi_checksum_constructor_frontiers_from_ids()
 		})
-		if checksum != 23668 {
+		if checksum != 62627 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_lorovaluelike_as_loro_value: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_frontiers_from_ids: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_onpop_on_pop()
+			return C.uniffi_loro_ffi_checksum_constructor_frontiers_new()
 		})
-		if checksum != 39438 {
+		if checksum != 15591 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_onpop_on_pop: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_frontiers_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_onpush_on_push()
+			return C.uniffi_loro_ffi_checksum_constructor_lorocounter_new()
 		})
-		if checksum != 46111 {
+		if checksum != 21553 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_onpush_on_push: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_lorocounter_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_precommitcallback_on_pre_commit()
+			return C.uniffi_loro_ffi_checksum_constructor_lorodoc_new()
 		})
-		if checksum != 58911 {
+		if checksum != 34555 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_precommitcallback_on_pre_commit: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_lorodoc_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_styleconfigmap_get()
+			return C.uniffi_loro_ffi_checksum_constructor_lorolist_new()
 		})
-		if checksum != 25442 {
+		if checksum != 41972 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_styleconfigmap_get: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_lorolist_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_styleconfigmap_insert()
+			return C.uniffi_loro_ffi_checksum_constructor_loromap_new()
 		})
-		if checksum != 49128 {
+		if checksum != 27269 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_styleconfigmap_insert: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_loromap_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_subscriber_on_diff()
+			return C.uniffi_loro_ffi_checksum_constructor_loromovablelist_new()
 		})
-		if checksum != 462 {
+		if checksum != 1821 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_subscriber_on_diff: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_loromovablelist_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_subscription_detach()
+			return C.uniffi_loro_ffi_checksum_constructor_lorotext_new()
 		})
-		if checksum != 64699 {
+		if checksum != 9497 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_subscription_detach: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_lorotext_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_subscription_unsubscribe()
+			return C.uniffi_loro_ffi_checksum_constructor_lorotree_new()
 		})
-		if checksum != 24473 {
+		if checksum != 27388 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_subscription_unsubscribe: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_lorotree_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_add_exclude_origin_prefix()
+			return C.uniffi_loro_ffi_checksum_constructor_styleconfigmap_default_rich_text_config()
 		})
-		if checksum != 61306 {
+		if checksum != 65451 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_add_exclude_origin_prefix: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_styleconfigmap_default_rich_text_config: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_can_redo()
+			return C.uniffi_loro_ffi_checksum_constructor_styleconfigmap_new()
 		})
-		if checksum != 61543 {
+		if checksum != 63349 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_can_redo: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_styleconfigmap_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_can_undo()
+			return C.uniffi_loro_ffi_checksum_constructor_undomanager_new()
 		})
-		if checksum != 51532 {
+		if checksum != 31025 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_can_undo: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_undomanager_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_record_new_checkpoint()
+			return C.uniffi_loro_ffi_checksum_constructor_versionrange_from_vv()
 		})
-		if checksum != 28438 {
+		if checksum != 10426 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_record_new_checkpoint: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_versionrange_from_vv: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_redo()
+			return C.uniffi_loro_ffi_checksum_constructor_versionrange_new()
 		})
-		if checksum != 54874 {
+		if checksum != 7136 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_redo: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_versionrange_new: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_set_max_undo_steps()
+			return C.uniffi_loro_ffi_checksum_constructor_versionvector_decode()
 		})
-		if checksum != 43243 {
+		if checksum != 54438 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_set_max_undo_steps: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_versionvector_decode: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_set_merge_interval()
+			return C.uniffi_loro_ffi_checksum_constructor_versionvector_new()
 		})
-		if checksum != 13688 {
+		if checksum != 28341 {
 			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_set_merge_interval: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_set_on_pop()
-		})
-		if checksum != 4141 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_set_on_pop: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_set_on_push()
-		})
-		if checksum != 31009 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_set_on_push: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_undomanager_undo()
-		})
-		if checksum != 14430 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_undomanager_undo: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_unsubscriber_on_unsubscribe()
-		})
-		if checksum != 17877 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_unsubscriber_on_unsubscribe: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_container()
-		})
-		if checksum != 61163 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_container: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_counter()
-		})
-		if checksum != 51072 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_counter: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_list()
-		})
-		if checksum != 16144 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_list: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_map()
-		})
-		if checksum != 62391 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_map: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_movable_list()
-		})
-		if checksum != 49359 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_movable_list: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_text()
-		})
-		if checksum != 8015 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_text: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_tree()
-		})
-		if checksum != 39545 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_tree: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_loro_unknown()
-		})
-		if checksum != 9911 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_loro_unknown: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_as_value()
-		})
-		if checksum != 9638 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_as_value: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_container_type()
-		})
-		if checksum != 56498 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_container_type: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_is_container()
-		})
-		if checksum != 16329 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_is_container: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_valueorcontainer_is_value()
-		})
-		if checksum != 13911 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_valueorcontainer_is_value: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_diff()
-		})
-		if checksum != 29529 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_diff: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_encode()
-		})
-		if checksum != 64665 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_encode: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_eq()
-		})
-		if checksum != 30406 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_eq: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_extend_to_include_vv()
-		})
-		if checksum != 28076 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_extend_to_include_vv: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_get_last()
-		})
-		if checksum != 45434 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_get_last: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_get_missing_span()
-		})
-		if checksum != 2797 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_get_missing_span: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_includes_id()
-		})
-		if checksum != 50408 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_includes_id: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_includes_vv()
-		})
-		if checksum != 23089 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_includes_vv: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_intersect_span()
-		})
-		if checksum != 54748 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_intersect_span: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_merge()
-		})
-		if checksum != 23694 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_merge: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_partial_cmp()
-		})
-		if checksum != 27570 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_partial_cmp: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_set_end()
-		})
-		if checksum != 27313 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_set_end: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_method_versionvector_set_last()
-		})
-		if checksum != 40968 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_method_versionvector_set_last: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_awareness_new()
-		})
-		if checksum != 33037 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_awareness_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_cursor_new()
-		})
-		if checksum != 11721 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_cursor_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_diffbatch_new()
-		})
-		if checksum != 62583 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_diffbatch_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_ephemeralstore_new()
-		})
-		if checksum != 60190 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_ephemeralstore_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_fractionalindex_from_bytes()
-		})
-		if checksum != 35415 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_fractionalindex_from_bytes: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_fractionalindex_from_hex_string()
-		})
-		if checksum != 10737 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_fractionalindex_from_hex_string: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_frontiers_decode()
-		})
-		if checksum != 27043 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_frontiers_decode: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_frontiers_from_id()
-		})
-		if checksum != 60928 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_frontiers_from_id: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_frontiers_from_ids()
-		})
-		if checksum != 61832 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_frontiers_from_ids: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_frontiers_new()
-		})
-		if checksum != 5172 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_frontiers_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_lorocounter_new()
-		})
-		if checksum != 44867 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_lorocounter_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_lorodoc_new()
-		})
-		if checksum != 54129 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_lorodoc_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_lorolist_new()
-		})
-		if checksum != 2861 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_lorolist_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_loromap_new()
-		})
-		if checksum != 63806 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_loromap_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_loromovablelist_new()
-		})
-		if checksum != 32944 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_loromovablelist_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_lorotext_new()
-		})
-		if checksum != 33191 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_lorotext_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_lorotree_new()
-		})
-		if checksum != 42150 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_lorotree_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_styleconfigmap_default_rich_text_config()
-		})
-		if checksum != 46944 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_styleconfigmap_default_rich_text_config: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_styleconfigmap_new()
-		})
-		if checksum != 23831 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_styleconfigmap_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_undomanager_new()
-		})
-		if checksum != 35328 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_undomanager_new: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_versionvector_decode()
-		})
-		if checksum != 19639 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_versionvector_decode: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_checksum_constructor_versionvector_new()
-		})
-		if checksum != 31126 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_checksum_constructor_versionvector_new: UniFFI API checksum mismatch")
+			panic("loro: uniffi_loro_ffi_checksum_constructor_versionvector_new: UniFFI API checksum mismatch")
 		}
 	}
 }
@@ -3745,7 +4060,7 @@ type Awareness struct {
 
 func NewAwareness(peer uint64, timeout int64) *Awareness {
 	return FfiConverterAwarenessINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_awareness_new(FfiConverterUint64INSTANCE.Lower(peer), FfiConverterInt64INSTANCE.Lower(timeout), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_awareness_new(FfiConverterUint64INSTANCE.Lower(peer), FfiConverterInt64INSTANCE.Lower(timeout), _uniffiStatus)
 	}))
 }
 
@@ -3754,7 +4069,7 @@ func (_self *Awareness) Apply(encodedPeersInfo []byte) AwarenessPeerUpdate {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterAwarenessPeerUpdateINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_apply(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_apply(
 				_pointer, FfiConverterBytesINSTANCE.Lower(encodedPeersInfo), _uniffiStatus),
 		}
 	}))
@@ -3765,7 +4080,7 @@ func (_self *Awareness) Encode(peers []uint64) []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_encode(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_encode(
 				_pointer, FfiConverterSequenceUint64INSTANCE.Lower(peers), _uniffiStatus),
 		}
 	}))
@@ -3776,7 +4091,7 @@ func (_self *Awareness) EncodeAll() []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_encode_all(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_encode_all(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -3787,7 +4102,7 @@ func (_self *Awareness) GetAllStates() map[uint64]PeerInfo {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapUint64PeerInfoINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_get_all_states(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_get_all_states(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -3798,7 +4113,7 @@ func (_self *Awareness) GetLocalState() *LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_get_local_state(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_get_local_state(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -3808,7 +4123,7 @@ func (_self *Awareness) Peer() uint64 {
 	_pointer := _self.ffiObject.incrementPointer("*Awareness")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_loro_fn_method_awareness_peer(
+		return C.uniffi_loro_ffi_fn_method_awareness_peer(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -3818,7 +4133,7 @@ func (_self *Awareness) RemoveOutdated() []uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_awareness_remove_outdated(
+			inner: C.uniffi_loro_ffi_fn_method_awareness_remove_outdated(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -3828,7 +4143,7 @@ func (_self *Awareness) SetLocalState(value LoroValueLike) {
 	_pointer := _self.ffiObject.incrementPointer("*Awareness")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_awareness_set_local_state(
+		C.uniffi_loro_ffi_fn_method_awareness_set_local_state(
 			_pointer, FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -3847,10 +4162,10 @@ func (c FfiConverterAwareness) Lift(pointer unsafe.Pointer) *Awareness {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_awareness(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_awareness(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_awareness(pointer, status)
+				C.uniffi_loro_ffi_fn_free_awareness(pointer, status)
 			},
 		),
 	}
@@ -3893,7 +4208,7 @@ func (_self *ChangeAncestorsTravelerImpl) Travel(change ChangeMeta) bool {
 	_pointer := _self.ffiObject.incrementPointer("ChangeAncestorsTraveler")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_changeancestorstraveler_travel(
+		return C.uniffi_loro_ffi_fn_method_changeancestorstraveler_travel(
 			_pointer, FfiConverterChangeMetaINSTANCE.Lower(change), _uniffiStatus)
 	}))
 }
@@ -3915,10 +4230,10 @@ func (c FfiConverterChangeAncestorsTraveler) Lift(pointer unsafe.Pointer) Change
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_changeancestorstraveler(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_changeancestorstraveler(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_changeancestorstraveler(pointer, status)
+				C.uniffi_loro_ffi_fn_free_changeancestorstraveler(pointer, status)
 			},
 		),
 	}
@@ -3999,8 +4314,8 @@ func (cm *concurrentHandleMap[T]) tryGet(handle uint64) (T, bool) {
 	return val, ok
 }
 
-//export loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0
-func loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0(uniffiHandle C.uint64_t, change C.RustBuffer, uniffiOutReturn *C.int8_t, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0(uniffiHandle C.uint64_t, change C.RustBuffer, uniffiOutReturn *C.int8_t, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterChangeAncestorsTravelerINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -4018,18 +4333,18 @@ func loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0(uniffiHand
 }
 
 var UniffiVTableCallbackInterfaceChangeAncestorsTravelerINSTANCE = C.UniffiVTableCallbackInterfaceChangeAncestorsTraveler{
-	travel: (C.UniffiCallbackInterfaceChangeAncestorsTravelerMethod0)(C.loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0),
+	travel: (C.UniffiCallbackInterfaceChangeAncestorsTravelerMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree
-func loro_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree
+func loro_ffi_cgo_dispatchCallbackInterfaceChangeAncestorsTravelerFree(handle C.uint64_t) {
 	FfiConverterChangeAncestorsTravelerINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterChangeAncestorsTraveler) register() {
-	C.uniffi_loro_fn_init_callback_vtable_changeancestorstraveler(&UniffiVTableCallbackInterfaceChangeAncestorsTravelerINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_changeancestorstraveler(&UniffiVTableCallbackInterfaceChangeAncestorsTravelerINSTANCE)
 }
 
 type ChangeModifierInterface interface {
@@ -4044,7 +4359,7 @@ func (_self *ChangeModifier) SetMessage(msg string) {
 	_pointer := _self.ffiObject.incrementPointer("*ChangeModifier")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_changemodifier_set_message(
+		C.uniffi_loro_ffi_fn_method_changemodifier_set_message(
 			_pointer, FfiConverterStringINSTANCE.Lower(msg), _uniffiStatus)
 		return false
 	})
@@ -4054,7 +4369,7 @@ func (_self *ChangeModifier) SetTimestamp(timestamp int64) {
 	_pointer := _self.ffiObject.incrementPointer("*ChangeModifier")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_changemodifier_set_timestamp(
+		C.uniffi_loro_ffi_fn_method_changemodifier_set_timestamp(
 			_pointer, FfiConverterInt64INSTANCE.Lower(timestamp), _uniffiStatus)
 		return false
 	})
@@ -4073,10 +4388,10 @@ func (c FfiConverterChangeModifier) Lift(pointer unsafe.Pointer) *ChangeModifier
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_changemodifier(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_changemodifier(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_changemodifier(pointer, status)
+				C.uniffi_loro_ffi_fn_free_changemodifier(pointer, status)
 			},
 		),
 	}
@@ -4124,7 +4439,7 @@ func (_self *Configure) Fork() *Configure {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterConfigureINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_configure_fork(
+		return C.uniffi_loro_ffi_fn_method_configure_fork(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -4133,7 +4448,7 @@ func (_self *Configure) MergeInterval() int64 {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterInt64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int64_t {
-		return C.uniffi_loro_fn_method_configure_merge_interval(
+		return C.uniffi_loro_ffi_fn_method_configure_merge_interval(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -4142,7 +4457,7 @@ func (_self *Configure) RecordTimestamp() bool {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_configure_record_timestamp(
+		return C.uniffi_loro_ffi_fn_method_configure_record_timestamp(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -4151,7 +4466,7 @@ func (_self *Configure) SetMergeInterval(interval int64) {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_configure_set_merge_interval(
+		C.uniffi_loro_ffi_fn_method_configure_set_merge_interval(
 			_pointer, FfiConverterInt64INSTANCE.Lower(interval), _uniffiStatus)
 		return false
 	})
@@ -4161,7 +4476,7 @@ func (_self *Configure) SetRecordTimestamp(record bool) {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_configure_set_record_timestamp(
+		C.uniffi_loro_ffi_fn_method_configure_set_record_timestamp(
 			_pointer, FfiConverterBoolINSTANCE.Lower(record), _uniffiStatus)
 		return false
 	})
@@ -4171,7 +4486,7 @@ func (_self *Configure) TextStyleConfig() *StyleConfigMap {
 	_pointer := _self.ffiObject.incrementPointer("*Configure")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStyleConfigMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_configure_text_style_config(
+		return C.uniffi_loro_ffi_fn_method_configure_text_style_config(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -4189,10 +4504,10 @@ func (c FfiConverterConfigure) Lift(pointer unsafe.Pointer) *Configure {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_configure(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_configure(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_configure(pointer, status)
+				C.uniffi_loro_ffi_fn_free_configure(pointer, status)
 			},
 		),
 	}
@@ -4236,7 +4551,7 @@ func (_self *ContainerIdLikeImpl) AsContainerId(ty ContainerType) ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_containeridlike_as_container_id(
+			inner: C.uniffi_loro_ffi_fn_method_containeridlike_as_container_id(
 				_pointer, FfiConverterContainerTypeINSTANCE.Lower(ty), _uniffiStatus),
 		}
 	}))
@@ -4259,10 +4574,10 @@ func (c FfiConverterContainerIdLike) Lift(pointer unsafe.Pointer) ContainerIdLik
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_containeridlike(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_containeridlike(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_containeridlike(pointer, status)
+				C.uniffi_loro_ffi_fn_free_containeridlike(pointer, status)
 			},
 		),
 	}
@@ -4297,8 +4612,8 @@ func (_ FfiDestroyerContainerIdLike) Destroy(value ContainerIdLike) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0
-func loro_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0(uniffiHandle C.uint64_t, ty C.RustBuffer, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0(uniffiHandle C.uint64_t, ty C.RustBuffer, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterContainerIdLikeINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -4316,21 +4631,22 @@ func loro_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0(uniffiHandle C.uin
 }
 
 var UniffiVTableCallbackInterfaceContainerIdLikeINSTANCE = C.UniffiVTableCallbackInterfaceContainerIdLike{
-	asContainerId: (C.UniffiCallbackInterfaceContainerIdLikeMethod0)(C.loro_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0),
+	asContainerId: (C.UniffiCallbackInterfaceContainerIdLikeMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceContainerIdLikeFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceContainerIdLikeFree
-func loro_cgo_dispatchCallbackInterfaceContainerIdLikeFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeFree
+func loro_ffi_cgo_dispatchCallbackInterfaceContainerIdLikeFree(handle C.uint64_t) {
 	FfiConverterContainerIdLikeINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterContainerIdLike) register() {
-	C.uniffi_loro_fn_init_callback_vtable_containeridlike(&UniffiVTableCallbackInterfaceContainerIdLikeINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_containeridlike(&UniffiVTableCallbackInterfaceContainerIdLikeINSTANCE)
 }
 
 type CursorInterface interface {
+	Encode() []byte
 }
 type Cursor struct {
 	ffiObject FfiObject
@@ -4338,10 +4654,32 @@ type Cursor struct {
 
 func NewCursor(id *Id, container ContainerId, side Side, originPos uint32) *Cursor {
 	return FfiConverterCursorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_cursor_new(FfiConverterOptionalIdINSTANCE.Lower(id), FfiConverterContainerIdINSTANCE.Lower(container), FfiConverterSideINSTANCE.Lower(side), FfiConverterUint32INSTANCE.Lower(originPos), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_cursor_new(FfiConverterOptionalIdINSTANCE.Lower(id), FfiConverterContainerIdINSTANCE.Lower(container), FfiConverterSideINSTANCE.Lower(side), FfiConverterUint32INSTANCE.Lower(originPos), _uniffiStatus)
 	}))
 }
 
+func CursorDecode(data []byte) (*Cursor, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_loro_ffi_fn_constructor_cursor_decode(FfiConverterBytesINSTANCE.Lower(data), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *Cursor
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterCursorINSTANCE.Lift(_uniffiRV), nil
+	}
+}
+
+func (_self *Cursor) Encode() []byte {
+	_pointer := _self.ffiObject.incrementPointer("*Cursor")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_cursor_encode(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
 func (object *Cursor) Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
@@ -4356,10 +4694,10 @@ func (c FfiConverterCursor) Lift(pointer unsafe.Pointer) *Cursor {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_cursor(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_cursor(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_cursor(pointer, status)
+				C.uniffi_loro_ffi_fn_free_cursor(pointer, status)
 			},
 		),
 	}
@@ -4411,7 +4749,7 @@ type DiffBatch struct {
 
 func NewDiffBatch() *DiffBatch {
 	return FfiConverterDiffBatchINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_diffbatch_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_diffbatch_new(_uniffiStatus)
 	}))
 }
 
@@ -4427,7 +4765,7 @@ func (_self *DiffBatch) GetDiff() []ContainerIdAndDiff {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceContainerIdAndDiffINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_diffbatch_get_diff(
+			inner: C.uniffi_loro_ffi_fn_method_diffbatch_get_diff(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -4441,7 +4779,7 @@ func (_self *DiffBatch) Push(cid ContainerId, diff Diff) *Diff {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalDiffINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_diffbatch_push(
+			inner: C.uniffi_loro_ffi_fn_method_diffbatch_push(
 				_pointer, FfiConverterContainerIdINSTANCE.Lower(cid), FfiConverterDiffINSTANCE.Lower(diff), _uniffiStatus),
 		}
 	}))
@@ -4460,10 +4798,10 @@ func (c FfiConverterDiffBatch) Lift(pointer unsafe.Pointer) *DiffBatch {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_diffbatch(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_diffbatch(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_diffbatch(pointer, status)
+				C.uniffi_loro_ffi_fn_free_diffbatch(pointer, status)
 			},
 		),
 	}
@@ -4496,7 +4834,7 @@ func (_ FfiDestroyerDiffBatch) Destroy(value *DiffBatch) {
 }
 
 type EphemeralStoreInterface interface {
-	Apply(data []byte)
+	Apply(data []byte) error
 	Delete(key string)
 	Encode(key string) []byte
 	EncodeAll() []byte
@@ -4514,25 +4852,26 @@ type EphemeralStore struct {
 
 func NewEphemeralStore(timeout int64) *EphemeralStore {
 	return FfiConverterEphemeralStoreINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_ephemeralstore_new(FfiConverterInt64INSTANCE.Lower(timeout), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_ephemeralstore_new(FfiConverterInt64INSTANCE.Lower(timeout), _uniffiStatus)
 	}))
 }
 
-func (_self *EphemeralStore) Apply(data []byte) {
+func (_self *EphemeralStore) Apply(data []byte) error {
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
-	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_ephemeralstore_apply(
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_ephemeralstore_apply(
 			_pointer, FfiConverterBytesINSTANCE.Lower(data), _uniffiStatus)
 		return false
 	})
+	return _uniffiErr.AsError()
 }
 
 func (_self *EphemeralStore) Delete(key string) {
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_ephemeralstore_delete(
+		C.uniffi_loro_ffi_fn_method_ephemeralstore_delete(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 		return false
 	})
@@ -4543,7 +4882,7 @@ func (_self *EphemeralStore) Encode(key string) []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_ephemeralstore_encode(
+			inner: C.uniffi_loro_ffi_fn_method_ephemeralstore_encode(
 				_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus),
 		}
 	}))
@@ -4554,7 +4893,7 @@ func (_self *EphemeralStore) EncodeAll() []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_ephemeralstore_encode_all(
+			inner: C.uniffi_loro_ffi_fn_method_ephemeralstore_encode_all(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -4565,7 +4904,7 @@ func (_self *EphemeralStore) Get(key string) *LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_ephemeralstore_get(
+			inner: C.uniffi_loro_ffi_fn_method_ephemeralstore_get(
 				_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus),
 		}
 	}))
@@ -4576,7 +4915,7 @@ func (_self *EphemeralStore) GetAllStates() map[string]LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterMapStringLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_ephemeralstore_get_all_states(
+			inner: C.uniffi_loro_ffi_fn_method_ephemeralstore_get_all_states(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -4587,7 +4926,7 @@ func (_self *EphemeralStore) Keys() []string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_ephemeralstore_keys(
+			inner: C.uniffi_loro_ffi_fn_method_ephemeralstore_keys(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -4597,7 +4936,7 @@ func (_self *EphemeralStore) RemoveOutdated() {
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_ephemeralstore_remove_outdated(
+		C.uniffi_loro_ffi_fn_method_ephemeralstore_remove_outdated(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -4607,7 +4946,7 @@ func (_self *EphemeralStore) Set(key string, value LoroValueLike) {
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_ephemeralstore_set(
+		C.uniffi_loro_ffi_fn_method_ephemeralstore_set(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -4617,7 +4956,7 @@ func (_self *EphemeralStore) Subscribe(listener EphemeralSubscriber) *Subscripti
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_ephemeralstore_subscribe(
+		return C.uniffi_loro_ffi_fn_method_ephemeralstore_subscribe(
 			_pointer, FfiConverterEphemeralSubscriberINSTANCE.Lower(listener), _uniffiStatus)
 	}))
 }
@@ -4626,7 +4965,7 @@ func (_self *EphemeralStore) SubscribeLocalUpdate(listener LocalEphemeralListene
 	_pointer := _self.ffiObject.incrementPointer("*EphemeralStore")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_ephemeralstore_subscribe_local_update(
+		return C.uniffi_loro_ffi_fn_method_ephemeralstore_subscribe_local_update(
 			_pointer, FfiConverterLocalEphemeralListenerINSTANCE.Lower(listener), _uniffiStatus)
 	}))
 }
@@ -4644,10 +4983,10 @@ func (c FfiConverterEphemeralStore) Lift(pointer unsafe.Pointer) *EphemeralStore
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_ephemeralstore(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_ephemeralstore(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_ephemeralstore(pointer, status)
+				C.uniffi_loro_ffi_fn_free_ephemeralstore(pointer, status)
 			},
 		),
 	}
@@ -4690,7 +5029,7 @@ func (_self *EphemeralSubscriberImpl) OnEphemeralEvent(event EphemeralStoreEvent
 	_pointer := _self.ffiObject.incrementPointer("EphemeralSubscriber")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_ephemeralsubscriber_on_ephemeral_event(
+		C.uniffi_loro_ffi_fn_method_ephemeralsubscriber_on_ephemeral_event(
 			_pointer, FfiConverterEphemeralStoreEventINSTANCE.Lower(event), _uniffiStatus)
 		return false
 	})
@@ -4713,10 +5052,10 @@ func (c FfiConverterEphemeralSubscriber) Lift(pointer unsafe.Pointer) EphemeralS
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_ephemeralsubscriber(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_ephemeralsubscriber(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_ephemeralsubscriber(pointer, status)
+				C.uniffi_loro_ffi_fn_free_ephemeralsubscriber(pointer, status)
 			},
 		),
 	}
@@ -4751,8 +5090,8 @@ func (_ FfiDestroyerEphemeralSubscriber) Destroy(value EphemeralSubscriber) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0
-func loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0(uniffiHandle C.uint64_t, event C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0(uniffiHandle C.uint64_t, event C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterEphemeralSubscriberINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -4768,18 +5107,18 @@ func loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0(uniffiHandle C
 }
 
 var UniffiVTableCallbackInterfaceEphemeralSubscriberINSTANCE = C.UniffiVTableCallbackInterfaceEphemeralSubscriber{
-	onEphemeralEvent: (C.UniffiCallbackInterfaceEphemeralSubscriberMethod0)(C.loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0),
+	onEphemeralEvent: (C.UniffiCallbackInterfaceEphemeralSubscriberMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree
-func loro_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree
+func loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree(handle C.uint64_t) {
 	FfiConverterEphemeralSubscriberINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterEphemeralSubscriber) register() {
-	C.uniffi_loro_fn_init_callback_vtable_ephemeralsubscriber(&UniffiVTableCallbackInterfaceEphemeralSubscriberINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_ephemeralsubscriber(&UniffiVTableCallbackInterfaceEphemeralSubscriberINSTANCE)
 }
 
 type FirstCommitFromPeerCallback interface {
@@ -4793,7 +5132,7 @@ func (_self *FirstCommitFromPeerCallbackImpl) OnFirstCommitFromPeer(payload Firs
 	_pointer := _self.ffiObject.incrementPointer("FirstCommitFromPeerCallback")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_firstcommitfrompeercallback_on_first_commit_from_peer(
+		C.uniffi_loro_ffi_fn_method_firstcommitfrompeercallback_on_first_commit_from_peer(
 			_pointer, FfiConverterFirstCommitFromPeerPayloadINSTANCE.Lower(payload), _uniffiStatus)
 		return false
 	})
@@ -4816,10 +5155,10 @@ func (c FfiConverterFirstCommitFromPeerCallback) Lift(pointer unsafe.Pointer) Fi
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_firstcommitfrompeercallback(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_firstcommitfrompeercallback(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_firstcommitfrompeercallback(pointer, status)
+				C.uniffi_loro_ffi_fn_free_firstcommitfrompeercallback(pointer, status)
 			},
 		),
 	}
@@ -4854,8 +5193,8 @@ func (_ FfiDestroyerFirstCommitFromPeerCallback) Destroy(value FirstCommitFromPe
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0
-func loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0(uniffiHandle C.uint64_t, payload C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0(uniffiHandle C.uint64_t, payload C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterFirstCommitFromPeerCallbackINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -4871,18 +5210,18 @@ func loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0(uniffi
 }
 
 var UniffiVTableCallbackInterfaceFirstCommitFromPeerCallbackINSTANCE = C.UniffiVTableCallbackInterfaceFirstCommitFromPeerCallback{
-	onFirstCommitFromPeer: (C.UniffiCallbackInterfaceFirstCommitFromPeerCallbackMethod0)(C.loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0),
+	onFirstCommitFromPeer: (C.UniffiCallbackInterfaceFirstCommitFromPeerCallbackMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree
-func loro_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree
+func loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree(handle C.uint64_t) {
 	FfiConverterFirstCommitFromPeerCallbackINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterFirstCommitFromPeerCallback) register() {
-	C.uniffi_loro_fn_init_callback_vtable_firstcommitfrompeercallback(&UniffiVTableCallbackInterfaceFirstCommitFromPeerCallbackINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_firstcommitfrompeercallback(&UniffiVTableCallbackInterfaceFirstCommitFromPeerCallbackINSTANCE)
 }
 
 type FractionalIndexInterface interface {
@@ -4894,13 +5233,13 @@ type FractionalIndex struct {
 
 func FractionalIndexFromBytes(bytes []byte) *FractionalIndex {
 	return FfiConverterFractionalIndexINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_fractionalindex_from_bytes(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_fractionalindex_from_bytes(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
 	}))
 }
 
 func FractionalIndexFromHexString(str string) *FractionalIndex {
 	return FfiConverterFractionalIndexINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_fractionalindex_from_hex_string(FfiConverterStringINSTANCE.Lower(str), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_fractionalindex_from_hex_string(FfiConverterStringINSTANCE.Lower(str), _uniffiStatus)
 	}))
 }
 
@@ -4909,7 +5248,7 @@ func (_self *FractionalIndex) ToString() string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_fractionalindex_to_string(
+			inner: C.uniffi_loro_ffi_fn_method_fractionalindex_to_string(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -4928,10 +5267,10 @@ func (c FfiConverterFractionalIndex) Lift(pointer unsafe.Pointer) *FractionalInd
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_fractionalindex(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_fractionalindex(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_fractionalindex(pointer, status)
+				C.uniffi_loro_ffi_fn_free_fractionalindex(pointer, status)
 			},
 		),
 	}
@@ -4966,6 +5305,8 @@ func (_ FfiDestroyerFractionalIndex) Destroy(value *FractionalIndex) {
 type FrontiersInterface interface {
 	Encode() []byte
 	Eq(other *Frontiers) bool
+	IsEmpty() bool
+	ToVec() []Id
 }
 type Frontiers struct {
 	ffiObject FfiObject
@@ -4973,13 +5314,13 @@ type Frontiers struct {
 
 func NewFrontiers() *Frontiers {
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_frontiers_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_frontiers_new(_uniffiStatus)
 	}))
 }
 
 func FrontiersDecode(bytes []byte) (*Frontiers, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_frontiers_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_frontiers_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
 		var _uniffiDefaultValue *Frontiers
@@ -4991,13 +5332,13 @@ func FrontiersDecode(bytes []byte) (*Frontiers, error) {
 
 func FrontiersFromId(id Id) *Frontiers {
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_frontiers_from_id(FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_frontiers_from_id(FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
 
 func FrontiersFromIds(ids []Id) *Frontiers {
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_frontiers_from_ids(FfiConverterSequenceIdINSTANCE.Lower(ids), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_frontiers_from_ids(FfiConverterSequenceIdINSTANCE.Lower(ids), _uniffiStatus)
 	}))
 }
 
@@ -5006,7 +5347,7 @@ func (_self *Frontiers) Encode() []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_frontiers_encode(
+			inner: C.uniffi_loro_ffi_fn_method_frontiers_encode(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -5016,8 +5357,28 @@ func (_self *Frontiers) Eq(other *Frontiers) bool {
 	_pointer := _self.ffiObject.incrementPointer("*Frontiers")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_frontiers_eq(
+		return C.uniffi_loro_ffi_fn_method_frontiers_eq(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(other), _uniffiStatus)
+	}))
+}
+
+func (_self *Frontiers) IsEmpty() bool {
+	_pointer := _self.ffiObject.incrementPointer("*Frontiers")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_frontiers_is_empty(
+			_pointer, _uniffiStatus)
+	}))
+}
+
+func (_self *Frontiers) ToVec() []Id {
+	_pointer := _self.ffiObject.incrementPointer("*Frontiers")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_frontiers_to_vec(
+				_pointer, _uniffiStatus),
+		}
 	}))
 }
 func (object *Frontiers) Destroy() {
@@ -5034,10 +5395,10 @@ func (c FfiConverterFrontiers) Lift(pointer unsafe.Pointer) *Frontiers {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_frontiers(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_frontiers(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_frontiers(pointer, status)
+				C.uniffi_loro_ffi_fn_free_frontiers(pointer, status)
 			},
 		),
 	}
@@ -5080,7 +5441,7 @@ func (_self *LocalEphemeralListenerImpl) OnEphemeralUpdate(update []byte) {
 	_pointer := _self.ffiObject.incrementPointer("LocalEphemeralListener")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_localephemerallistener_on_ephemeral_update(
+		C.uniffi_loro_ffi_fn_method_localephemerallistener_on_ephemeral_update(
 			_pointer, FfiConverterBytesINSTANCE.Lower(update), _uniffiStatus)
 		return false
 	})
@@ -5103,10 +5464,10 @@ func (c FfiConverterLocalEphemeralListener) Lift(pointer unsafe.Pointer) LocalEp
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_localephemerallistener(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_localephemerallistener(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_localephemerallistener(pointer, status)
+				C.uniffi_loro_ffi_fn_free_localephemerallistener(pointer, status)
 			},
 		),
 	}
@@ -5141,8 +5502,8 @@ func (_ FfiDestroyerLocalEphemeralListener) Destroy(value LocalEphemeralListener
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0
-func loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0(uniffiHandle C.uint64_t, update C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0(uniffiHandle C.uint64_t, update C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterLocalEphemeralListenerINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -5158,18 +5519,18 @@ func loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0(uniffiHandl
 }
 
 var UniffiVTableCallbackInterfaceLocalEphemeralListenerINSTANCE = C.UniffiVTableCallbackInterfaceLocalEphemeralListener{
-	onEphemeralUpdate: (C.UniffiCallbackInterfaceLocalEphemeralListenerMethod0)(C.loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0),
+	onEphemeralUpdate: (C.UniffiCallbackInterfaceLocalEphemeralListenerMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree
-func loro_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree
+func loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree(handle C.uint64_t) {
 	FfiConverterLocalEphemeralListenerINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterLocalEphemeralListener) register() {
-	C.uniffi_loro_fn_init_callback_vtable_localephemerallistener(&UniffiVTableCallbackInterfaceLocalEphemeralListenerINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_localephemerallistener(&UniffiVTableCallbackInterfaceLocalEphemeralListenerINSTANCE)
 }
 
 type LocalUpdateCallback interface {
@@ -5183,7 +5544,7 @@ func (_self *LocalUpdateCallbackImpl) OnLocalUpdate(update []byte) {
 	_pointer := _self.ffiObject.incrementPointer("LocalUpdateCallback")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_localupdatecallback_on_local_update(
+		C.uniffi_loro_ffi_fn_method_localupdatecallback_on_local_update(
 			_pointer, FfiConverterBytesINSTANCE.Lower(update), _uniffiStatus)
 		return false
 	})
@@ -5206,10 +5567,10 @@ func (c FfiConverterLocalUpdateCallback) Lift(pointer unsafe.Pointer) LocalUpdat
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_localupdatecallback(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_localupdatecallback(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_localupdatecallback(pointer, status)
+				C.uniffi_loro_ffi_fn_free_localupdatecallback(pointer, status)
 			},
 		),
 	}
@@ -5244,8 +5605,8 @@ func (_ FfiDestroyerLocalUpdateCallback) Destroy(value LocalUpdateCallback) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0
-func loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0(uniffiHandle C.uint64_t, update C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0(uniffiHandle C.uint64_t, update C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterLocalUpdateCallbackINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -5261,18 +5622,18 @@ func loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0(uniffiHandle C
 }
 
 var UniffiVTableCallbackInterfaceLocalUpdateCallbackINSTANCE = C.UniffiVTableCallbackInterfaceLocalUpdateCallback{
-	onLocalUpdate: (C.UniffiCallbackInterfaceLocalUpdateCallbackMethod0)(C.loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0),
+	onLocalUpdate: (C.UniffiCallbackInterfaceLocalUpdateCallbackMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree
-func loro_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree
+func loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackFree(handle C.uint64_t) {
 	FfiConverterLocalUpdateCallbackINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterLocalUpdateCallback) register() {
-	C.uniffi_loro_fn_init_callback_vtable_localupdatecallback(&UniffiVTableCallbackInterfaceLocalUpdateCallbackINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_localupdatecallback(&UniffiVTableCallbackInterfaceLocalUpdateCallbackINSTANCE)
 }
 
 type LoroCounterInterface interface {
@@ -5295,6 +5656,18 @@ type LoroCounterInterface interface {
 	IsAttached() bool
 	// Whether the container is deleted.
 	IsDeleted() bool
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 }
 type LoroCounter struct {
 	ffiObject FfiObject
@@ -5303,7 +5676,7 @@ type LoroCounter struct {
 // Create a new Counter.
 func NewLoroCounter() *LoroCounter {
 	return FfiConverterLoroCounterINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_lorocounter_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_lorocounter_new(_uniffiStatus)
 	}))
 }
 
@@ -5312,7 +5685,7 @@ func (_self *LoroCounter) Decrement(value float64) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorocounter_decrement(
+		C.uniffi_loro_ffi_fn_method_lorocounter_decrement(
 			_pointer, FfiConverterFloat64INSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -5325,7 +5698,7 @@ func (_self *LoroCounter) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorocounter_doc(
+			inner: C.uniffi_loro_ffi_fn_method_lorocounter_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -5337,7 +5710,7 @@ func (_self *LoroCounter) GetAttached() **LoroCounter {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroCounterINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorocounter_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_lorocounter_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -5348,7 +5721,7 @@ func (_self *LoroCounter) GetValue() float64 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterFloat64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.double {
-		return C.uniffi_loro_fn_method_lorocounter_get_value(
+		return C.uniffi_loro_ffi_fn_method_lorocounter_get_value(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -5359,7 +5732,7 @@ func (_self *LoroCounter) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorocounter_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorocounter_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -5370,7 +5743,7 @@ func (_self *LoroCounter) Increment(value float64) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorocounter_increment(
+		C.uniffi_loro_ffi_fn_method_lorocounter_increment(
 			_pointer, FfiConverterFloat64INSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -5385,7 +5758,7 @@ func (_self *LoroCounter) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorocounter_is_attached(
+		return C.uniffi_loro_ffi_fn_method_lorocounter_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -5395,8 +5768,30 @@ func (_self *LoroCounter) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorocounter_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_lorocounter_is_deleted(
 			_pointer, _uniffiStatus)
+	}))
+}
+
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroCounter) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroCounter")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorocounter_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
+		}
 	}))
 }
 func (object *LoroCounter) Destroy() {
@@ -5413,10 +5808,10 @@ func (c FfiConverterLoroCounter) Lift(pointer unsafe.Pointer) *LoroCounter {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorocounter(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorocounter(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorocounter(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorocounter(pointer, status)
 			},
 		),
 	}
@@ -5764,8 +6159,6 @@ type LoroDocInterface interface {
 	LenChanges() uint64
 	// Get the total number of operations in the `OpLog`
 	LenOps() uint64
-	// Estimate the size of the document states in memory.
-	LogEstimateSize()
 	// Minimize the frontiers by removing the unnecessary entries.
 	MinimizeFrontiers(frontiers *Frontiers) FrontiersOrId
 	// Get the `Frontiers` version of `OpLog`
@@ -5774,6 +6167,19 @@ type LoroDocInterface interface {
 	OplogVv() *VersionVector
 	// Get the PeerID
 	PeerId() uint64
+	// Redacts sensitive content in JSON updates within the specified version range.
+	//
+	// This function allows you to share document history while removing potentially sensitive content.
+	// It preserves the document structure and collaboration capabilities while replacing content with
+	// placeholders according to these redaction rules:
+	//
+	// - Preserves delete and move operations
+	// - Replaces text insertion content with the Unicode replacement character
+	// - Substitutes list and map insert values with null
+	// - Maintains structure of child containers
+	// - Replaces text mark values with null
+	// - Preserves map keys and text annotation keys
+	RedactJsonUpdates(json string, versionRange *VersionRange) (string, error)
 	// Revert the current document state back to the target version
 	//
 	// Internally, it will generate a series of local operations that can revert the
@@ -5889,7 +6295,7 @@ type LoroDoc struct {
 // Create a new `LoroDoc` instance.
 func NewLoroDoc() *LoroDoc {
 	return FfiConverterLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_lorodoc_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_lorodoc_new(_uniffiStatus)
 	}))
 }
 
@@ -5900,7 +6306,7 @@ func (_self *LoroDoc) ApplyDiff(diff *DiffBatch) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_apply_diff(
+		C.uniffi_loro_ffi_fn_method_lorodoc_apply_diff(
 			_pointer, FfiConverterDiffBatchINSTANCE.Lower(diff), _uniffiStatus)
 		return false
 	})
@@ -5917,7 +6323,7 @@ func (_self *LoroDoc) Attach() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_attach(
+		C.uniffi_loro_ffi_fn_method_lorodoc_attach(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -5929,7 +6335,7 @@ func (_self *LoroDoc) CheckStateCorrectnessSlow() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_check_state_correctness_slow(
+		C.uniffi_loro_ffi_fn_method_lorodoc_check_state_correctness_slow(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -5947,7 +6353,7 @@ func (_self *LoroDoc) Checkout(frontiers *Frontiers) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_checkout(
+		C.uniffi_loro_ffi_fn_method_lorodoc_checkout(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus)
 		return false
 	})
@@ -5966,7 +6372,7 @@ func (_self *LoroDoc) CheckoutToLatest() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_checkout_to_latest(
+		C.uniffi_loro_ffi_fn_method_lorodoc_checkout_to_latest(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -5977,7 +6383,7 @@ func (_self *LoroDoc) ClearNextCommitOptions() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_clear_next_commit_options(
+		C.uniffi_loro_ffi_fn_method_lorodoc_clear_next_commit_options(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -5991,7 +6397,7 @@ func (_self *LoroDoc) CmpWithFrontiers(other *Frontiers) Ordering {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOrderingINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_cmp_with_frontiers(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_cmp_with_frontiers(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(other), _uniffiStatus),
 		}
 	}))
@@ -6010,7 +6416,7 @@ func (_self *LoroDoc) Commit() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_commit(
+		C.uniffi_loro_ffi_fn_method_lorodoc_commit(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -6020,7 +6426,7 @@ func (_self *LoroDoc) CommitWith(options CommitOptions) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_commit_with(
+		C.uniffi_loro_ffi_fn_method_lorodoc_commit_with(
 			_pointer, FfiConverterCommitOptionsINSTANCE.Lower(options), _uniffiStatus)
 		return false
 	})
@@ -6033,7 +6439,7 @@ func (_self *LoroDoc) CompactChangeStore() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_compact_change_store(
+		C.uniffi_loro_ffi_fn_method_lorodoc_compact_change_store(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -6044,7 +6450,7 @@ func (_self *LoroDoc) Config() *Configure {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterConfigureINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_config(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_config(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6061,7 +6467,7 @@ func (_self *LoroDoc) ConfigDefaultTextStyle(textStyle *StyleConfig) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_config_default_text_style(
+		C.uniffi_loro_ffi_fn_method_lorodoc_config_default_text_style(
 			_pointer, FfiConverterOptionalStyleConfigINSTANCE.Lower(textStyle), _uniffiStatus)
 		return false
 	})
@@ -6078,7 +6484,7 @@ func (_self *LoroDoc) ConfigTextStyle(textStyle *StyleConfigMap) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_config_text_style(
+		C.uniffi_loro_ffi_fn_method_lorodoc_config_text_style(
 			_pointer, FfiConverterStyleConfigMapINSTANCE.Lower(textStyle), _uniffiStatus)
 		return false
 	})
@@ -6095,7 +6501,7 @@ func (_self *LoroDoc) DeleteRootContainer(cid ContainerId) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_delete_root_container(
+		C.uniffi_loro_ffi_fn_method_lorodoc_delete_root_container(
 			_pointer, FfiConverterContainerIdINSTANCE.Lower(cid), _uniffiStatus)
 		return false
 	})
@@ -6110,7 +6516,7 @@ func (_self *LoroDoc) Detach() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_detach(
+		C.uniffi_loro_ffi_fn_method_lorodoc_detach(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -6121,7 +6527,7 @@ func (_self *LoroDoc) Diff(a *Frontiers, b *Frontiers) (*DiffBatch, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_diff(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_diff(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(a), FfiConverterFrontiersINSTANCE.Lower(b), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -6145,7 +6551,7 @@ func (_self *LoroDoc) ExportJsonInIdSpan(idSpan IdSpan) []string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_json_in_id_span(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_json_in_id_span(
 				_pointer, FfiConverterIdSpanINSTANCE.Lower(idSpan), _uniffiStatus),
 		}
 	}))
@@ -6157,7 +6563,7 @@ func (_self *LoroDoc) ExportJsonUpdates(startVv *VersionVector, endVv *VersionVe
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_json_updates(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_json_updates(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(startVv), FfiConverterVersionVectorINSTANCE.Lower(endVv), _uniffiStatus),
 		}
 	}))
@@ -6172,7 +6578,7 @@ func (_self *LoroDoc) ExportJsonUpdatesWithoutPeerCompression(startVv *VersionVe
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_json_updates_without_peer_compression(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_json_updates_without_peer_compression(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(startVv), FfiConverterVersionVectorINSTANCE.Lower(endVv), _uniffiStatus),
 		}
 	}))
@@ -6183,7 +6589,7 @@ func (_self *LoroDoc) ExportShallowSnapshot(frontiers *Frontiers) ([]byte, error
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_shallow_snapshot(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_shallow_snapshot(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
 		}
 	})
@@ -6201,7 +6607,7 @@ func (_self *LoroDoc) ExportSnapshot() ([]byte, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_snapshot(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_snapshot(
 				_pointer, _uniffiStatus),
 		}
 	})
@@ -6218,7 +6624,7 @@ func (_self *LoroDoc) ExportSnapshotAt(frontiers *Frontiers) ([]byte, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_snapshot_at(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_snapshot_at(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
 		}
 	})
@@ -6235,7 +6641,7 @@ func (_self *LoroDoc) ExportStateOnly(frontiers **Frontiers) ([]byte, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_state_only(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_state_only(
 				_pointer, FfiConverterOptionalFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
 		}
 	})
@@ -6253,7 +6659,7 @@ func (_self *LoroDoc) ExportUpdates(vv *VersionVector) ([]byte, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_updates(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_updates(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(vv), _uniffiStatus),
 		}
 	})
@@ -6270,7 +6676,7 @@ func (_self *LoroDoc) ExportUpdatesInRange(spans []IdSpan) ([]byte, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_export_updates_in_range(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_updates_in_range(
 				_pointer, FfiConverterSequenceIdSpanINSTANCE.Lower(spans), _uniffiStatus),
 		}
 	})
@@ -6288,7 +6694,7 @@ func (_self *LoroDoc) FindIdSpansBetween(from *Frontiers, to *Frontiers) Version
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterVersionVectorDiffINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_find_id_spans_between(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_find_id_spans_between(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(from), FfiConverterFrontiersINSTANCE.Lower(to), _uniffiStatus),
 		}
 	}))
@@ -6304,7 +6710,7 @@ func (_self *LoroDoc) Fork() *LoroDoc {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_fork(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_fork(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6316,7 +6722,7 @@ func (_self *LoroDoc) ForkAt(frontiers *Frontiers) *LoroDoc {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_fork_at(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_fork_at(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus)
 	}))
 }
@@ -6326,7 +6732,7 @@ func (_self *LoroDoc) FreeDiffCalculator() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_free_diff_calculator(
+		C.uniffi_loro_ffi_fn_method_lorodoc_free_diff_calculator(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -6340,7 +6746,7 @@ func (_self *LoroDoc) FreeHistoryCache() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_free_history_cache(
+		C.uniffi_loro_ffi_fn_method_lorodoc_free_history_cache(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -6352,7 +6758,7 @@ func (_self *LoroDoc) FrontiersToVv(frontiers *Frontiers) **VersionVector {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalVersionVectorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_frontiers_to_vv(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_frontiers_to_vv(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
 		}
 	}))
@@ -6364,7 +6770,7 @@ func (_self *LoroDoc) GetByPath(path []Index) **ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_by_path(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_by_path(
 				_pointer, FfiConverterSequenceIndexINSTANCE.Lower(path), _uniffiStatus),
 		}
 	}))
@@ -6426,7 +6832,7 @@ func (_self *LoroDoc) GetByStrPath(path string) **ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_by_str_path(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_by_str_path(
 				_pointer, FfiConverterStringINSTANCE.Lower(path), _uniffiStatus),
 		}
 	}))
@@ -6450,7 +6856,7 @@ func (_self *LoroDoc) GetChange(id Id) *ChangeMeta {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalChangeMetaINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_change(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_change(
 				_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus),
 		}
 	}))
@@ -6472,7 +6878,7 @@ func (_self *LoroDoc) GetChangedContainersIn(id Id, len uint32) []ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_changed_containers_in(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_changed_containers_in(
 				_pointer, FfiConverterIdINSTANCE.Lower(id), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus),
 		}
 	}))
@@ -6485,7 +6891,7 @@ func (_self *LoroDoc) GetCounter(id ContainerIdLike) *LoroCounter {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroCounterINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_counter(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_counter(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6495,7 +6901,7 @@ func (_self *LoroDoc) GetCursorPos(cursor *Cursor) (PosQueryResult, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[CannotFindRelativePosition](FfiConverterCannotFindRelativePosition{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_cursor_pos(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_cursor_pos(
 				_pointer, FfiConverterCursorINSTANCE.Lower(cursor), _uniffiStatus),
 		}
 	})
@@ -6513,7 +6919,7 @@ func (_self *LoroDoc) GetDeepValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_deep_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_deep_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -6525,7 +6931,7 @@ func (_self *LoroDoc) GetDeepValueWithId() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_deep_value_with_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_deep_value_with_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -6538,7 +6944,7 @@ func (_self *LoroDoc) GetList(id ContainerIdLike) *LoroList {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_list(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_list(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6550,7 +6956,7 @@ func (_self *LoroDoc) GetMap(id ContainerIdLike) *LoroMap {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_map(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_map(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6562,7 +6968,7 @@ func (_self *LoroDoc) GetMovableList(id ContainerIdLike) *LoroMovableList {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroMovableListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_movable_list(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_movable_list(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6573,7 +6979,7 @@ func (_self *LoroDoc) GetPathToContainer(id ContainerId) *[]ContainerPath {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalSequenceContainerPathINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_path_to_container(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_path_to_container(
 				_pointer, FfiConverterContainerIdINSTANCE.Lower(id), _uniffiStatus),
 		}
 	}))
@@ -6587,7 +6993,7 @@ func (_self *LoroDoc) GetPendingTxnLen() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_lorodoc_get_pending_txn_len(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_pending_txn_len(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6599,7 +7005,7 @@ func (_self *LoroDoc) GetText(id ContainerIdLike) *LoroText {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroTextINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_text(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_text(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6611,7 +7017,7 @@ func (_self *LoroDoc) GetTree(id ContainerIdLike) *LoroTree {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroTreeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_get_tree(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_get_tree(
 			_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6622,7 +7028,7 @@ func (_self *LoroDoc) GetValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_get_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -6636,7 +7042,7 @@ func (_self *LoroDoc) HasContainer(id ContainerId) bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorodoc_has_container(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_has_container(
 			_pointer, FfiConverterContainerIdINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -6645,7 +7051,7 @@ func (_self *LoroDoc) HasHistoryCache() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorodoc_has_history_cache(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_has_history_cache(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6656,7 +7062,7 @@ func (_self *LoroDoc) Import(bytes []byte) (ImportStatus, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_import(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_import(
 				_pointer, FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus),
 		}
 	})
@@ -6676,7 +7082,7 @@ func (_self *LoroDoc) ImportBatch(bytes [][]byte) (ImportStatus, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_import_batch(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_import_batch(
 				_pointer, FfiConverterSequenceBytesINSTANCE.Lower(bytes), _uniffiStatus),
 		}
 	})
@@ -6693,7 +7099,7 @@ func (_self *LoroDoc) ImportJsonUpdates(json string) (ImportStatus, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_import_json_updates(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_import_json_updates(
 				_pointer, FfiConverterStringINSTANCE.Lower(json), _uniffiStatus),
 		}
 	})
@@ -6714,7 +7120,7 @@ func (_self *LoroDoc) ImportWith(bytes []byte, origin string) (ImportStatus, err
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_import_with(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_import_with(
 				_pointer, FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterStringINSTANCE.Lower(origin), _uniffiStatus),
 		}
 	})
@@ -6732,7 +7138,7 @@ func (_self *LoroDoc) IsDetached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorodoc_is_detached(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_is_detached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6742,7 +7148,7 @@ func (_self *LoroDoc) IsShallow() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorodoc_is_shallow(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_is_shallow(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6781,7 +7187,7 @@ func (_self *LoroDoc) Jsonpath(path string) ([]*ValueOrContainer, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[JsonPathError](FfiConverterJsonPathError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_jsonpath(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_jsonpath(
 				_pointer, FfiConverterStringINSTANCE.Lower(path), _uniffiStatus),
 		}
 	})
@@ -6798,7 +7204,7 @@ func (_self *LoroDoc) LenChanges() uint64 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_loro_fn_method_lorodoc_len_changes(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_len_changes(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6808,20 +7214,9 @@ func (_self *LoroDoc) LenOps() uint64 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_loro_fn_method_lorodoc_len_ops(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_len_ops(
 			_pointer, _uniffiStatus)
 	}))
-}
-
-// Estimate the size of the document states in memory.
-func (_self *LoroDoc) LogEstimateSize() {
-	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
-	defer _self.ffiObject.decrementPointer()
-	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_log_estimate_size(
-			_pointer, _uniffiStatus)
-		return false
-	})
 }
 
 // Minimize the frontiers by removing the unnecessary entries.
@@ -6830,7 +7225,7 @@ func (_self *LoroDoc) MinimizeFrontiers(frontiers *Frontiers) FrontiersOrId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterFrontiersOrIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorodoc_minimize_frontiers(
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_minimize_frontiers(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
 		}
 	}))
@@ -6841,7 +7236,7 @@ func (_self *LoroDoc) OplogFrontiers() *Frontiers {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_oplog_frontiers(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_oplog_frontiers(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6851,7 +7246,7 @@ func (_self *LoroDoc) OplogVv() *VersionVector {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterVersionVectorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_oplog_vv(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_oplog_vv(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -6861,9 +7256,38 @@ func (_self *LoroDoc) PeerId() uint64 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
-		return C.uniffi_loro_fn_method_lorodoc_peer_id(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_peer_id(
 			_pointer, _uniffiStatus)
 	}))
+}
+
+// Redacts sensitive content in JSON updates within the specified version range.
+//
+// This function allows you to share document history while removing potentially sensitive content.
+// It preserves the document structure and collaboration capabilities while replacing content with
+// placeholders according to these redaction rules:
+//
+// - Preserves delete and move operations
+// - Replaces text insertion content with the Unicode replacement character
+// - Substitutes list and map insert values with null
+// - Maintains structure of child containers
+// - Replaces text mark values with null
+// - Preserves map keys and text annotation keys
+func (_self *LoroDoc) RedactJsonUpdates(json string, versionRange *VersionRange) (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_redact_json_updates(
+				_pointer, FfiConverterStringINSTANCE.Lower(json), FfiConverterVersionRangeINSTANCE.Lower(versionRange), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue string
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
+	}
 }
 
 // Revert the current document state back to the target version
@@ -6875,7 +7299,7 @@ func (_self *LoroDoc) RevertTo(version *Frontiers) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_revert_to(
+		C.uniffi_loro_ffi_fn_method_lorodoc_revert_to(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(version), _uniffiStatus)
 		return false
 	})
@@ -6893,7 +7317,7 @@ func (_self *LoroDoc) SetChangeMergeInterval(interval int64) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_change_merge_interval(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_change_merge_interval(
 			_pointer, FfiConverterInt64INSTANCE.Lower(interval), _uniffiStatus)
 		return false
 	})
@@ -6904,7 +7328,7 @@ func (_self *LoroDoc) SetHideEmptyRootContainers(hide bool) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_hide_empty_root_containers(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_hide_empty_root_containers(
 			_pointer, FfiConverterBoolINSTANCE.Lower(hide), _uniffiStatus)
 		return false
 	})
@@ -6917,7 +7341,7 @@ func (_self *LoroDoc) SetNextCommitMessage(msg string) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_next_commit_message(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_next_commit_message(
 			_pointer, FfiConverterStringINSTANCE.Lower(msg), _uniffiStatus)
 		return false
 	})
@@ -6930,7 +7354,7 @@ func (_self *LoroDoc) SetNextCommitOptions(options CommitOptions) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_next_commit_options(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_next_commit_options(
 			_pointer, FfiConverterCommitOptionsINSTANCE.Lower(options), _uniffiStatus)
 		return false
 	})
@@ -6943,7 +7367,7 @@ func (_self *LoroDoc) SetNextCommitOrigin(origin string) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_next_commit_origin(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_next_commit_origin(
 			_pointer, FfiConverterStringINSTANCE.Lower(origin), _uniffiStatus)
 		return false
 	})
@@ -6957,7 +7381,7 @@ func (_self *LoroDoc) SetNextCommitTimestamp(timestamp int64) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_next_commit_timestamp(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_next_commit_timestamp(
 			_pointer, FfiConverterInt64INSTANCE.Lower(timestamp), _uniffiStatus)
 		return false
 	})
@@ -6971,7 +7395,7 @@ func (_self *LoroDoc) SetPeerId(peer uint64) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_peer_id(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_peer_id(
 			_pointer, FfiConverterUint64INSTANCE.Lower(peer), _uniffiStatus)
 		return false
 	})
@@ -6991,7 +7415,7 @@ func (_self *LoroDoc) SetRecordTimestamp(record bool) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_set_record_timestamp(
+		C.uniffi_loro_ffi_fn_method_lorodoc_set_record_timestamp(
 			_pointer, FfiConverterBoolINSTANCE.Lower(record), _uniffiStatus)
 		return false
 	})
@@ -7004,7 +7428,7 @@ func (_self *LoroDoc) ShallowSinceVv() *VersionVector {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterVersionVectorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_shallow_since_vv(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_shallow_since_vv(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7016,7 +7440,7 @@ func (_self *LoroDoc) StateFrontiers() *Frontiers {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_state_frontiers(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_state_frontiers(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7026,7 +7450,7 @@ func (_self *LoroDoc) StateVv() *VersionVector {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterVersionVectorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_state_vv(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_state_vv(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7046,7 +7470,7 @@ func (_self *LoroDoc) Subscribe(containerId ContainerId, subscriber Subscriber) 
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_subscribe(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe(
 			_pointer, FfiConverterContainerIdINSTANCE.Lower(containerId), FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus)
 	}))
 }
@@ -7060,7 +7484,7 @@ func (_self *LoroDoc) SubscribeFirstCommitFromPeer(callback FirstCommitFromPeerC
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_subscribe_first_commit_from_peer(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_first_commit_from_peer(
 			_pointer, FfiConverterFirstCommitFromPeerCallbackINSTANCE.Lower(callback), _uniffiStatus)
 	}))
 }
@@ -7070,7 +7494,7 @@ func (_self *LoroDoc) SubscribeLocalUpdate(callback LocalUpdateCallback) *Subscr
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_subscribe_local_update(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_local_update(
 			_pointer, FfiConverterLocalUpdateCallbackINSTANCE.Lower(callback), _uniffiStatus)
 	}))
 }
@@ -7083,7 +7507,7 @@ func (_self *LoroDoc) SubscribePreCommit(callback PreCommitCallback) *Subscripti
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_subscribe_pre_commit(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_pre_commit(
 			_pointer, FfiConverterPreCommitCallbackINSTANCE.Lower(callback), _uniffiStatus)
 	}))
 }
@@ -7096,7 +7520,7 @@ func (_self *LoroDoc) SubscribeRoot(subscriber Subscriber) *Subscription {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_subscribe_root(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_root(
 			_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus)
 	}))
 }
@@ -7114,7 +7538,7 @@ func (_self *LoroDoc) TravelChangeAncestors(ids []Id, f ChangeAncestorsTraveler)
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[ChangeTravelError](FfiConverterChangeTravelError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorodoc_travel_change_ancestors(
+		C.uniffi_loro_ffi_fn_method_lorodoc_travel_change_ancestors(
 			_pointer, FfiConverterSequenceIdINSTANCE.Lower(ids), FfiConverterChangeAncestorsTravelerINSTANCE.Lower(f), _uniffiStatus)
 		return false
 	})
@@ -7126,7 +7550,7 @@ func (_self *LoroDoc) VvToFrontiers(vv *VersionVector) *Frontiers {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterFrontiersINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorodoc_vv_to_frontiers(
+		return C.uniffi_loro_ffi_fn_method_lorodoc_vv_to_frontiers(
 			_pointer, FfiConverterVersionVectorINSTANCE.Lower(vv), _uniffiStatus)
 	}))
 }
@@ -7144,10 +7568,10 @@ func (c FfiConverterLoroDoc) Lift(pointer unsafe.Pointer) *LoroDoc {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorodoc(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorodoc(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorodoc(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorodoc(pointer, status)
 			},
 		),
 	}
@@ -7221,6 +7645,18 @@ type LoroListInterface interface {
 	// Pop the last element of the list.
 	Pop() (*LoroValue, error)
 	Push(v LoroValueLike) error
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 	// Converts the LoroList to a Vec of LoroValue.
 	//
 	// This method unwraps the internal Arc and clones the data if necessary,
@@ -7237,7 +7673,7 @@ type LoroList struct {
 // To attach the container to the document, please insert it into an attached container.
 func NewLoroList() *LoroList {
 	return FfiConverterLoroListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_lorolist_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_lorolist_new(_uniffiStatus)
 	}))
 }
 
@@ -7246,7 +7682,7 @@ func (_self *LoroList) Clear() error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorolist_clear(
+		C.uniffi_loro_ffi_fn_method_lorolist_clear(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -7258,7 +7694,7 @@ func (_self *LoroList) Delete(pos uint32, len uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorolist_delete(
+		C.uniffi_loro_ffi_fn_method_lorolist_delete(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
 		return false
 	})
@@ -7271,7 +7707,7 @@ func (_self *LoroList) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_doc(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7283,7 +7719,7 @@ func (_self *LoroList) Get(index uint32) **ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get(
 				_pointer, FfiConverterUint32INSTANCE.Lower(index), _uniffiStatus),
 		}
 	}))
@@ -7295,7 +7731,7 @@ func (_self *LoroList) GetAttached() **LoroList {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7306,7 +7742,7 @@ func (_self *LoroList) GetCursor(pos uint32, side Side) **Cursor {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalCursorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get_cursor(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get_cursor(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterSideINSTANCE.Lower(side), _uniffiStatus),
 		}
 	}))
@@ -7318,7 +7754,7 @@ func (_self *LoroList) GetDeepValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get_deep_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get_deep_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7330,7 +7766,7 @@ func (_self *LoroList) GetIdAt(pos uint32) *Id {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get_id_at(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get_id_at(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
 		}
 	}))
@@ -7344,7 +7780,7 @@ func (_self *LoroList) GetValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_get_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_get_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7356,7 +7792,7 @@ func (_self *LoroList) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7367,7 +7803,7 @@ func (_self *LoroList) Insert(pos uint32, v LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorolist_insert(
+		C.uniffi_loro_ffi_fn_method_lorolist_insert(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroValueLikeINSTANCE.Lower(v), _uniffiStatus)
 		return false
 	})
@@ -7378,7 +7814,7 @@ func (_self *LoroList) InsertCounterContainer(pos uint32, child *LoroCounter) (*
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_counter_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_counter_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroCounterINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7393,7 +7829,7 @@ func (_self *LoroList) InsertListContainer(pos uint32, child *LoroList) (*LoroLi
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_list_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7408,7 +7844,7 @@ func (_self *LoroList) InsertMapContainer(pos uint32, child *LoroMap) (*LoroMap,
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_map_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_map_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMapINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7423,7 +7859,7 @@ func (_self *LoroList) InsertMovableListContainer(pos uint32, child *LoroMovable
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_movable_list_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_movable_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMovableListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7438,7 +7874,7 @@ func (_self *LoroList) InsertTextContainer(pos uint32, child *LoroText) (*LoroTe
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_text_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_text_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTextINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7453,7 +7889,7 @@ func (_self *LoroList) InsertTreeContainer(pos uint32, child *LoroTree) (*LoroTr
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorolist_insert_tree_container(
+		return C.uniffi_loro_ffi_fn_method_lorolist_insert_tree_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTreeINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7472,7 +7908,7 @@ func (_self *LoroList) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorolist_is_attached(
+		return C.uniffi_loro_ffi_fn_method_lorolist_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7482,7 +7918,7 @@ func (_self *LoroList) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorolist_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_lorolist_is_deleted(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7491,7 +7927,7 @@ func (_self *LoroList) IsEmpty() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorolist_is_empty(
+		return C.uniffi_loro_ffi_fn_method_lorolist_is_empty(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7500,7 +7936,7 @@ func (_self *LoroList) Len() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_lorolist_len(
+		return C.uniffi_loro_ffi_fn_method_lorolist_len(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7511,7 +7947,7 @@ func (_self *LoroList) Pop() (*LoroValue, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_pop(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_pop(
 				_pointer, _uniffiStatus),
 		}
 	})
@@ -7527,11 +7963,33 @@ func (_self *LoroList) Push(v LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorolist_push(
+		C.uniffi_loro_ffi_fn_method_lorolist_push(
 			_pointer, FfiConverterLoroValueLikeINSTANCE.Lower(v), _uniffiStatus)
 		return false
 	})
 	return _uniffiErr.AsError()
+}
+
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroList) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroList")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
+		}
+	}))
 }
 
 // Converts the LoroList to a Vec of LoroValue.
@@ -7543,7 +8001,7 @@ func (_self *LoroList) ToVec() []LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorolist_to_vec(
+			inner: C.uniffi_loro_ffi_fn_method_lorolist_to_vec(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7562,10 +8020,10 @@ func (c FfiConverterLoroList) Lift(pointer unsafe.Pointer) *LoroList {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorolist(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorolist(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorolist(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorolist(pointer, status)
 			},
 		),
 	}
@@ -7647,6 +8105,18 @@ type LoroMapInterface interface {
 	Keys() []string
 	// Get the length of the map.
 	Len() uint32
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 	// Get the values of the map.
 	Values() []*ValueOrContainer
 }
@@ -7660,7 +8130,7 @@ type LoroMap struct {
 // To attach the container to the document, please insert it into an attached container.
 func NewLoroMap() *LoroMap {
 	return FfiConverterLoroMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_loromap_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_loromap_new(_uniffiStatus)
 	}))
 }
 
@@ -7669,7 +8139,7 @@ func (_self *LoroMap) Clear() error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromap_clear(
+		C.uniffi_loro_ffi_fn_method_loromap_clear(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -7681,7 +8151,7 @@ func (_self *LoroMap) Delete(key string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromap_delete(
+		C.uniffi_loro_ffi_fn_method_loromap_delete(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 		return false
 	})
@@ -7694,7 +8164,7 @@ func (_self *LoroMap) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_doc(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7706,7 +8176,7 @@ func (_self *LoroMap) Get(key string) **ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_get(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_get(
 				_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus),
 		}
 	}))
@@ -7718,7 +8188,7 @@ func (_self *LoroMap) GetAttached() **LoroMap {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7732,7 +8202,7 @@ func (_self *LoroMap) GetDeepValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_get_deep_value(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_get_deep_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7744,7 +8214,7 @@ func (_self *LoroMap) GetLastEditor(key string) *uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_get_last_editor(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_get_last_editor(
 				_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus),
 		}
 	}))
@@ -7754,7 +8224,7 @@ func (_self *LoroMap) GetOrCreateCounterContainer(key string, child *LoroCounter
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_counter_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_counter_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroCounterINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7769,7 +8239,7 @@ func (_self *LoroMap) GetOrCreateListContainer(key string, child *LoroList) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_list_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7784,7 +8254,7 @@ func (_self *LoroMap) GetOrCreateMapContainer(key string, child *LoroMap) (*Loro
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_map_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_map_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroMapINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7799,7 +8269,7 @@ func (_self *LoroMap) GetOrCreateMovableListContainer(key string, child *LoroMov
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_movable_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_movable_list_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroMovableListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7814,7 +8284,7 @@ func (_self *LoroMap) GetOrCreateTextContainer(key string, child *LoroText) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_text_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_text_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroTextINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7829,7 +8299,7 @@ func (_self *LoroMap) GetOrCreateTreeContainer(key string, child *LoroTree) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_get_or_create_tree_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_get_or_create_tree_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroTreeINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7848,7 +8318,7 @@ func (_self *LoroMap) GetValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_get_value(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_get_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7860,7 +8330,7 @@ func (_self *LoroMap) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_id(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -7874,7 +8344,7 @@ func (_self *LoroMap) Insert(key string, v LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromap_insert(
+		C.uniffi_loro_ffi_fn_method_loromap_insert(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroValueLikeINSTANCE.Lower(v), _uniffiStatus)
 		return false
 	})
@@ -7885,7 +8355,7 @@ func (_self *LoroMap) InsertCounterContainer(key string, child *LoroCounter) (*L
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_counter_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_counter_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroCounterINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7900,7 +8370,7 @@ func (_self *LoroMap) InsertListContainer(key string, child *LoroList) (*LoroLis
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_list_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7915,7 +8385,7 @@ func (_self *LoroMap) InsertMapContainer(key string, child *LoroMap) (*LoroMap, 
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_map_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_map_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroMapINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7930,7 +8400,7 @@ func (_self *LoroMap) InsertMovableListContainer(key string, child *LoroMovableL
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_movable_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_movable_list_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroMovableListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7945,7 +8415,7 @@ func (_self *LoroMap) InsertTextContainer(key string, child *LoroText) (*LoroTex
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_text_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_text_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroTextINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7960,7 +8430,7 @@ func (_self *LoroMap) InsertTreeContainer(key string, child *LoroTree) (*LoroTre
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromap_insert_tree_container(
+		return C.uniffi_loro_ffi_fn_method_loromap_insert_tree_container(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroTreeINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -7976,7 +8446,7 @@ func (_self *LoroMap) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromap_is_attached(
+		return C.uniffi_loro_ffi_fn_method_loromap_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7986,7 +8456,7 @@ func (_self *LoroMap) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromap_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_loromap_is_deleted(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -7996,7 +8466,7 @@ func (_self *LoroMap) IsEmpty() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromap_is_empty(
+		return C.uniffi_loro_ffi_fn_method_loromap_is_empty(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8007,7 +8477,7 @@ func (_self *LoroMap) Keys() []string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_keys(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_keys(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8018,8 +8488,30 @@ func (_self *LoroMap) Len() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_loromap_len(
+		return C.uniffi_loro_ffi_fn_method_loromap_len(
 			_pointer, _uniffiStatus)
+	}))
+}
+
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroMap) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroMap")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_loromap_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
+		}
 	}))
 }
 
@@ -8029,7 +8521,7 @@ func (_self *LoroMap) Values() []*ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromap_values(
+			inner: C.uniffi_loro_ffi_fn_method_loromap_values(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8048,10 +8540,10 @@ func (c FfiConverterLoroMap) Lift(pointer unsafe.Pointer) *LoroMap {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_loromap(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_loromap(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_loromap(pointer, status)
+				C.uniffi_loro_ffi_fn_free_loromap(pointer, status)
 			},
 		),
 	}
@@ -8151,6 +8643,18 @@ type LoroMovableListInterface interface {
 	SetMovableListContainer(pos uint32, child *LoroMovableList) (*LoroMovableList, error)
 	SetTextContainer(pos uint32, child *LoroText) (*LoroText, error)
 	SetTreeContainer(pos uint32, child *LoroTree) (*LoroTree, error)
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 	// Get the elements of the list as a vector of LoroValues.
 	//
 	// This method returns a vector containing all the elements in the list as LoroValues.
@@ -8168,7 +8672,7 @@ type LoroMovableList struct {
 // To attach the container to the document, please insert it into an attached container.
 func NewLoroMovableList() *LoroMovableList {
 	return FfiConverterLoroMovableListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_loromovablelist_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_loromovablelist_new(_uniffiStatus)
 	}))
 }
 
@@ -8177,7 +8681,7 @@ func (_self *LoroMovableList) Clear() error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_clear(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_clear(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -8189,7 +8693,7 @@ func (_self *LoroMovableList) Delete(pos uint32, len uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_delete(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_delete(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
 		return false
 	})
@@ -8202,7 +8706,7 @@ func (_self *LoroMovableList) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_doc(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8214,7 +8718,7 @@ func (_self *LoroMovableList) Get(index uint32) **ValueOrContainer {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get(
 				_pointer, FfiConverterUint32INSTANCE.Lower(index), _uniffiStatus),
 		}
 	}))
@@ -8226,7 +8730,7 @@ func (_self *LoroMovableList) GetAttached() **LoroMovableList {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroMovableListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8237,7 +8741,7 @@ func (_self *LoroMovableList) GetCreatorAt(pos uint32) *uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_creator_at(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_creator_at(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
 		}
 	}))
@@ -8261,7 +8765,7 @@ func (_self *LoroMovableList) GetCursor(pos uint32, side Side) **Cursor {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalCursorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_cursor(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_cursor(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterSideINSTANCE.Lower(side), _uniffiStatus),
 		}
 	}))
@@ -8273,7 +8777,7 @@ func (_self *LoroMovableList) GetDeepValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_deep_value(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_deep_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8285,7 +8789,7 @@ func (_self *LoroMovableList) GetLastEditorAt(pos uint32) *uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_last_editor_at(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_last_editor_at(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
 		}
 	}))
@@ -8297,7 +8801,7 @@ func (_self *LoroMovableList) GetLastMoverAt(pos uint32) *uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_last_mover_at(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_last_mover_at(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
 		}
 	}))
@@ -8311,7 +8815,7 @@ func (_self *LoroMovableList) GetValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_get_value(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_get_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8323,7 +8827,7 @@ func (_self *LoroMovableList) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_id(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8334,7 +8838,7 @@ func (_self *LoroMovableList) Insert(pos uint32, v LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_insert(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_insert(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroValueLikeINSTANCE.Lower(v), _uniffiStatus)
 		return false
 	})
@@ -8345,7 +8849,7 @@ func (_self *LoroMovableList) InsertCounterContainer(pos uint32, child *LoroCoun
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_counter_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_counter_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroCounterINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8360,7 +8864,7 @@ func (_self *LoroMovableList) InsertListContainer(pos uint32, child *LoroList) (
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8375,7 +8879,7 @@ func (_self *LoroMovableList) InsertMapContainer(pos uint32, child *LoroMap) (*L
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_map_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_map_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMapINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8390,7 +8894,7 @@ func (_self *LoroMovableList) InsertMovableListContainer(pos uint32, child *Loro
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_movable_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_movable_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMovableListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8405,7 +8909,7 @@ func (_self *LoroMovableList) InsertTextContainer(pos uint32, child *LoroText) (
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_text_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_text_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTextINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8420,7 +8924,7 @@ func (_self *LoroMovableList) InsertTreeContainer(pos uint32, child *LoroTree) (
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_insert_tree_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_insert_tree_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTreeINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8439,7 +8943,7 @@ func (_self *LoroMovableList) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromovablelist_is_attached(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8449,7 +8953,7 @@ func (_self *LoroMovableList) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromovablelist_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_is_deleted(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8458,7 +8962,7 @@ func (_self *LoroMovableList) IsEmpty() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_loromovablelist_is_empty(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_is_empty(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8467,7 +8971,7 @@ func (_self *LoroMovableList) Len() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_loromovablelist_len(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_len(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8477,7 +8981,7 @@ func (_self *LoroMovableList) Mov(from uint32, to uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_mov(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_mov(
 			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), _uniffiStatus)
 		return false
 	})
@@ -8490,7 +8994,7 @@ func (_self *LoroMovableList) Pop() (**ValueOrContainer, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_pop(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_pop(
 				_pointer, _uniffiStatus),
 		}
 	})
@@ -8506,7 +9010,7 @@ func (_self *LoroMovableList) Push(v LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_push(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_push(
 			_pointer, FfiConverterLoroValueLikeINSTANCE.Lower(v), _uniffiStatus)
 		return false
 	})
@@ -8518,7 +9022,7 @@ func (_self *LoroMovableList) Set(pos uint32, value LoroValueLike) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_loromovablelist_set(
+		C.uniffi_loro_ffi_fn_method_loromovablelist_set(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -8529,7 +9033,7 @@ func (_self *LoroMovableList) SetCounterContainer(pos uint32, child *LoroCounter
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_counter_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_counter_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroCounterINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8544,7 +9048,7 @@ func (_self *LoroMovableList) SetListContainer(pos uint32, child *LoroList) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8559,7 +9063,7 @@ func (_self *LoroMovableList) SetMapContainer(pos uint32, child *LoroMap) (*Loro
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_map_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_map_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMapINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8574,7 +9078,7 @@ func (_self *LoroMovableList) SetMovableListContainer(pos uint32, child *LoroMov
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_movable_list_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_movable_list_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroMovableListINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8589,7 +9093,7 @@ func (_self *LoroMovableList) SetTextContainer(pos uint32, child *LoroText) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_text_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_text_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTextINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8604,7 +9108,7 @@ func (_self *LoroMovableList) SetTreeContainer(pos uint32, child *LoroTree) (*Lo
 	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_loromovablelist_set_tree_container(
+		return C.uniffi_loro_ffi_fn_method_loromovablelist_set_tree_container(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterLoroTreeINSTANCE.Lower(child), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -8613,6 +9117,28 @@ func (_self *LoroMovableList) SetTreeContainer(pos uint32, child *LoroTree) (*Lo
 	} else {
 		return FfiConverterLoroTreeINSTANCE.Lift(_uniffiRV), nil
 	}
+}
+
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroMovableList) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroMovableList")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
+		}
+	}))
 }
 
 // Get the elements of the list as a vector of LoroValues.
@@ -8625,7 +9151,7 @@ func (_self *LoroMovableList) ToVec() []LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_loromovablelist_to_vec(
+			inner: C.uniffi_loro_ffi_fn_method_loromovablelist_to_vec(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8644,10 +9170,10 @@ func (c FfiConverterLoroMovableList) Lift(pointer unsafe.Pointer) *LoroMovableLi
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_loromovablelist(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_loromovablelist(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_loromovablelist(pointer, status)
+				C.uniffi_loro_ffi_fn_free_loromovablelist(pointer, status)
 			},
 		),
 	}
@@ -8682,6 +9208,8 @@ func (_ FfiDestroyerLoroMovableList) Destroy(value *LoroMovableList) {
 type LoroTextInterface interface {
 	// Apply a [delta](https://quilljs.com/docs/delta/) to the text container.
 	ApplyDelta(delta []TextDelta) error
+	// Get the characters at given unicode position.
+	CharAt(pos uint32) (string, error)
 	// Delete a range of text at the given unicode position with unicode length.
 	Delete(pos uint32, len uint32) error
 	// Delete a range of text at the given utf-8 position with utf-8 length.
@@ -8750,6 +9278,18 @@ type LoroTextInterface interface {
 	Slice(startIndex uint32, endIndex uint32) (string, error)
 	// Delete specified character and insert string at the same position at given unicode position.
 	Splice(pos uint32, len uint32, s string) (string, error)
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 	// Get the text in [Delta](https://quilljs.com/docs/delta/) format.
 	ToDelta() []TextDelta
 	// Get the text content of the text container.
@@ -8794,7 +9334,7 @@ type LoroText struct {
 // To attach the container to the document, please insert it into an attached container.
 func NewLoroText() *LoroText {
 	return FfiConverterLoroTextINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_lorotext_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_lorotext_new(_uniffiStatus)
 	}))
 }
 
@@ -8803,11 +9343,29 @@ func (_self *LoroText) ApplyDelta(delta []TextDelta) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_apply_delta(
+		C.uniffi_loro_ffi_fn_method_lorotext_apply_delta(
 			_pointer, FfiConverterSequenceTextDeltaINSTANCE.Lower(delta), _uniffiStatus)
 		return false
 	})
 	return _uniffiErr.AsError()
+}
+
+// Get the characters at given unicode position.
+func (_self *LoroText) CharAt(pos uint32) (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_char_at(
+				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue string
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
+	}
 }
 
 // Delete a range of text at the given unicode position with unicode length.
@@ -8815,7 +9373,7 @@ func (_self *LoroText) Delete(pos uint32, len uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_delete(
+		C.uniffi_loro_ffi_fn_method_lorotext_delete(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
 		return false
 	})
@@ -8827,7 +9385,7 @@ func (_self *LoroText) DeleteUtf8(pos uint32, len uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_delete_utf8(
+		C.uniffi_loro_ffi_fn_method_lorotext_delete_utf8(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
 		return false
 	})
@@ -8840,7 +9398,7 @@ func (_self *LoroText) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_doc(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8852,7 +9410,7 @@ func (_self *LoroText) GetAttached() **LoroText {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroTextINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8876,7 +9434,7 @@ func (_self *LoroText) GetCursor(pos uint32, side Side) **Cursor {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalCursorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_get_cursor(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_get_cursor(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterSideINSTANCE.Lower(side), _uniffiStatus),
 		}
 	}))
@@ -8888,7 +9446,7 @@ func (_self *LoroText) GetEditorAtUnicodePos(pos uint32) *uint64 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_get_editor_at_unicode_pos(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_get_editor_at_unicode_pos(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), _uniffiStatus),
 		}
 	}))
@@ -8900,7 +9458,7 @@ func (_self *LoroText) GetRichtextValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_get_richtext_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_get_richtext_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8912,7 +9470,7 @@ func (_self *LoroText) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -8923,7 +9481,7 @@ func (_self *LoroText) Insert(pos uint32, s string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_insert(
+		C.uniffi_loro_ffi_fn_method_lorotext_insert(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterStringINSTANCE.Lower(s), _uniffiStatus)
 		return false
 	})
@@ -8935,7 +9493,7 @@ func (_self *LoroText) InsertUtf8(pos uint32, s string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_insert_utf8(
+		C.uniffi_loro_ffi_fn_method_lorotext_insert_utf8(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterStringINSTANCE.Lower(s), _uniffiStatus)
 		return false
 	})
@@ -8950,7 +9508,7 @@ func (_self *LoroText) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotext_is_attached(
+		return C.uniffi_loro_ffi_fn_method_lorotext_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8960,7 +9518,7 @@ func (_self *LoroText) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotext_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_lorotext_is_deleted(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8970,7 +9528,7 @@ func (_self *LoroText) IsEmpty() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotext_is_empty(
+		return C.uniffi_loro_ffi_fn_method_lorotext_is_empty(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8980,7 +9538,7 @@ func (_self *LoroText) LenUnicode() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_lorotext_len_unicode(
+		return C.uniffi_loro_ffi_fn_method_lorotext_len_unicode(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -8990,7 +9548,7 @@ func (_self *LoroText) LenUtf16() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_lorotext_len_utf16(
+		return C.uniffi_loro_ffi_fn_method_lorotext_len_utf16(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -9000,7 +9558,7 @@ func (_self *LoroText) LenUtf8() uint32 {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.uniffi_loro_fn_method_lorotext_len_utf8(
+		return C.uniffi_loro_ffi_fn_method_lorotext_len_utf8(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -9023,7 +9581,7 @@ func (_self *LoroText) Mark(from uint32, to uint32, key string, value LoroValueL
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_mark(
+		C.uniffi_loro_ffi_fn_method_lorotext_mark(
 			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -9035,7 +9593,7 @@ func (_self *LoroText) PushStr(s string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_push_str(
+		C.uniffi_loro_ffi_fn_method_lorotext_push_str(
 			_pointer, FfiConverterStringINSTANCE.Lower(s), _uniffiStatus)
 		return false
 	})
@@ -9048,7 +9606,7 @@ func (_self *LoroText) Slice(startIndex uint32, endIndex uint32) (string, error)
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_slice(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_slice(
 				_pointer, FfiConverterUint32INSTANCE.Lower(startIndex), FfiConverterUint32INSTANCE.Lower(endIndex), _uniffiStatus),
 		}
 	})
@@ -9066,7 +9624,7 @@ func (_self *LoroText) Splice(pos uint32, len uint32, s string) (string, error) 
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_splice(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_splice(
 				_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), FfiConverterStringINSTANCE.Lower(s), _uniffiStatus),
 		}
 	})
@@ -9078,13 +9636,35 @@ func (_self *LoroText) Splice(pos uint32, len uint32, s string) (string, error) 
 	}
 }
 
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroText) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
+		}
+	}))
+}
+
 // Get the text in [Delta](https://quilljs.com/docs/delta/) format.
 func (_self *LoroText) ToDelta() []TextDelta {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTextDeltaINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_to_delta(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_to_delta(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9096,7 +9676,7 @@ func (_self *LoroText) ToString() string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotext_to_string(
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_to_string(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9122,7 +9702,7 @@ func (_self *LoroText) Unmark(from uint32, to uint32, key string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_unmark(
+		C.uniffi_loro_ffi_fn_method_lorotext_unmark(
 			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 		return false
 	})
@@ -9140,7 +9720,7 @@ func (_self *LoroText) Update(s string, options UpdateOptions) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[UpdateTimeoutError](FfiConverterUpdateTimeoutError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_update(
+		C.uniffi_loro_ffi_fn_method_lorotext_update(
 			_pointer, FfiConverterStringINSTANCE.Lower(s), FfiConverterUpdateOptionsINSTANCE.Lower(options), _uniffiStatus)
 		return false
 	})
@@ -9154,7 +9734,7 @@ func (_self *LoroText) UpdateByLine(s string, options UpdateOptions) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[UpdateTimeoutError](FfiConverterUpdateTimeoutError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotext_update_by_line(
+		C.uniffi_loro_ffi_fn_method_lorotext_update_by_line(
 			_pointer, FfiConverterStringINSTANCE.Lower(s), FfiConverterUpdateOptionsINSTANCE.Lower(options), _uniffiStatus)
 		return false
 	})
@@ -9174,10 +9754,10 @@ func (c FfiConverterLoroText) Lift(pointer unsafe.Pointer) *LoroText {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorotext(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorotext(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorotext(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorotext(pointer, status)
 			},
 		),
 	}
@@ -9300,6 +9880,18 @@ type LoroTreeInterface interface {
 	Parent(target TreeId) (TreeParentId, error)
 	// Get the root nodes of the forest.
 	Roots() []TreeId
+	// Subscribe the events of a container.
+	//
+	// The callback will be invoked when the container is changed.
+	// Returns a subscription that can be used to unsubscribe.
+	//
+	// The events will be emitted after a transaction is committed. A transaction is committed when:
+	//
+	// - `doc.commit()` is called.
+	// - `doc.export(mode)` is called.
+	// - `doc.import(data)` is called.
+	// - `doc.checkout(version)` is called.
+	Subscribe(subscriber Subscriber) **Subscription
 }
 type LoroTree struct {
 	ffiObject FfiObject
@@ -9311,7 +9903,7 @@ type LoroTree struct {
 // To attach the container to the document, please insert it into an attached container.
 func NewLoroTree() *LoroTree {
 	return FfiConverterLoroTreeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_lorotree_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_lorotree_new(_uniffiStatus)
 	}))
 }
 
@@ -9323,7 +9915,7 @@ func (_self *LoroTree) Children(parent TreeParentId) *[]TreeId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalSequenceTreeIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_children(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_children(
 				_pointer, FfiConverterTreeParentIdINSTANCE.Lower(parent), _uniffiStatus),
 		}
 	}))
@@ -9335,7 +9927,7 @@ func (_self *LoroTree) ChildrenNum(parent TreeParentId) *uint32 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_children_num(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_children_num(
 				_pointer, FfiConverterTreeParentIdINSTANCE.Lower(parent), _uniffiStatus),
 		}
 	}))
@@ -9346,7 +9938,7 @@ func (_self *LoroTree) Contains(target TreeId) bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotree_contains(
+		return C.uniffi_loro_ffi_fn_method_lorotree_contains(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus)
 	}))
 }
@@ -9360,7 +9952,7 @@ func (_self *LoroTree) Create(parent TreeParentId) (TreeId, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_create(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_create(
 				_pointer, FfiConverterTreeParentIdINSTANCE.Lower(parent), _uniffiStatus),
 		}
 	})
@@ -9381,7 +9973,7 @@ func (_self *LoroTree) CreateAt(parent TreeParentId, index uint32) (TreeId, erro
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_create_at(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_create_at(
 				_pointer, FfiConverterTreeParentIdINSTANCE.Lower(parent), FfiConverterUint32INSTANCE.Lower(index), _uniffiStatus),
 		}
 	})
@@ -9401,7 +9993,7 @@ func (_self *LoroTree) Delete(target TreeId) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_delete(
+		C.uniffi_loro_ffi_fn_method_lorotree_delete(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus)
 		return false
 	})
@@ -9417,7 +10009,7 @@ func (_self *LoroTree) DisableFractionalIndex() {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_disable_fractional_index(
+		C.uniffi_loro_ffi_fn_method_lorotree_disable_fractional_index(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -9429,7 +10021,7 @@ func (_self *LoroTree) Doc() **LoroDoc {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_doc(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_doc(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9446,7 +10038,7 @@ func (_self *LoroTree) EnableFractionalIndex(jitter uint8) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_enable_fractional_index(
+		C.uniffi_loro_ffi_fn_method_lorotree_enable_fractional_index(
 			_pointer, FfiConverterUint8INSTANCE.Lower(jitter), _uniffiStatus)
 		return false
 	})
@@ -9458,7 +10050,7 @@ func (_self *LoroTree) FractionalIndex(target TreeId) *string {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_fractional_index(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_fractional_index(
 				_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus),
 		}
 	}))
@@ -9470,7 +10062,7 @@ func (_self *LoroTree) GetAttached() **LoroTree {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroTreeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_get_attached(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_get_attached(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9482,7 +10074,7 @@ func (_self *LoroTree) GetLastMoveId(target TreeId) *Id {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_get_last_move_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_get_last_move_id(
 				_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus),
 		}
 	}))
@@ -9493,7 +10085,7 @@ func (_self *LoroTree) GetMeta(target TreeId) (*LoroMap, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_method_lorotree_get_meta(
+		return C.uniffi_loro_ffi_fn_method_lorotree_get_meta(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -9513,7 +10105,7 @@ func (_self *LoroTree) GetValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_get_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_get_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9525,7 +10117,7 @@ func (_self *LoroTree) GetValueWithMeta() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_get_value_with_meta(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_get_value_with_meta(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9537,7 +10129,7 @@ func (_self *LoroTree) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9551,7 +10143,7 @@ func (_self *LoroTree) IsAttached() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotree_is_attached(
+		return C.uniffi_loro_ffi_fn_method_lorotree_is_attached(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -9561,7 +10153,7 @@ func (_self *LoroTree) IsDeleted() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotree_is_deleted(
+		return C.uniffi_loro_ffi_fn_method_lorotree_is_deleted(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -9571,7 +10163,7 @@ func (_self *LoroTree) IsFractionalIndexEnabled() bool {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotree_is_fractional_index_enabled(
+		return C.uniffi_loro_ffi_fn_method_lorotree_is_fractional_index_enabled(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -9584,7 +10176,7 @@ func (_self *LoroTree) IsNodeDeleted(target TreeId) (bool, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_lorotree_is_node_deleted(
+		return C.uniffi_loro_ffi_fn_method_lorotree_is_node_deleted(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -9602,7 +10194,7 @@ func (_self *LoroTree) Mov(target TreeId, parent TreeParentId) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_mov(
+		C.uniffi_loro_ffi_fn_method_lorotree_mov(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), FfiConverterTreeParentIdINSTANCE.Lower(parent), _uniffiStatus)
 		return false
 	})
@@ -9614,7 +10206,7 @@ func (_self *LoroTree) MovAfter(target TreeId, after TreeId) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_mov_after(
+		C.uniffi_loro_ffi_fn_method_lorotree_mov_after(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), FfiConverterTreeIdINSTANCE.Lower(after), _uniffiStatus)
 		return false
 	})
@@ -9626,7 +10218,7 @@ func (_self *LoroTree) MovBefore(target TreeId, before TreeId) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_mov_before(
+		C.uniffi_loro_ffi_fn_method_lorotree_mov_before(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), FfiConverterTreeIdINSTANCE.Lower(before), _uniffiStatus)
 		return false
 	})
@@ -9639,7 +10231,7 @@ func (_self *LoroTree) MovTo(target TreeId, parent TreeParentId, to uint32) erro
 	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_lorotree_mov_to(
+		C.uniffi_loro_ffi_fn_method_lorotree_mov_to(
 			_pointer, FfiConverterTreeIdINSTANCE.Lower(target), FfiConverterTreeParentIdINSTANCE.Lower(parent), FfiConverterUint32INSTANCE.Lower(to), _uniffiStatus)
 		return false
 	})
@@ -9652,7 +10244,7 @@ func (_self *LoroTree) Nodes() []TreeId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTreeIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_nodes(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_nodes(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9667,7 +10259,7 @@ func (_self *LoroTree) Parent(target TreeId) (TreeParentId, error) {
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_parent(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_parent(
 				_pointer, FfiConverterTreeIdINSTANCE.Lower(target), _uniffiStatus),
 		}
 	})
@@ -9685,8 +10277,30 @@ func (_self *LoroTree) Roots() []TreeId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceTreeIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorotree_roots(
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_roots(
 				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Subscribe the events of a container.
+//
+// The callback will be invoked when the container is changed.
+// Returns a subscription that can be used to unsubscribe.
+//
+// The events will be emitted after a transaction is committed. A transaction is committed when:
+//
+// - `doc.commit()` is called.
+// - `doc.export(mode)` is called.
+// - `doc.import(data)` is called.
+// - `doc.checkout(version)` is called.
+func (_self *LoroTree) Subscribe(subscriber Subscriber) **Subscription {
+	_pointer := _self.ffiObject.incrementPointer("*LoroTree")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalSubscriptionINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotree_subscribe(
+				_pointer, FfiConverterSubscriberINSTANCE.Lower(subscriber), _uniffiStatus),
 		}
 	}))
 }
@@ -9704,10 +10318,10 @@ func (c FfiConverterLoroTree) Lift(pointer unsafe.Pointer) *LoroTree {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorotree(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorotree(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorotree(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorotree(pointer, status)
 			},
 		),
 	}
@@ -9753,7 +10367,7 @@ func (_self *LoroUnknown) Id() ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorounknown_id(
+			inner: C.uniffi_loro_ffi_fn_method_lorounknown_id(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9772,10 +10386,10 @@ func (c FfiConverterLoroUnknown) Lift(pointer unsafe.Pointer) *LoroUnknown {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorounknown(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorounknown(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorounknown(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorounknown(pointer, status)
 			},
 		),
 	}
@@ -9819,7 +10433,7 @@ func (_self *LoroValueLikeImpl) AsLoroValue() LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_lorovaluelike_as_loro_value(
+			inner: C.uniffi_loro_ffi_fn_method_lorovaluelike_as_loro_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -9842,10 +10456,10 @@ func (c FfiConverterLoroValueLike) Lift(pointer unsafe.Pointer) LoroValueLike {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_lorovaluelike(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_lorovaluelike(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_lorovaluelike(pointer, status)
+				C.uniffi_loro_ffi_fn_free_lorovaluelike(pointer, status)
 			},
 		),
 	}
@@ -9880,8 +10494,8 @@ func (_ FfiDestroyerLoroValueLike) Destroy(value LoroValueLike) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0
-func loro_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0(uniffiHandle C.uint64_t, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0(uniffiHandle C.uint64_t, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterLoroValueLikeINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -9895,18 +10509,18 @@ func loro_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0(uniffiHandle C.uint6
 }
 
 var UniffiVTableCallbackInterfaceLoroValueLikeINSTANCE = C.UniffiVTableCallbackInterfaceLoroValueLike{
-	asLoroValue: (C.UniffiCallbackInterfaceLoroValueLikeMethod0)(C.loro_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0),
+	asLoroValue: (C.UniffiCallbackInterfaceLoroValueLikeMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceLoroValueLikeFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceLoroValueLikeFree
-func loro_cgo_dispatchCallbackInterfaceLoroValueLikeFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeFree
+func loro_ffi_cgo_dispatchCallbackInterfaceLoroValueLikeFree(handle C.uint64_t) {
 	FfiConverterLoroValueLikeINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterLoroValueLike) register() {
-	C.uniffi_loro_fn_init_callback_vtable_lorovaluelike(&UniffiVTableCallbackInterfaceLoroValueLikeINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_lorovaluelike(&UniffiVTableCallbackInterfaceLoroValueLikeINSTANCE)
 }
 
 type OnPop interface {
@@ -9920,7 +10534,7 @@ func (_self *OnPopImpl) OnPop(undoOrRedo UndoOrRedo, span CounterSpan, undoMeta 
 	_pointer := _self.ffiObject.incrementPointer("OnPop")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_onpop_on_pop(
+		C.uniffi_loro_ffi_fn_method_onpop_on_pop(
 			_pointer, FfiConverterUndoOrRedoINSTANCE.Lower(undoOrRedo), FfiConverterCounterSpanINSTANCE.Lower(span), FfiConverterUndoItemMetaINSTANCE.Lower(undoMeta), _uniffiStatus)
 		return false
 	})
@@ -9943,10 +10557,10 @@ func (c FfiConverterOnPop) Lift(pointer unsafe.Pointer) OnPop {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_onpop(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_onpop(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_onpop(pointer, status)
+				C.uniffi_loro_ffi_fn_free_onpop(pointer, status)
 			},
 		),
 	}
@@ -9981,8 +10595,8 @@ func (_ FfiDestroyerOnPop) Destroy(value OnPop) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceOnPopMethod0
-func loro_cgo_dispatchCallbackInterfaceOnPopMethod0(uniffiHandle C.uint64_t, undoOrRedo C.RustBuffer, span C.RustBuffer, undoMeta C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceOnPopMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceOnPopMethod0(uniffiHandle C.uint64_t, undoOrRedo C.RustBuffer, span C.RustBuffer, undoMeta C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterOnPopINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -10004,18 +10618,18 @@ func loro_cgo_dispatchCallbackInterfaceOnPopMethod0(uniffiHandle C.uint64_t, und
 }
 
 var UniffiVTableCallbackInterfaceOnPopINSTANCE = C.UniffiVTableCallbackInterfaceOnPop{
-	onPop: (C.UniffiCallbackInterfaceOnPopMethod0)(C.loro_cgo_dispatchCallbackInterfaceOnPopMethod0),
+	onPop: (C.UniffiCallbackInterfaceOnPopMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceOnPopMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceOnPopFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceOnPopFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceOnPopFree
-func loro_cgo_dispatchCallbackInterfaceOnPopFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceOnPopFree
+func loro_ffi_cgo_dispatchCallbackInterfaceOnPopFree(handle C.uint64_t) {
 	FfiConverterOnPopINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterOnPop) register() {
-	C.uniffi_loro_fn_init_callback_vtable_onpop(&UniffiVTableCallbackInterfaceOnPopINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_onpop(&UniffiVTableCallbackInterfaceOnPopINSTANCE)
 }
 
 type OnPush interface {
@@ -10030,7 +10644,7 @@ func (_self *OnPushImpl) OnPush(undoOrRedo UndoOrRedo, span CounterSpan, diffEve
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterUndoItemMetaINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_onpush_on_push(
+			inner: C.uniffi_loro_ffi_fn_method_onpush_on_push(
 				_pointer, FfiConverterUndoOrRedoINSTANCE.Lower(undoOrRedo), FfiConverterCounterSpanINSTANCE.Lower(span), FfiConverterOptionalDiffEventINSTANCE.Lower(diffEvent), _uniffiStatus),
 		}
 	}))
@@ -10053,10 +10667,10 @@ func (c FfiConverterOnPush) Lift(pointer unsafe.Pointer) OnPush {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_onpush(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_onpush(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_onpush(pointer, status)
+				C.uniffi_loro_ffi_fn_free_onpush(pointer, status)
 			},
 		),
 	}
@@ -10091,8 +10705,8 @@ func (_ FfiDestroyerOnPush) Destroy(value OnPush) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceOnPushMethod0
-func loro_cgo_dispatchCallbackInterfaceOnPushMethod0(uniffiHandle C.uint64_t, undoOrRedo C.RustBuffer, span C.RustBuffer, diffEvent C.RustBuffer, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceOnPushMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceOnPushMethod0(uniffiHandle C.uint64_t, undoOrRedo C.RustBuffer, span C.RustBuffer, diffEvent C.RustBuffer, uniffiOutReturn *C.RustBuffer, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterOnPushINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -10116,18 +10730,18 @@ func loro_cgo_dispatchCallbackInterfaceOnPushMethod0(uniffiHandle C.uint64_t, un
 }
 
 var UniffiVTableCallbackInterfaceOnPushINSTANCE = C.UniffiVTableCallbackInterfaceOnPush{
-	onPush: (C.UniffiCallbackInterfaceOnPushMethod0)(C.loro_cgo_dispatchCallbackInterfaceOnPushMethod0),
+	onPush: (C.UniffiCallbackInterfaceOnPushMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceOnPushMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceOnPushFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceOnPushFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceOnPushFree
-func loro_cgo_dispatchCallbackInterfaceOnPushFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceOnPushFree
+func loro_ffi_cgo_dispatchCallbackInterfaceOnPushFree(handle C.uint64_t) {
 	FfiConverterOnPushINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterOnPush) register() {
-	C.uniffi_loro_fn_init_callback_vtable_onpush(&UniffiVTableCallbackInterfaceOnPushINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_onpush(&UniffiVTableCallbackInterfaceOnPushINSTANCE)
 }
 
 type PreCommitCallback interface {
@@ -10141,7 +10755,7 @@ func (_self *PreCommitCallbackImpl) OnPreCommit(payload PreCommitCallbackPayload
 	_pointer := _self.ffiObject.incrementPointer("PreCommitCallback")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_precommitcallback_on_pre_commit(
+		C.uniffi_loro_ffi_fn_method_precommitcallback_on_pre_commit(
 			_pointer, FfiConverterPreCommitCallbackPayloadINSTANCE.Lower(payload), _uniffiStatus)
 		return false
 	})
@@ -10164,10 +10778,10 @@ func (c FfiConverterPreCommitCallback) Lift(pointer unsafe.Pointer) PreCommitCal
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_precommitcallback(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_precommitcallback(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_precommitcallback(pointer, status)
+				C.uniffi_loro_ffi_fn_free_precommitcallback(pointer, status)
 			},
 		),
 	}
@@ -10202,8 +10816,8 @@ func (_ FfiDestroyerPreCommitCallback) Destroy(value PreCommitCallback) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0
-func loro_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0(uniffiHandle C.uint64_t, payload C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0
+func loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0(uniffiHandle C.uint64_t, payload C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterPreCommitCallbackINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -10219,18 +10833,18 @@ func loro_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0(uniffiHandle C.u
 }
 
 var UniffiVTableCallbackInterfacePreCommitCallbackINSTANCE = C.UniffiVTableCallbackInterfacePreCommitCallback{
-	onPreCommit: (C.UniffiCallbackInterfacePreCommitCallbackMethod0)(C.loro_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0),
+	onPreCommit: (C.UniffiCallbackInterfacePreCommitCallbackMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfacePreCommitCallbackFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfacePreCommitCallbackFree
-func loro_cgo_dispatchCallbackInterfacePreCommitCallbackFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackFree
+func loro_ffi_cgo_dispatchCallbackInterfacePreCommitCallbackFree(handle C.uint64_t) {
 	FfiConverterPreCommitCallbackINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterPreCommitCallback) register() {
-	C.uniffi_loro_fn_init_callback_vtable_precommitcallback(&UniffiVTableCallbackInterfacePreCommitCallbackINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_precommitcallback(&UniffiVTableCallbackInterfacePreCommitCallbackINSTANCE)
 }
 
 type StyleConfigMapInterface interface {
@@ -10243,13 +10857,13 @@ type StyleConfigMap struct {
 
 func NewStyleConfigMap() *StyleConfigMap {
 	return FfiConverterStyleConfigMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_styleconfigmap_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_styleconfigmap_new(_uniffiStatus)
 	}))
 }
 
 func StyleConfigMapDefaultRichTextConfig() *StyleConfigMap {
 	return FfiConverterStyleConfigMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_styleconfigmap_default_rich_text_config(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_styleconfigmap_default_rich_text_config(_uniffiStatus)
 	}))
 }
 
@@ -10258,7 +10872,7 @@ func (_self *StyleConfigMap) Get(key string) *StyleConfig {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalStyleConfigINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_styleconfigmap_get(
+			inner: C.uniffi_loro_ffi_fn_method_styleconfigmap_get(
 				_pointer, FfiConverterStringINSTANCE.Lower(key), _uniffiStatus),
 		}
 	}))
@@ -10268,7 +10882,7 @@ func (_self *StyleConfigMap) Insert(key string, value StyleConfig) {
 	_pointer := _self.ffiObject.incrementPointer("*StyleConfigMap")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_styleconfigmap_insert(
+		C.uniffi_loro_ffi_fn_method_styleconfigmap_insert(
 			_pointer, FfiConverterStringINSTANCE.Lower(key), FfiConverterStyleConfigINSTANCE.Lower(value), _uniffiStatus)
 		return false
 	})
@@ -10287,10 +10901,10 @@ func (c FfiConverterStyleConfigMap) Lift(pointer unsafe.Pointer) *StyleConfigMap
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_styleconfigmap(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_styleconfigmap(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_styleconfigmap(pointer, status)
+				C.uniffi_loro_ffi_fn_free_styleconfigmap(pointer, status)
 			},
 		),
 	}
@@ -10333,7 +10947,7 @@ func (_self *SubscriberImpl) OnDiff(diff DiffEvent) {
 	_pointer := _self.ffiObject.incrementPointer("Subscriber")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_subscriber_on_diff(
+		C.uniffi_loro_ffi_fn_method_subscriber_on_diff(
 			_pointer, FfiConverterDiffEventINSTANCE.Lower(diff), _uniffiStatus)
 		return false
 	})
@@ -10356,10 +10970,10 @@ func (c FfiConverterSubscriber) Lift(pointer unsafe.Pointer) Subscriber {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_subscriber(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_subscriber(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_subscriber(pointer, status)
+				C.uniffi_loro_ffi_fn_free_subscriber(pointer, status)
 			},
 		),
 	}
@@ -10394,8 +11008,8 @@ func (_ FfiDestroyerSubscriber) Destroy(value Subscriber) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceSubscriberMethod0
-func loro_cgo_dispatchCallbackInterfaceSubscriberMethod0(uniffiHandle C.uint64_t, diff C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceSubscriberMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceSubscriberMethod0(uniffiHandle C.uint64_t, diff C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterSubscriberINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -10411,18 +11025,18 @@ func loro_cgo_dispatchCallbackInterfaceSubscriberMethod0(uniffiHandle C.uint64_t
 }
 
 var UniffiVTableCallbackInterfaceSubscriberINSTANCE = C.UniffiVTableCallbackInterfaceSubscriber{
-	onDiff: (C.UniffiCallbackInterfaceSubscriberMethod0)(C.loro_cgo_dispatchCallbackInterfaceSubscriberMethod0),
+	onDiff: (C.UniffiCallbackInterfaceSubscriberMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceSubscriberMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceSubscriberFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceSubscriberFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceSubscriberFree
-func loro_cgo_dispatchCallbackInterfaceSubscriberFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceSubscriberFree
+func loro_ffi_cgo_dispatchCallbackInterfaceSubscriberFree(handle C.uint64_t) {
 	FfiConverterSubscriberINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterSubscriber) register() {
-	C.uniffi_loro_fn_init_callback_vtable_subscriber(&UniffiVTableCallbackInterfaceSubscriberINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_subscriber(&UniffiVTableCallbackInterfaceSubscriberINSTANCE)
 }
 
 // A handle to a subscription created by GPUI. When dropped, the subscription
@@ -10449,7 +11063,7 @@ func (_self *Subscription) Detach() {
 	_pointer := _self.ffiObject.incrementPointer("*Subscription")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_subscription_detach(
+		C.uniffi_loro_ffi_fn_method_subscription_detach(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -10460,7 +11074,7 @@ func (_self *Subscription) Unsubscribe() {
 	_pointer := _self.ffiObject.incrementPointer("*Subscription")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_subscription_unsubscribe(
+		C.uniffi_loro_ffi_fn_method_subscription_unsubscribe(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -10479,10 +11093,10 @@ func (c FfiConverterSubscription) Lift(pointer unsafe.Pointer) *Subscription {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_subscription(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_subscription(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_subscription(pointer, status)
+				C.uniffi_loro_ffi_fn_free_subscription(pointer, status)
 			},
 		),
 	}
@@ -10522,10 +11136,23 @@ type UndoManagerInterface interface {
 	CanRedo() bool
 	// Whether the undo manager can undo.
 	CanUndo() bool
+	// Ends the current group, calling UndoManager::undo() after this will
+	// undo all changes that occurred during the group.
+	GroupEnd()
+	// Will start a new group of changes, all subsequent changes will be merged
+	// into a new item on the undo stack. If we receive remote changes, we determine
+	// wether or not they are conflicting. If the remote changes are conflicting
+	// we split the undo item and close the group. If there are no conflict
+	// in changed container ids we continue the group merge.
+	GroupStart() error
+	// Get the peer id of the undo manager
+	Peer() uint64
 	// Record a new checkpoint.
 	RecordNewCheckpoint() error
 	// Redo the last change made by the peer.
 	Redo() (bool, error)
+	// How many times the undo manager can redo.
+	RedoCount() uint32
 	// Set the maximum number of undo steps. The default value is 100.
 	SetMaxUndoSteps(size uint32)
 	// Set the merge interval in ms. The default value is 0, which means no merge.
@@ -10536,8 +11163,18 @@ type UndoManagerInterface interface {
 	// Set the listener for push events.
 	// The listener will be called when a new undo/redo item is pushed into the stack.
 	SetOnPush(onPush *OnPush)
+	// Get the metadata of the top redo stack item, if any.
+	TopRedoMeta() *UndoItemMeta
+	// Get the value associated with the top redo stack item, if any.
+	TopRedoValue() *LoroValue
+	// Get the metadata of the top undo stack item, if any.
+	TopUndoMeta() *UndoItemMeta
+	// Get the value associated with the top undo stack item, if any.
+	TopUndoValue() *LoroValue
 	// Undo the last change made by the peer.
 	Undo() (bool, error)
+	// How many times the undo manager can undo.
+	UndoCount() uint32
 }
 type UndoManager struct {
 	ffiObject FfiObject
@@ -10546,7 +11183,7 @@ type UndoManager struct {
 // Create a new UndoManager.
 func NewUndoManager(doc *LoroDoc) *UndoManager {
 	return FfiConverterUndoManagerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_undomanager_new(FfiConverterLoroDocINSTANCE.Lower(doc), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_undomanager_new(FfiConverterLoroDocINSTANCE.Lower(doc), _uniffiStatus)
 	}))
 }
 
@@ -10556,7 +11193,7 @@ func (_self *UndoManager) AddExcludeOriginPrefix(prefix string) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_add_exclude_origin_prefix(
+		C.uniffi_loro_ffi_fn_method_undomanager_add_exclude_origin_prefix(
 			_pointer, FfiConverterStringINSTANCE.Lower(prefix), _uniffiStatus)
 		return false
 	})
@@ -10567,7 +11204,7 @@ func (_self *UndoManager) CanRedo() bool {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_undomanager_can_redo(
+		return C.uniffi_loro_ffi_fn_method_undomanager_can_redo(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -10577,7 +11214,45 @@ func (_self *UndoManager) CanUndo() bool {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_undomanager_can_undo(
+		return C.uniffi_loro_ffi_fn_method_undomanager_can_undo(
+			_pointer, _uniffiStatus)
+	}))
+}
+
+// Ends the current group, calling UndoManager::undo() after this will
+// undo all changes that occurred during the group.
+func (_self *UndoManager) GroupEnd() {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_undomanager_group_end(
+			_pointer, _uniffiStatus)
+		return false
+	})
+}
+
+// Will start a new group of changes, all subsequent changes will be merged
+// into a new item on the undo stack. If we receive remote changes, we determine
+// wether or not they are conflicting. If the remote changes are conflicting
+// we split the undo item and close the group. If there are no conflict
+// in changed container ids we continue the group merge.
+func (_self *UndoManager) GroupStart() error {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_undomanager_group_start(
+			_pointer, _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
+// Get the peer id of the undo manager
+func (_self *UndoManager) Peer() uint64 {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint64_t {
+		return C.uniffi_loro_ffi_fn_method_undomanager_peer(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -10587,7 +11262,7 @@ func (_self *UndoManager) RecordNewCheckpoint() error {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_record_new_checkpoint(
+		C.uniffi_loro_ffi_fn_method_undomanager_record_new_checkpoint(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -10599,7 +11274,7 @@ func (_self *UndoManager) Redo() (bool, error) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_undomanager_redo(
+		return C.uniffi_loro_ffi_fn_method_undomanager_redo(
 			_pointer, _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -10610,12 +11285,22 @@ func (_self *UndoManager) Redo() (bool, error) {
 	}
 }
 
+// How many times the undo manager can redo.
+func (_self *UndoManager) RedoCount() uint32 {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
+		return C.uniffi_loro_ffi_fn_method_undomanager_redo_count(
+			_pointer, _uniffiStatus)
+	}))
+}
+
 // Set the maximum number of undo steps. The default value is 100.
 func (_self *UndoManager) SetMaxUndoSteps(size uint32) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_set_max_undo_steps(
+		C.uniffi_loro_ffi_fn_method_undomanager_set_max_undo_steps(
 			_pointer, FfiConverterUint32INSTANCE.Lower(size), _uniffiStatus)
 		return false
 	})
@@ -10626,7 +11311,7 @@ func (_self *UndoManager) SetMergeInterval(interval int64) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_set_merge_interval(
+		C.uniffi_loro_ffi_fn_method_undomanager_set_merge_interval(
 			_pointer, FfiConverterInt64INSTANCE.Lower(interval), _uniffiStatus)
 		return false
 	})
@@ -10638,7 +11323,7 @@ func (_self *UndoManager) SetOnPop(onPop *OnPop) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_set_on_pop(
+		C.uniffi_loro_ffi_fn_method_undomanager_set_on_pop(
 			_pointer, FfiConverterOptionalOnPopINSTANCE.Lower(onPop), _uniffiStatus)
 		return false
 	})
@@ -10650,10 +11335,58 @@ func (_self *UndoManager) SetOnPush(onPush *OnPush) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_undomanager_set_on_push(
+		C.uniffi_loro_ffi_fn_method_undomanager_set_on_push(
 			_pointer, FfiConverterOptionalOnPushINSTANCE.Lower(onPush), _uniffiStatus)
 		return false
 	})
+}
+
+// Get the metadata of the top redo stack item, if any.
+func (_self *UndoManager) TopRedoMeta() *UndoItemMeta {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalUndoItemMetaINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_undomanager_top_redo_meta(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Get the value associated with the top redo stack item, if any.
+func (_self *UndoManager) TopRedoValue() *LoroValue {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_undomanager_top_redo_value(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Get the metadata of the top undo stack item, if any.
+func (_self *UndoManager) TopUndoMeta() *UndoItemMeta {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalUndoItemMetaINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_undomanager_top_undo_meta(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Get the value associated with the top undo stack item, if any.
+func (_self *UndoManager) TopUndoValue() *LoroValue {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_undomanager_top_undo_value(
+				_pointer, _uniffiStatus),
+		}
+	}))
 }
 
 // Undo the last change made by the peer.
@@ -10661,7 +11394,7 @@ func (_self *UndoManager) Undo() (bool, error) {
 	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_undomanager_undo(
+		return C.uniffi_loro_ffi_fn_method_undomanager_undo(
 			_pointer, _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -10670,6 +11403,16 @@ func (_self *UndoManager) Undo() (bool, error) {
 	} else {
 		return FfiConverterBoolINSTANCE.Lift(_uniffiRV), nil
 	}
+}
+
+// How many times the undo manager can undo.
+func (_self *UndoManager) UndoCount() uint32 {
+	_pointer := _self.ffiObject.incrementPointer("*UndoManager")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint32_t {
+		return C.uniffi_loro_ffi_fn_method_undomanager_undo_count(
+			_pointer, _uniffiStatus)
+	}))
 }
 func (object *UndoManager) Destroy() {
 	runtime.SetFinalizer(object, nil)
@@ -10685,10 +11428,10 @@ func (c FfiConverterUndoManager) Lift(pointer unsafe.Pointer) *UndoManager {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_undomanager(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_undomanager(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_undomanager(pointer, status)
+				C.uniffi_loro_ffi_fn_free_undomanager(pointer, status)
 			},
 		),
 	}
@@ -10731,7 +11474,7 @@ func (_self *UnsubscriberImpl) OnUnsubscribe() {
 	_pointer := _self.ffiObject.incrementPointer("Unsubscriber")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_unsubscriber_on_unsubscribe(
+		C.uniffi_loro_ffi_fn_method_unsubscriber_on_unsubscribe(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -10754,10 +11497,10 @@ func (c FfiConverterUnsubscriber) Lift(pointer unsafe.Pointer) Unsubscriber {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_unsubscriber(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_unsubscriber(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_unsubscriber(pointer, status)
+				C.uniffi_loro_ffi_fn_free_unsubscriber(pointer, status)
 			},
 		),
 	}
@@ -10792,8 +11535,8 @@ func (_ FfiDestroyerUnsubscriber) Destroy(value Unsubscriber) {
 	}
 }
 
-//export loro_cgo_dispatchCallbackInterfaceUnsubscriberMethod0
-func loro_cgo_dispatchCallbackInterfaceUnsubscriberMethod0(uniffiHandle C.uint64_t, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberMethod0(uniffiHandle C.uint64_t, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
 	handle := uint64(uniffiHandle)
 	uniffiObj, ok := FfiConverterUnsubscriberINSTANCE.handleMap.tryGet(handle)
 	if !ok {
@@ -10805,18 +11548,18 @@ func loro_cgo_dispatchCallbackInterfaceUnsubscriberMethod0(uniffiHandle C.uint64
 }
 
 var UniffiVTableCallbackInterfaceUnsubscriberINSTANCE = C.UniffiVTableCallbackInterfaceUnsubscriber{
-	onUnsubscribe: (C.UniffiCallbackInterfaceUnsubscriberMethod0)(C.loro_cgo_dispatchCallbackInterfaceUnsubscriberMethod0),
+	onUnsubscribe: (C.UniffiCallbackInterfaceUnsubscriberMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberMethod0),
 
-	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_cgo_dispatchCallbackInterfaceUnsubscriberFree),
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberFree),
 }
 
-//export loro_cgo_dispatchCallbackInterfaceUnsubscriberFree
-func loro_cgo_dispatchCallbackInterfaceUnsubscriberFree(handle C.uint64_t) {
+//export loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberFree
+func loro_ffi_cgo_dispatchCallbackInterfaceUnsubscriberFree(handle C.uint64_t) {
 	FfiConverterUnsubscriberINSTANCE.handleMap.remove(uint64(handle))
 }
 
 func (c FfiConverterUnsubscriber) register() {
-	C.uniffi_loro_fn_init_callback_vtable_unsubscriber(&UniffiVTableCallbackInterfaceUnsubscriberINSTANCE)
+	C.uniffi_loro_ffi_fn_init_callback_vtable_unsubscriber(&UniffiVTableCallbackInterfaceUnsubscriberINSTANCE)
 }
 
 type ValueOrContainerInterface interface {
@@ -10842,7 +11585,7 @@ func (_self *ValueOrContainer) AsContainer() *ContainerId {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalContainerIdINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_container(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_container(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10853,7 +11596,7 @@ func (_self *ValueOrContainer) AsLoroCounter() **LoroCounter {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroCounterINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_counter(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_counter(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10864,7 +11607,7 @@ func (_self *ValueOrContainer) AsLoroList() **LoroList {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_list(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_list(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10875,7 +11618,7 @@ func (_self *ValueOrContainer) AsLoroMap() **LoroMap {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_map(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_map(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10886,7 +11629,7 @@ func (_self *ValueOrContainer) AsLoroMovableList() **LoroMovableList {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroMovableListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_movable_list(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_movable_list(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10897,7 +11640,7 @@ func (_self *ValueOrContainer) AsLoroText() **LoroText {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroTextINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_text(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_text(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10908,7 +11651,7 @@ func (_self *ValueOrContainer) AsLoroTree() **LoroTree {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroTreeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_tree(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_tree(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10919,7 +11662,7 @@ func (_self *ValueOrContainer) AsLoroUnknown() **LoroUnknown {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroUnknownINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_loro_unknown(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_loro_unknown(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10930,7 +11673,7 @@ func (_self *ValueOrContainer) AsValue() *LoroValue {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalLoroValueINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_as_value(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_as_value(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10941,7 +11684,7 @@ func (_self *ValueOrContainer) ContainerType() *ContainerType {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalContainerTypeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_valueorcontainer_container_type(
+			inner: C.uniffi_loro_ffi_fn_method_valueorcontainer_container_type(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -10951,7 +11694,7 @@ func (_self *ValueOrContainer) IsContainer() bool {
 	_pointer := _self.ffiObject.incrementPointer("*ValueOrContainer")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_valueorcontainer_is_container(
+		return C.uniffi_loro_ffi_fn_method_valueorcontainer_is_container(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -10960,7 +11703,7 @@ func (_self *ValueOrContainer) IsValue() bool {
 	_pointer := _self.ffiObject.incrementPointer("*ValueOrContainer")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_valueorcontainer_is_value(
+		return C.uniffi_loro_ffi_fn_method_valueorcontainer_is_value(
 			_pointer, _uniffiStatus)
 	}))
 }
@@ -10978,10 +11721,10 @@ func (c FfiConverterValueOrContainer) Lift(pointer unsafe.Pointer) *ValueOrConta
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_valueorcontainer(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_valueorcontainer(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_valueorcontainer(pointer, status)
+				C.uniffi_loro_ffi_fn_free_valueorcontainer(pointer, status)
 			},
 		),
 	}
@@ -11013,6 +11756,216 @@ func (_ FfiDestroyerValueOrContainer) Destroy(value *ValueOrContainer) {
 	value.Destroy()
 }
 
+type VersionRangeInterface interface {
+	// Clear all ranges in the VersionRange
+	Clear()
+	// Check if this VersionRange contains a specific ID
+	ContainsId(id Id) bool
+	// Check if this VersionRange contains a specific ID span
+	ContainsIdSpan(span IdSpan) bool
+	// Check if this VersionRange contains operations between two VersionVectors
+	ContainsOpsBetween(vvA *VersionVector, vvB *VersionVector) bool
+	// Extend this VersionRange to include the given ID span
+	ExtendsToIncludeIdSpan(span IdSpan)
+	// Get the counter range for a specific peer
+	// Returns the counter range if the peer exists, null otherwise
+	Get(peer uint64) *CounterSpan
+	// Get all ranges as a list of (peer, start, end) tuples
+	GetAllRanges() []VersionRangeItem
+	// Get all peer IDs in this VersionRange
+	GetPeers() []uint64
+	// Check if this VersionRange has overlap with the given ID span
+	HasOverlapWith(span IdSpan) bool
+	// Insert a counter range for a specific peer
+	Insert(peer uint64, start int32, end int32)
+	// Check if the VersionRange is empty
+	IsEmpty() bool
+}
+type VersionRange struct {
+	ffiObject FfiObject
+}
+
+func NewVersionRange() *VersionRange {
+	return FfiConverterVersionRangeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_loro_ffi_fn_constructor_versionrange_new(_uniffiStatus)
+	}))
+}
+
+// Create a VersionRange from a VersionVector
+func VersionRangeFromVv(vv *VersionVector) *VersionRange {
+	return FfiConverterVersionRangeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_loro_ffi_fn_constructor_versionrange_from_vv(FfiConverterVersionVectorINSTANCE.Lower(vv), _uniffiStatus)
+	}))
+}
+
+// Clear all ranges in the VersionRange
+func (_self *VersionRange) Clear() {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_versionrange_clear(
+			_pointer, _uniffiStatus)
+		return false
+	})
+}
+
+// Check if this VersionRange contains a specific ID
+func (_self *VersionRange) ContainsId(id Id) bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionrange_contains_id(
+			_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
+	}))
+}
+
+// Check if this VersionRange contains a specific ID span
+func (_self *VersionRange) ContainsIdSpan(span IdSpan) bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionrange_contains_id_span(
+			_pointer, FfiConverterIdSpanINSTANCE.Lower(span), _uniffiStatus)
+	}))
+}
+
+// Check if this VersionRange contains operations between two VersionVectors
+func (_self *VersionRange) ContainsOpsBetween(vvA *VersionVector, vvB *VersionVector) bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionrange_contains_ops_between(
+			_pointer, FfiConverterVersionVectorINSTANCE.Lower(vvA), FfiConverterVersionVectorINSTANCE.Lower(vvB), _uniffiStatus)
+	}))
+}
+
+// Extend this VersionRange to include the given ID span
+func (_self *VersionRange) ExtendsToIncludeIdSpan(span IdSpan) {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_versionrange_extends_to_include_id_span(
+			_pointer, FfiConverterIdSpanINSTANCE.Lower(span), _uniffiStatus)
+		return false
+	})
+}
+
+// Get the counter range for a specific peer
+// Returns the counter range if the peer exists, null otherwise
+func (_self *VersionRange) Get(peer uint64) *CounterSpan {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalCounterSpanINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_versionrange_get(
+				_pointer, FfiConverterUint64INSTANCE.Lower(peer), _uniffiStatus),
+		}
+	}))
+}
+
+// Get all ranges as a list of (peer, start, end) tuples
+func (_self *VersionRange) GetAllRanges() []VersionRangeItem {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceVersionRangeItemINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_versionrange_get_all_ranges(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Get all peer IDs in this VersionRange
+func (_self *VersionRange) GetPeers() []uint64 {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterSequenceUint64INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_versionrange_get_peers(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Check if this VersionRange has overlap with the given ID span
+func (_self *VersionRange) HasOverlapWith(span IdSpan) bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionrange_has_overlap_with(
+			_pointer, FfiConverterIdSpanINSTANCE.Lower(span), _uniffiStatus)
+	}))
+}
+
+// Insert a counter range for a specific peer
+func (_self *VersionRange) Insert(peer uint64, start int32, end int32) {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_versionrange_insert(
+			_pointer, FfiConverterUint64INSTANCE.Lower(peer), FfiConverterInt32INSTANCE.Lower(start), FfiConverterInt32INSTANCE.Lower(end), _uniffiStatus)
+		return false
+	})
+}
+
+// Check if the VersionRange is empty
+func (_self *VersionRange) IsEmpty() bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionRange")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionrange_is_empty(
+			_pointer, _uniffiStatus)
+	}))
+}
+func (object *VersionRange) Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterVersionRange struct{}
+
+var FfiConverterVersionRangeINSTANCE = FfiConverterVersionRange{}
+
+func (c FfiConverterVersionRange) Lift(pointer unsafe.Pointer) *VersionRange {
+	result := &VersionRange{
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
+				return C.uniffi_loro_ffi_fn_clone_versionrange(pointer, status)
+			},
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_loro_ffi_fn_free_versionrange(pointer, status)
+			},
+		),
+	}
+	runtime.SetFinalizer(result, (*VersionRange).Destroy)
+	return result
+}
+
+func (c FfiConverterVersionRange) Read(reader io.Reader) *VersionRange {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterVersionRange) Lower(value *VersionRange) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*VersionRange")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+
+}
+
+func (c FfiConverterVersionRange) Write(writer io.Writer, value *VersionRange) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerVersionRange struct{}
+
+func (_ FfiDestroyerVersionRange) Destroy(value *VersionRange) {
+	value.Destroy()
+}
+
 type VersionVectorInterface interface {
 	Diff(rhs *VersionVector) VersionVectorDiff
 	Encode() []byte
@@ -11027,6 +11980,9 @@ type VersionVectorInterface interface {
 	PartialCmp(other *VersionVector) *Ordering
 	SetEnd(id Id)
 	SetLast(id Id)
+	ToHashmap() map[uint64]int32
+	// Update the end counter of the given client if the end is greater. Return whether updated
+	TryUpdateLast(id Id) bool
 }
 type VersionVector struct {
 	ffiObject FfiObject
@@ -11034,13 +11990,13 @@ type VersionVector struct {
 
 func NewVersionVector() *VersionVector {
 	return FfiConverterVersionVectorINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_versionvector_new(_uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_versionvector_new(_uniffiStatus)
 	}))
 }
 
 func VersionVectorDecode(bytes []byte) (*VersionVector, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_loro_fn_constructor_versionvector_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
+		return C.uniffi_loro_ffi_fn_constructor_versionvector_decode(FfiConverterBytesINSTANCE.Lower(bytes), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
 		var _uniffiDefaultValue *VersionVector
@@ -11055,7 +12011,7 @@ func (_self *VersionVector) Diff(rhs *VersionVector) VersionVectorDiff {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterVersionVectorDiffINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_diff(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_diff(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(rhs), _uniffiStatus),
 		}
 	}))
@@ -11066,7 +12022,7 @@ func (_self *VersionVector) Encode() []byte {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBytesINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_encode(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_encode(
 				_pointer, _uniffiStatus),
 		}
 	}))
@@ -11076,7 +12032,7 @@ func (_self *VersionVector) Eq(other *VersionVector) bool {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_versionvector_eq(
+		return C.uniffi_loro_ffi_fn_method_versionvector_eq(
 			_pointer, FfiConverterVersionVectorINSTANCE.Lower(other), _uniffiStatus)
 	}))
 }
@@ -11085,7 +12041,7 @@ func (_self *VersionVector) ExtendToIncludeVv(other *VersionVector) {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_versionvector_extend_to_include_vv(
+		C.uniffi_loro_ffi_fn_method_versionvector_extend_to_include_vv(
 			_pointer, FfiConverterVersionVectorINSTANCE.Lower(other), _uniffiStatus)
 		return false
 	})
@@ -11096,7 +12052,7 @@ func (_self *VersionVector) GetLast(peer uint64) *int32 {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalInt32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_get_last(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_get_last(
 				_pointer, FfiConverterUint64INSTANCE.Lower(peer), _uniffiStatus),
 		}
 	}))
@@ -11107,7 +12063,7 @@ func (_self *VersionVector) GetMissingSpan(target *VersionVector) []IdSpan {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterSequenceIdSpanINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_get_missing_span(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_get_missing_span(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(target), _uniffiStatus),
 		}
 	}))
@@ -11117,7 +12073,7 @@ func (_self *VersionVector) IncludesId(id Id) bool {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_versionvector_includes_id(
+		return C.uniffi_loro_ffi_fn_method_versionvector_includes_id(
 			_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
 	}))
 }
@@ -11126,7 +12082,7 @@ func (_self *VersionVector) IncludesVv(other *VersionVector) bool {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
-		return C.uniffi_loro_fn_method_versionvector_includes_vv(
+		return C.uniffi_loro_ffi_fn_method_versionvector_includes_vv(
 			_pointer, FfiConverterVersionVectorINSTANCE.Lower(other), _uniffiStatus)
 	}))
 }
@@ -11136,7 +12092,7 @@ func (_self *VersionVector) IntersectSpan(target IdSpan) *CounterSpan {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalCounterSpanINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_intersect_span(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_intersect_span(
 				_pointer, FfiConverterIdSpanINSTANCE.Lower(target), _uniffiStatus),
 		}
 	}))
@@ -11146,7 +12102,7 @@ func (_self *VersionVector) Merge(other *VersionVector) {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_versionvector_merge(
+		C.uniffi_loro_ffi_fn_method_versionvector_merge(
 			_pointer, FfiConverterVersionVectorINSTANCE.Lower(other), _uniffiStatus)
 		return false
 	})
@@ -11157,7 +12113,7 @@ func (_self *VersionVector) PartialCmp(other *VersionVector) *Ordering {
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterOptionalOrderingINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_method_versionvector_partial_cmp(
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_partial_cmp(
 				_pointer, FfiConverterVersionVectorINSTANCE.Lower(other), _uniffiStatus),
 		}
 	}))
@@ -11167,7 +12123,7 @@ func (_self *VersionVector) SetEnd(id Id) {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_versionvector_set_end(
+		C.uniffi_loro_ffi_fn_method_versionvector_set_end(
 			_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
 		return false
 	})
@@ -11177,10 +12133,31 @@ func (_self *VersionVector) SetLast(id Id) {
 	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
 	defer _self.ffiObject.decrementPointer()
 	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_loro_fn_method_versionvector_set_last(
+		C.uniffi_loro_ffi_fn_method_versionvector_set_last(
 			_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
 		return false
 	})
+}
+
+func (_self *VersionVector) ToHashmap() map[uint64]int32 {
+	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterMapUint64Int32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_versionvector_to_hashmap(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+// Update the end counter of the given client if the end is greater. Return whether updated
+func (_self *VersionVector) TryUpdateLast(id Id) bool {
+	_pointer := _self.ffiObject.incrementPointer("*VersionVector")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterBoolINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_loro_ffi_fn_method_versionvector_try_update_last(
+			_pointer, FfiConverterIdINSTANCE.Lower(id), _uniffiStatus)
+	}))
 }
 func (object *VersionVector) Destroy() {
 	runtime.SetFinalizer(object, nil)
@@ -11196,10 +12173,10 @@ func (c FfiConverterVersionVector) Lift(pointer unsafe.Pointer) *VersionVector {
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
-				return C.uniffi_loro_fn_clone_versionvector(pointer, status)
+				return C.uniffi_loro_ffi_fn_clone_versionvector(pointer, status)
 			},
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_loro_fn_free_versionvector(pointer, status)
+				C.uniffi_loro_ffi_fn_free_versionvector(pointer, status)
 			},
 		),
 	}
@@ -12474,6 +13451,50 @@ func (c FfiConverterUpdateOptions) Write(writer io.Writer, value UpdateOptions) 
 type FfiDestroyerUpdateOptions struct{}
 
 func (_ FfiDestroyerUpdateOptions) Destroy(value UpdateOptions) {
+	value.Destroy()
+}
+
+type VersionRangeItem struct {
+	Peer  uint64
+	Start int32
+	End   int32
+}
+
+func (r *VersionRangeItem) Destroy() {
+	FfiDestroyerUint64{}.Destroy(r.Peer)
+	FfiDestroyerInt32{}.Destroy(r.Start)
+	FfiDestroyerInt32{}.Destroy(r.End)
+}
+
+type FfiConverterVersionRangeItem struct{}
+
+var FfiConverterVersionRangeItemINSTANCE = FfiConverterVersionRangeItem{}
+
+func (c FfiConverterVersionRangeItem) Lift(rb RustBufferI) VersionRangeItem {
+	return LiftFromRustBuffer[VersionRangeItem](c, rb)
+}
+
+func (c FfiConverterVersionRangeItem) Read(reader io.Reader) VersionRangeItem {
+	return VersionRangeItem{
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterInt32INSTANCE.Read(reader),
+		FfiConverterInt32INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterVersionRangeItem) Lower(value VersionRangeItem) C.RustBuffer {
+	return LowerIntoRustBuffer[VersionRangeItem](c, value)
+}
+
+func (c FfiConverterVersionRangeItem) Write(writer io.Writer, value VersionRangeItem) {
+	FfiConverterUint64INSTANCE.Write(writer, value.Peer)
+	FfiConverterInt32INSTANCE.Write(writer, value.Start)
+	FfiConverterInt32INSTANCE.Write(writer, value.End)
+}
+
+type FfiDestroyerVersionRangeItem struct{}
+
+func (_ FfiDestroyerVersionRangeItem) Destroy(value VersionRangeItem) {
 	value.Destroy()
 }
 
@@ -15984,6 +17005,43 @@ func (_ FfiDestroyerOptionalOnPush) Destroy(value *OnPush) {
 	}
 }
 
+type FfiConverterOptionalSubscription struct{}
+
+var FfiConverterOptionalSubscriptionINSTANCE = FfiConverterOptionalSubscription{}
+
+func (c FfiConverterOptionalSubscription) Lift(rb RustBufferI) **Subscription {
+	return LiftFromRustBuffer[**Subscription](c, rb)
+}
+
+func (_ FfiConverterOptionalSubscription) Read(reader io.Reader) **Subscription {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterSubscriptionINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalSubscription) Lower(value **Subscription) C.RustBuffer {
+	return LowerIntoRustBuffer[**Subscription](c, value)
+}
+
+func (_ FfiConverterOptionalSubscription) Write(writer io.Writer, value **Subscription) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterSubscriptionINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalSubscription struct{}
+
+func (_ FfiDestroyerOptionalSubscription) Destroy(value **Subscription) {
+	if value != nil {
+		FfiDestroyerSubscription{}.Destroy(*value)
+	}
+}
+
 type FfiConverterOptionalValueOrContainer struct{}
 
 var FfiConverterOptionalValueOrContainerINSTANCE = FfiConverterOptionalValueOrContainer{}
@@ -16240,6 +17298,43 @@ type FfiDestroyerOptionalStyleConfig struct{}
 func (_ FfiDestroyerOptionalStyleConfig) Destroy(value *StyleConfig) {
 	if value != nil {
 		FfiDestroyerStyleConfig{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalUndoItemMeta struct{}
+
+var FfiConverterOptionalUndoItemMetaINSTANCE = FfiConverterOptionalUndoItemMeta{}
+
+func (c FfiConverterOptionalUndoItemMeta) Lift(rb RustBufferI) *UndoItemMeta {
+	return LiftFromRustBuffer[*UndoItemMeta](c, rb)
+}
+
+func (_ FfiConverterOptionalUndoItemMeta) Read(reader io.Reader) *UndoItemMeta {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterUndoItemMetaINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalUndoItemMeta) Lower(value *UndoItemMeta) C.RustBuffer {
+	return LowerIntoRustBuffer[*UndoItemMeta](c, value)
+}
+
+func (_ FfiConverterOptionalUndoItemMeta) Write(writer io.Writer, value *UndoItemMeta) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterUndoItemMetaINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalUndoItemMeta struct{}
+
+func (_ FfiDestroyerOptionalUndoItemMeta) Destroy(value *UndoItemMeta) {
+	if value != nil {
+		FfiDestroyerUndoItemMeta{}.Destroy(*value)
 	}
 }
 
@@ -17135,6 +18230,49 @@ func (FfiDestroyerSequenceTreeId) Destroy(sequence []TreeId) {
 	}
 }
 
+type FfiConverterSequenceVersionRangeItem struct{}
+
+var FfiConverterSequenceVersionRangeItemINSTANCE = FfiConverterSequenceVersionRangeItem{}
+
+func (c FfiConverterSequenceVersionRangeItem) Lift(rb RustBufferI) []VersionRangeItem {
+	return LiftFromRustBuffer[[]VersionRangeItem](c, rb)
+}
+
+func (c FfiConverterSequenceVersionRangeItem) Read(reader io.Reader) []VersionRangeItem {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]VersionRangeItem, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterVersionRangeItemINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceVersionRangeItem) Lower(value []VersionRangeItem) C.RustBuffer {
+	return LowerIntoRustBuffer[[]VersionRangeItem](c, value)
+}
+
+func (c FfiConverterSequenceVersionRangeItem) Write(writer io.Writer, value []VersionRangeItem) {
+	if len(value) > math.MaxInt32 {
+		panic("[]VersionRangeItem is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterVersionRangeItemINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceVersionRangeItem struct{}
+
+func (FfiDestroyerSequenceVersionRangeItem) Destroy(sequence []VersionRangeItem) {
+	for _, value := range sequence {
+		FfiDestroyerVersionRangeItem{}.Destroy(value)
+	}
+}
+
 type FfiConverterSequenceContainerId struct{}
 
 var FfiConverterSequenceContainerIdINSTANCE = FfiConverterSequenceContainerId{}
@@ -17350,6 +18488,50 @@ func (FfiDestroyerSequenceTextDelta) Destroy(sequence []TextDelta) {
 	}
 }
 
+type FfiConverterMapUint64Int32 struct{}
+
+var FfiConverterMapUint64Int32INSTANCE = FfiConverterMapUint64Int32{}
+
+func (c FfiConverterMapUint64Int32) Lift(rb RustBufferI) map[uint64]int32 {
+	return LiftFromRustBuffer[map[uint64]int32](c, rb)
+}
+
+func (_ FfiConverterMapUint64Int32) Read(reader io.Reader) map[uint64]int32 {
+	result := make(map[uint64]int32)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterUint64INSTANCE.Read(reader)
+		value := FfiConverterInt32INSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapUint64Int32) Lower(value map[uint64]int32) C.RustBuffer {
+	return LowerIntoRustBuffer[map[uint64]int32](c, value)
+}
+
+func (_ FfiConverterMapUint64Int32) Write(writer io.Writer, mapValue map[uint64]int32) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[uint64]int32 is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterUint64INSTANCE.Write(writer, key)
+		FfiConverterInt32INSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapUint64Int32 struct{}
+
+func (_ FfiDestroyerMapUint64Int32) Destroy(mapValue map[uint64]int32) {
+	for key, value := range mapValue {
+		FfiDestroyerUint64{}.Destroy(key)
+		FfiDestroyerInt32{}.Destroy(value)
+	}
+}
+
 type FfiConverterMapUint64CounterSpan struct{}
 
 var FfiConverterMapUint64CounterSpanINSTANCE = FfiConverterMapUint64CounterSpan{}
@@ -17530,7 +18712,7 @@ func (_ FfiDestroyerMapStringOptionalValueOrContainer) Destroy(mapValue map[stri
 func DecodeImportBlobMeta(bytes []byte, checkChecksum bool) (ImportBlobMetadata, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_func_decode_import_blob_meta(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterBoolINSTANCE.Lower(checkChecksum), _uniffiStatus),
+			inner: C.uniffi_loro_ffi_fn_func_decode_import_blob_meta(FfiConverterBytesINSTANCE.Lower(bytes), FfiConverterBoolINSTANCE.Lower(checkChecksum), _uniffiStatus),
 		}
 	})
 	if _uniffiErr != nil {
@@ -17544,7 +18726,7 @@ func DecodeImportBlobMeta(bytes []byte, checkChecksum bool) (ImportBlobMetadata,
 func GetVersion() string {
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_fn_func_get_version(_uniffiStatus),
+			inner: C.uniffi_loro_ffi_fn_func_get_version(_uniffiStatus),
 		}
 	}))
 }
