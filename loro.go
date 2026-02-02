@@ -337,6 +337,7 @@ func init() {
 	FfiConverterContainerIdLikeINSTANCE.register()
 	FfiConverterEphemeralSubscriberINSTANCE.register()
 	FfiConverterFirstCommitFromPeerCallbackINSTANCE.register()
+	FfiConverterJsonPathSubscriberINSTANCE.register()
 	FfiConverterLocalEphemeralListenerINSTANCE.register()
 	FfiConverterLocalUpdateCallbackINSTANCE.register()
 	FfiConverterLoroValueLikeINSTANCE.register()
@@ -685,15 +686,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_ffi_checksum_method_fractionalindex_to_string()
-		})
-		if checksum != 5688 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_ffi_checksum_method_fractionalindex_to_string: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_frontiers_encode()
 		})
 		if checksum != 14564 {
@@ -726,6 +718,15 @@ func uniffiCheckChecksums() {
 		if checksum != 15210 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_frontiers_to_vec: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_jsonpathsubscriber_on_jsonpath_changed()
+		})
+		if checksum != 36440 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_jsonpathsubscriber_on_jsonpath_changed: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -1144,6 +1145,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_container()
+		})
+		if checksum != 29566 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_get_container: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_get_counter()
 		})
 		if checksum != 60124 {
@@ -1518,6 +1528,15 @@ func uniffiCheckChecksums() {
 		if checksum != 65444 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_first_commit_from_peer: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_subscribe_jsonpath()
+		})
+		if checksum != 58559 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_subscribe_jsonpath: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -2386,11 +2405,29 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_convert_pos()
+		})
+		if checksum != 51289 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_convert_pos: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorotext_delete()
 		})
 		if checksum != 50707 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_delete: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_delete_utf16()
+		})
+		if checksum != 1418 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_delete_utf16: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -2467,6 +2504,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_insert_utf16()
+		})
+		if checksum != 39579 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_insert_utf16: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorotext_insert_utf8()
 		})
 		if checksum != 16771 {
@@ -2539,6 +2585,24 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_mark_utf16()
+		})
+		if checksum != 54485 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_mark_utf16: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_mark_utf8()
+		})
+		if checksum != 20536 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_mark_utf8: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorotext_push_str()
 		})
 		if checksum != 46599 {
@@ -2557,11 +2621,38 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_slice_delta()
+		})
+		if checksum != 46224 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_slice_delta: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_slice_utf16()
+		})
+		if checksum != 25024 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_slice_utf16: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorotext_splice()
 		})
 		if checksum != 53391 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_splice: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_splice_utf16()
+		})
+		if checksum != 30121 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_splice_utf16: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -2584,20 +2675,20 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_loro_ffi_checksum_method_lorotext_to_string()
-		})
-		if checksum != 28280 {
-			// If this happens try cleaning and rebuilding your project
-			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_to_string: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorotext_unmark()
 		})
 		if checksum != 47537 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_unmark: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorotext_unmark_utf16()
+		})
+		if checksum != 39405 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorotext_unmark_utf16: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -5225,7 +5316,6 @@ func (c FfiConverterFirstCommitFromPeerCallback) register() {
 }
 
 type FractionalIndexInterface interface {
-	ToString() string
 }
 type FractionalIndex struct {
 	ffiObject FfiObject
@@ -5243,16 +5333,17 @@ func FractionalIndexFromHexString(str string) *FractionalIndex {
 	}))
 }
 
-func (_self *FractionalIndex) ToString() string {
+func (_self *FractionalIndex) String() string {
 	_pointer := _self.ffiObject.incrementPointer("*FractionalIndex")
 	defer _self.ffiObject.decrementPointer()
 	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
-			inner: C.uniffi_loro_ffi_fn_method_fractionalindex_to_string(
+			inner: C.uniffi_loro_ffi_fn_method_fractionalindex_uniffi_trait_display(
 				_pointer, _uniffiStatus),
 		}
 	}))
 }
+
 func (object *FractionalIndex) Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
@@ -5428,6 +5519,107 @@ type FfiDestroyerFrontiers struct{}
 
 func (_ FfiDestroyerFrontiers) Destroy(value *Frontiers) {
 	value.Destroy()
+}
+
+type JsonPathSubscriber interface {
+	// Called when a change may affect the subscribed JSONPath query.
+	OnJsonpathChanged()
+}
+type JsonPathSubscriberImpl struct {
+	ffiObject FfiObject
+}
+
+// Called when a change may affect the subscribed JSONPath query.
+func (_self *JsonPathSubscriberImpl) OnJsonpathChanged() {
+	_pointer := _self.ffiObject.incrementPointer("JsonPathSubscriber")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_jsonpathsubscriber_on_jsonpath_changed(
+			_pointer, _uniffiStatus)
+		return false
+	})
+}
+func (object *JsonPathSubscriberImpl) Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterJsonPathSubscriber struct {
+	handleMap *concurrentHandleMap[JsonPathSubscriber]
+}
+
+var FfiConverterJsonPathSubscriberINSTANCE = FfiConverterJsonPathSubscriber{
+	handleMap: newConcurrentHandleMap[JsonPathSubscriber](),
+}
+
+func (c FfiConverterJsonPathSubscriber) Lift(pointer unsafe.Pointer) JsonPathSubscriber {
+	result := &JsonPathSubscriberImpl{
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
+				return C.uniffi_loro_ffi_fn_clone_jsonpathsubscriber(pointer, status)
+			},
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_loro_ffi_fn_free_jsonpathsubscriber(pointer, status)
+			},
+		),
+	}
+	runtime.SetFinalizer(result, (*JsonPathSubscriberImpl).Destroy)
+	return result
+}
+
+func (c FfiConverterJsonPathSubscriber) Read(reader io.Reader) JsonPathSubscriber {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterJsonPathSubscriber) Lower(value JsonPathSubscriber) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := unsafe.Pointer(uintptr(c.handleMap.insert(value)))
+	return pointer
+
+}
+
+func (c FfiConverterJsonPathSubscriber) Write(writer io.Writer, value JsonPathSubscriber) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerJsonPathSubscriber struct{}
+
+func (_ FfiDestroyerJsonPathSubscriber) Destroy(value JsonPathSubscriber) {
+	if val, ok := value.(*JsonPathSubscriberImpl); ok {
+		val.Destroy()
+	} else {
+		panic("Expected *JsonPathSubscriberImpl")
+	}
+}
+
+//export loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberMethod0
+func loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberMethod0(uniffiHandle C.uint64_t, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+	handle := uint64(uniffiHandle)
+	uniffiObj, ok := FfiConverterJsonPathSubscriberINSTANCE.handleMap.tryGet(handle)
+	if !ok {
+		panic(fmt.Errorf("no callback in handle map: %d", handle))
+	}
+
+	uniffiObj.OnJsonpathChanged()
+
+}
+
+var UniffiVTableCallbackInterfaceJsonPathSubscriberINSTANCE = C.UniffiVTableCallbackInterfaceJsonPathSubscriber{
+	onJsonpathChanged: (C.UniffiCallbackInterfaceJsonPathSubscriberMethod0)(C.loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberMethod0),
+
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberFree),
+}
+
+//export loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberFree
+func loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberFree(handle C.uint64_t) {
+	FfiConverterJsonPathSubscriberINSTANCE.handleMap.remove(uint64(handle))
+}
+
+func (c FfiConverterJsonPathSubscriber) register() {
+	C.uniffi_loro_ffi_fn_init_callback_vtable_jsonpathsubscriber(&UniffiVTableCallbackInterfaceJsonPathSubscriberINSTANCE)
 }
 
 type LocalEphemeralListener interface {
@@ -6064,6 +6256,8 @@ type LoroDocInterface interface {
 	// * `id` - The starting ID of the change range
 	// * `len` - The length of the change range to check
 	GetChangedContainersIn(id Id, len uint32) []ContainerId
+	// Get a container by container id.
+	GetContainer(id ContainerId) **ValueOrContainer
 	// Get a [LoroCounter] by container id.
 	//
 	// If the provided id is string, it will be converted into a root container id with the name of the string.
@@ -6256,6 +6450,11 @@ type LoroDocInterface interface {
 	// This is useful for managing the relationship between `PeerID` and user information.
 	// For example, you could store user names in a `LoroMap` using `PeerID` as the key and the `UserID` as the value.
 	SubscribeFirstCommitFromPeer(callback FirstCommitFromPeerCallback) *Subscription
+	// Subscribe to updates that might affect the given JSONPath query.
+	//
+	// The callback may fire false positives; it is intended as a lightweight notification so
+	// callers can debounce or throttle before re-running JSONPath themselves.
+	SubscribeJsonpath(path string, callback JsonPathSubscriber) (*Subscription, error)
 	// Subscribe the local update of the document.
 	SubscribeLocalUpdate(callback LocalUpdateCallback) *Subscription
 	// Subscribe to the pre-commit event.
@@ -6884,6 +7083,18 @@ func (_self *LoroDoc) GetChangedContainersIn(id Id, len uint32) []ContainerId {
 	}))
 }
 
+// Get a container by container id.
+func (_self *LoroDoc) GetContainer(id ContainerId) **ValueOrContainer {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalValueOrContainerINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_get_container(
+				_pointer, FfiConverterContainerIdINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
 // Get a [LoroCounter] by container id.
 //
 // If the provided id is string, it will be converted into a root container id with the name of the string.
@@ -7487,6 +7698,25 @@ func (_self *LoroDoc) SubscribeFirstCommitFromPeer(callback FirstCommitFromPeerC
 		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_first_commit_from_peer(
 			_pointer, FfiConverterFirstCommitFromPeerCallbackINSTANCE.Lower(callback), _uniffiStatus)
 	}))
+}
+
+// Subscribe to updates that might affect the given JSONPath query.
+//
+// The callback may fire false positives; it is intended as a lightweight notification so
+// callers can debounce or throttle before re-running JSONPath themselves.
+func (_self *LoroDoc) SubscribeJsonpath(path string, callback JsonPathSubscriber) (*Subscription, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_loro_ffi_fn_method_lorodoc_subscribe_jsonpath(
+			_pointer, FfiConverterStringINSTANCE.Lower(path), FfiConverterJsonPathSubscriberINSTANCE.Lower(callback), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *Subscription
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterSubscriptionINSTANCE.Lift(_uniffiRV), nil
+	}
 }
 
 // Subscribe the local update of the document.
@@ -9210,8 +9440,12 @@ type LoroTextInterface interface {
 	ApplyDelta(delta []TextDelta) error
 	// Get the characters at given unicode position.
 	CharAt(pos uint32) (string, error)
+	// Convert a position between coordinate systems (Unicode, UTF-16, UTF-8 bytes, Event).
+	ConvertPos(index uint32, from PosType, to PosType) *uint32
 	// Delete a range of text at the given unicode position with unicode length.
 	Delete(pos uint32, len uint32) error
+	// Delete a range of text at the given utf-16 position with utf-16 length.
+	DeleteUtf16(pos uint32, len uint32) error
 	// Delete a range of text at the given utf-8 position with utf-8 length.
 	DeleteUtf8(pos uint32, len uint32) error
 	// Get the LoroDoc from this container
@@ -9240,6 +9474,8 @@ type LoroTextInterface interface {
 	Id() ContainerId
 	// Insert a string at the given unicode position.
 	Insert(pos uint32, s string) error
+	// Insert a string at the given utf-16 position.
+	InsertUtf16(pos uint32, s string) error
 	// Insert a string at the given utf-8 position.
 	InsertUtf8(pos uint32, s string) error
 	// Whether the container is attached to a document
@@ -9272,12 +9508,22 @@ type LoroTextInterface interface {
 	//
 	// Note: this is not suitable for unmergeable annotations like comments.
 	Mark(from uint32, to uint32, key string, value LoroValueLike) error
+	// Mark a range of text with UTF-16 offsets.
+	MarkUtf16(from uint32, to uint32, key string, value LoroValueLike) error
+	// Mark a range of text with UTF-8 offsets.
+	MarkUtf8(from uint32, to uint32, key string, value LoroValueLike) error
 	// Push a string to the end of the text container.
 	PushStr(s string) error
 	// Get a string slice at the given Unicode range
 	Slice(startIndex uint32, endIndex uint32) (string, error)
+	// Get the rich-text delta within a range.
+	SliceDelta(startIndex uint32, endIndex uint32, posType PosType) ([]TextDelta, error)
+	// Get a string slice at the given UTF-16 range
+	SliceUtf16(startIndex uint32, endIndex uint32) (string, error)
 	// Delete specified character and insert string at the same position at given unicode position.
 	Splice(pos uint32, len uint32, s string) (string, error)
+	// Delete specified range and insert a string at the same UTF-16 position.
+	SpliceUtf16(pos uint32, len uint32, s string) error
 	// Subscribe the events of a container.
 	//
 	// The callback will be invoked when the container is changed.
@@ -9292,8 +9538,6 @@ type LoroTextInterface interface {
 	Subscribe(subscriber Subscriber) **Subscription
 	// Get the text in [Delta](https://quilljs.com/docs/delta/) format.
 	ToDelta() []TextDelta
-	// Get the text content of the text container.
-	ToString() string
 	// Unmark a range of text with a key and a value.
 	//
 	// You can use it to remove highlights, bolds or links
@@ -9311,6 +9555,8 @@ type LoroTextInterface interface {
 	//
 	// Note: you cannot delete unmergeable annotations like comments by this method.
 	Unmark(from uint32, to uint32, key string) error
+	// Unmark a UTF-16 range of text with a key.
+	UnmarkUtf16(from uint32, to uint32, key string) error
 	// Update the current text based on the provided text.
 	//
 	// It will calculate the minimal difference and apply it to the current text.
@@ -9368,12 +9614,36 @@ func (_self *LoroText) CharAt(pos uint32) (string, error) {
 	}
 }
 
+// Convert a position between coordinate systems (Unicode, UTF-16, UTF-8 bytes, Event).
+func (_self *LoroText) ConvertPos(index uint32, from PosType, to PosType) *uint32 {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalUint32INSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_convert_pos(
+				_pointer, FfiConverterUint32INSTANCE.Lower(index), FfiConverterPosTypeINSTANCE.Lower(from), FfiConverterPosTypeINSTANCE.Lower(to), _uniffiStatus),
+		}
+	}))
+}
+
 // Delete a range of text at the given unicode position with unicode length.
 func (_self *LoroText) Delete(pos uint32, len uint32) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
 		C.uniffi_loro_ffi_fn_method_lorotext_delete(
+			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
+// Delete a range of text at the given utf-16 position with utf-16 length.
+func (_self *LoroText) DeleteUtf16(pos uint32, len uint32) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_delete_utf16(
 			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), _uniffiStatus)
 		return false
 	})
@@ -9488,6 +9758,18 @@ func (_self *LoroText) Insert(pos uint32, s string) error {
 	return _uniffiErr.AsError()
 }
 
+// Insert a string at the given utf-16 position.
+func (_self *LoroText) InsertUtf16(pos uint32, s string) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_insert_utf16(
+			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterStringINSTANCE.Lower(s), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
 // Insert a string at the given utf-8 position.
 func (_self *LoroText) InsertUtf8(pos uint32, s string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
@@ -9588,6 +9870,30 @@ func (_self *LoroText) Mark(from uint32, to uint32, key string, value LoroValueL
 	return _uniffiErr.AsError()
 }
 
+// Mark a range of text with UTF-16 offsets.
+func (_self *LoroText) MarkUtf16(from uint32, to uint32, key string, value LoroValueLike) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_mark_utf16(
+			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
+// Mark a range of text with UTF-8 offsets.
+func (_self *LoroText) MarkUtf8(from uint32, to uint32, key string, value LoroValueLike) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_mark_utf8(
+			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), FfiConverterLoroValueLikeINSTANCE.Lower(value), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
 // Push a string to the end of the text container.
 func (_self *LoroText) PushStr(s string) error {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
@@ -9618,6 +9924,42 @@ func (_self *LoroText) Slice(startIndex uint32, endIndex uint32) (string, error)
 	}
 }
 
+// Get the rich-text delta within a range.
+func (_self *LoroText) SliceDelta(startIndex uint32, endIndex uint32, posType PosType) ([]TextDelta, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_slice_delta(
+				_pointer, FfiConverterUint32INSTANCE.Lower(startIndex), FfiConverterUint32INSTANCE.Lower(endIndex), FfiConverterPosTypeINSTANCE.Lower(posType), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue []TextDelta
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterSequenceTextDeltaINSTANCE.Lift(_uniffiRV), nil
+	}
+}
+
+// Get a string slice at the given UTF-16 range
+func (_self *LoroText) SliceUtf16(startIndex uint32, endIndex uint32) (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_slice_utf16(
+				_pointer, FfiConverterUint32INSTANCE.Lower(startIndex), FfiConverterUint32INSTANCE.Lower(endIndex), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue string
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
+	}
+}
+
 // Delete specified character and insert string at the same position at given unicode position.
 func (_self *LoroText) Splice(pos uint32, len uint32, s string) (string, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroText")
@@ -9634,6 +9976,18 @@ func (_self *LoroText) Splice(pos uint32, len uint32, s string) (string, error) 
 	} else {
 		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
 	}
+}
+
+// Delete specified range and insert a string at the same UTF-16 position.
+func (_self *LoroText) SpliceUtf16(pos uint32, len uint32, s string) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_splice_utf16(
+			_pointer, FfiConverterUint32INSTANCE.Lower(pos), FfiConverterUint32INSTANCE.Lower(len), FfiConverterStringINSTANCE.Lower(s), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
 }
 
 // Subscribe the events of a container.
@@ -9670,18 +10024,6 @@ func (_self *LoroText) ToDelta() []TextDelta {
 	}))
 }
 
-// Get the text content of the text container.
-func (_self *LoroText) ToString() string {
-	_pointer := _self.ffiObject.incrementPointer("*LoroText")
-	defer _self.ffiObject.decrementPointer()
-	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return GoRustBuffer{
-			inner: C.uniffi_loro_ffi_fn_method_lorotext_to_string(
-				_pointer, _uniffiStatus),
-		}
-	}))
-}
-
 // Unmark a range of text with a key and a value.
 //
 // # You can use it to remove highlights, bolds or links
@@ -9703,6 +10045,18 @@ func (_self *LoroText) Unmark(from uint32, to uint32, key string) error {
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
 		C.uniffi_loro_ffi_fn_method_lorotext_unmark(
+			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr.AsError()
+}
+
+// Unmark a UTF-16 range of text with a key.
+func (_self *LoroText) UnmarkUtf16(from uint32, to uint32, key string) error {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_loro_ffi_fn_method_lorotext_unmark_utf16(
 			_pointer, FfiConverterUint32INSTANCE.Lower(from), FfiConverterUint32INSTANCE.Lower(to), FfiConverterStringINSTANCE.Lower(key), _uniffiStatus)
 		return false
 	})
@@ -9740,6 +10094,18 @@ func (_self *LoroText) UpdateByLine(s string, options UpdateOptions) error {
 	})
 	return _uniffiErr.AsError()
 }
+
+func (_self *LoroText) String() string {
+	_pointer := _self.ffiObject.incrementPointer("*LoroText")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorotext_uniffi_trait_display(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
 func (object *LoroText) Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
@@ -14705,6 +15071,7 @@ var ErrLoroErrorUtf16InUnicodeCodePoint = fmt.Errorf("LoroErrorUtf16InUnicodeCod
 var ErrLoroErrorEndIndexLessThanStartIndex = fmt.Errorf("LoroErrorEndIndexLessThanStartIndex")
 var ErrLoroErrorInvalidRootContainerName = fmt.Errorf("LoroErrorInvalidRootContainerName")
 var ErrLoroErrorImportUpdatesThatDependsOnOutdatedVersion = fmt.Errorf("LoroErrorImportUpdatesThatDependsOnOutdatedVersion")
+var ErrLoroErrorImportUnsupportedEncodingMode = fmt.Errorf("LoroErrorImportUnsupportedEncodingMode")
 var ErrLoroErrorSwitchToVersionBeforeShallowRoot = fmt.Errorf("LoroErrorSwitchToVersionBeforeShallowRoot")
 var ErrLoroErrorContainerDeleted = fmt.Errorf("LoroErrorContainerDeleted")
 var ErrLoroErrorConcurrentOpsWithSamePeerId = fmt.Errorf("LoroErrorConcurrentOpsWithSamePeerId")
@@ -15321,6 +15688,25 @@ func (self LoroErrorImportUpdatesThatDependsOnOutdatedVersion) Is(target error) 
 	return target == ErrLoroErrorImportUpdatesThatDependsOnOutdatedVersion
 }
 
+type LoroErrorImportUnsupportedEncodingMode struct {
+	message string
+}
+
+func NewLoroErrorImportUnsupportedEncodingMode() *LoroError {
+	return &LoroError{err: &LoroErrorImportUnsupportedEncodingMode{}}
+}
+
+func (e LoroErrorImportUnsupportedEncodingMode) destroy() {
+}
+
+func (err LoroErrorImportUnsupportedEncodingMode) Error() string {
+	return fmt.Sprintf("ImportUnsupportedEncodingMode: %s", err.message)
+}
+
+func (self LoroErrorImportUnsupportedEncodingMode) Is(target error) bool {
+	return target == ErrLoroErrorImportUnsupportedEncodingMode
+}
+
 type LoroErrorSwitchToVersionBeforeShallowRoot struct {
 	message string
 }
@@ -15517,16 +15903,18 @@ func (c FfiConverterLoroError) Read(reader io.Reader) *LoroError {
 	case 32:
 		return &LoroError{&LoroErrorImportUpdatesThatDependsOnOutdatedVersion{message}}
 	case 33:
-		return &LoroError{&LoroErrorSwitchToVersionBeforeShallowRoot{message}}
+		return &LoroError{&LoroErrorImportUnsupportedEncodingMode{message}}
 	case 34:
-		return &LoroError{&LoroErrorContainerDeleted{message}}
+		return &LoroError{&LoroErrorSwitchToVersionBeforeShallowRoot{message}}
 	case 35:
-		return &LoroError{&LoroErrorConcurrentOpsWithSamePeerId{message}}
+		return &LoroError{&LoroErrorContainerDeleted{message}}
 	case 36:
-		return &LoroError{&LoroErrorInvalidPeerId{message}}
+		return &LoroError{&LoroErrorConcurrentOpsWithSamePeerId{message}}
 	case 37:
-		return &LoroError{&LoroErrorContainersNotFound{message}}
+		return &LoroError{&LoroErrorInvalidPeerId{message}}
 	case 38:
+		return &LoroError{&LoroErrorContainersNotFound{message}}
+	case 39:
 		return &LoroError{&LoroErrorUndoGroupAlreadyStarted{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterLoroError.Read()", errorID))
@@ -15600,18 +15988,20 @@ func (c FfiConverterLoroError) Write(writer io.Writer, value *LoroError) {
 		writeInt32(writer, 31)
 	case *LoroErrorImportUpdatesThatDependsOnOutdatedVersion:
 		writeInt32(writer, 32)
-	case *LoroErrorSwitchToVersionBeforeShallowRoot:
+	case *LoroErrorImportUnsupportedEncodingMode:
 		writeInt32(writer, 33)
-	case *LoroErrorContainerDeleted:
+	case *LoroErrorSwitchToVersionBeforeShallowRoot:
 		writeInt32(writer, 34)
-	case *LoroErrorConcurrentOpsWithSamePeerId:
+	case *LoroErrorContainerDeleted:
 		writeInt32(writer, 35)
-	case *LoroErrorInvalidPeerId:
+	case *LoroErrorConcurrentOpsWithSamePeerId:
 		writeInt32(writer, 36)
-	case *LoroErrorContainersNotFound:
+	case *LoroErrorInvalidPeerId:
 		writeInt32(writer, 37)
-	case *LoroErrorUndoGroupAlreadyStarted:
+	case *LoroErrorContainersNotFound:
 		writeInt32(writer, 38)
+	case *LoroErrorUndoGroupAlreadyStarted:
+		writeInt32(writer, 39)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterLoroError.Write", value))
@@ -15685,6 +16075,8 @@ func (_ FfiDestroyerLoroError) Destroy(value *LoroError) {
 	case LoroErrorInvalidRootContainerName:
 		variantValue.destroy()
 	case LoroErrorImportUpdatesThatDependsOnOutdatedVersion:
+		variantValue.destroy()
+	case LoroErrorImportUnsupportedEncodingMode:
 		variantValue.destroy()
 	case LoroErrorSwitchToVersionBeforeShallowRoot:
 		variantValue.destroy()
@@ -15901,6 +16293,41 @@ func (FfiConverterOrdering) Write(writer io.Writer, value Ordering) {
 type FfiDestroyerOrdering struct{}
 
 func (_ FfiDestroyerOrdering) Destroy(value Ordering) {
+}
+
+type PosType uint
+
+const (
+	PosTypeBytes   PosType = 1
+	PosTypeUnicode PosType = 2
+	PosTypeUtf16   PosType = 3
+	PosTypeEvent   PosType = 4
+	PosTypeEntity  PosType = 5
+)
+
+type FfiConverterPosType struct{}
+
+var FfiConverterPosTypeINSTANCE = FfiConverterPosType{}
+
+func (c FfiConverterPosType) Lift(rb RustBufferI) PosType {
+	return LiftFromRustBuffer[PosType](c, rb)
+}
+
+func (c FfiConverterPosType) Lower(value PosType) C.RustBuffer {
+	return LowerIntoRustBuffer[PosType](c, value)
+}
+func (FfiConverterPosType) Read(reader io.Reader) PosType {
+	id := readInt32(reader)
+	return PosType(id)
+}
+
+func (FfiConverterPosType) Write(writer io.Writer, value PosType) {
+	writeInt32(writer, int32(value))
+}
+
+type FfiDestroyerPosType struct{}
+
+func (_ FfiDestroyerPosType) Destroy(value PosType) {
 }
 
 type Side uint
