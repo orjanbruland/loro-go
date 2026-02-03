@@ -862,10 +862,11 @@ dependencies = [
 [[package]]
 name = "loro-ffi"
 version = "1.10.3"
-source = "git+https://github.com/loro-dev/loro-ffi.git?tag=v1.10.3#1406e1ed36f2ac6816ef8637c2826af7e5c1c9e1"
+source = "git+https://github.com/orjanbruland/loro-ffi.git?rev=e43310a4afeffe467d0566f2ad1d8c5850828e43#e43310a4afeffe467d0566f2ad1d8c5850828e43"
 dependencies = [
  "loro",
  "serde_json",
+ "thiserror 1.0.69",
  "uniffi",
 ]
 

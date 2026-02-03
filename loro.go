@@ -1012,7 +1012,7 @@ func uniffiCheckChecksums() {
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot()
 		})
-		if checksum != 28510 {
+		if checksum != 57235 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot: UniFFI API checksum mismatch")
 		}
@@ -1021,7 +1021,7 @@ func uniffiCheckChecksums() {
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot_at()
 		})
-		if checksum != 37996 {
+		if checksum != 47168 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_snapshot_at: UniFFI API checksum mismatch")
 		}
@@ -6804,7 +6804,7 @@ func (_self *LoroDoc) ExportShallowSnapshot(frontiers *Frontiers) ([]byte, error
 func (_self *LoroDoc) ExportSnapshot() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	_uniffiRV, _uniffiErr := rustCallWithError[ExportError](FfiConverterExportError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
 			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_snapshot(
 				_pointer, _uniffiStatus),
@@ -6821,7 +6821,7 @@ func (_self *LoroDoc) ExportSnapshot() ([]byte, error) {
 func (_self *LoroDoc) ExportSnapshotAt(frontiers *Frontiers) ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
-	_uniffiRV, _uniffiErr := rustCallWithError[LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+	_uniffiRV, _uniffiErr := rustCallWithError[ExportError](FfiConverterExportError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
 		return GoRustBuffer{
 			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_snapshot_at(
 				_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus),
@@ -14580,6 +14580,176 @@ func (FfiConverterExpandType) Write(writer io.Writer, value ExpandType) {
 type FfiDestroyerExpandType struct{}
 
 func (_ FfiDestroyerExpandType) Destroy(value ExpandType) {
+}
+
+type ExportError struct {
+	err error
+}
+
+// Convience method to turn *ExportError into error
+// Avoiding treating nil pointer as non nil error interface
+func (err *ExportError) AsError() error {
+	if err == nil {
+		return nil
+	} else {
+		return err
+	}
+}
+
+func (err ExportError) Error() string {
+	return fmt.Sprintf("ExportError: %s", err.err.Error())
+}
+
+func (err ExportError) Unwrap() error {
+	return err.err
+}
+
+// Err* are used for checking error type with `errors.Is`
+var ErrExportErrorFrontiersNotFound = fmt.Errorf("ExportErrorFrontiersNotFound")
+var ErrExportErrorShallowSnapshotIncompatibleWithOldFormat = fmt.Errorf("ExportErrorShallowSnapshotIncompatibleWithOldFormat")
+var ErrExportErrorUnknownContainer = fmt.Errorf("ExportErrorUnknownContainer")
+var ErrExportErrorInternalError = fmt.Errorf("ExportErrorInternalError")
+
+// Variant structs
+type ExportErrorFrontiersNotFound struct {
+	message string
+}
+
+func NewExportErrorFrontiersNotFound() *ExportError {
+	return &ExportError{err: &ExportErrorFrontiersNotFound{}}
+}
+
+func (e ExportErrorFrontiersNotFound) destroy() {
+}
+
+func (err ExportErrorFrontiersNotFound) Error() string {
+	return fmt.Sprintf("FrontiersNotFound: %s", err.message)
+}
+
+func (self ExportErrorFrontiersNotFound) Is(target error) bool {
+	return target == ErrExportErrorFrontiersNotFound
+}
+
+type ExportErrorShallowSnapshotIncompatibleWithOldFormat struct {
+	message string
+}
+
+func NewExportErrorShallowSnapshotIncompatibleWithOldFormat() *ExportError {
+	return &ExportError{err: &ExportErrorShallowSnapshotIncompatibleWithOldFormat{}}
+}
+
+func (e ExportErrorShallowSnapshotIncompatibleWithOldFormat) destroy() {
+}
+
+func (err ExportErrorShallowSnapshotIncompatibleWithOldFormat) Error() string {
+	return fmt.Sprintf("ShallowSnapshotIncompatibleWithOldFormat: %s", err.message)
+}
+
+func (self ExportErrorShallowSnapshotIncompatibleWithOldFormat) Is(target error) bool {
+	return target == ErrExportErrorShallowSnapshotIncompatibleWithOldFormat
+}
+
+type ExportErrorUnknownContainer struct {
+	message string
+}
+
+func NewExportErrorUnknownContainer() *ExportError {
+	return &ExportError{err: &ExportErrorUnknownContainer{}}
+}
+
+func (e ExportErrorUnknownContainer) destroy() {
+}
+
+func (err ExportErrorUnknownContainer) Error() string {
+	return fmt.Sprintf("UnknownContainer: %s", err.message)
+}
+
+func (self ExportErrorUnknownContainer) Is(target error) bool {
+	return target == ErrExportErrorUnknownContainer
+}
+
+type ExportErrorInternalError struct {
+	message string
+}
+
+func NewExportErrorInternalError() *ExportError {
+	return &ExportError{err: &ExportErrorInternalError{}}
+}
+
+func (e ExportErrorInternalError) destroy() {
+}
+
+func (err ExportErrorInternalError) Error() string {
+	return fmt.Sprintf("InternalError: %s", err.message)
+}
+
+func (self ExportErrorInternalError) Is(target error) bool {
+	return target == ErrExportErrorInternalError
+}
+
+type FfiConverterExportError struct{}
+
+var FfiConverterExportErrorINSTANCE = FfiConverterExportError{}
+
+func (c FfiConverterExportError) Lift(eb RustBufferI) *ExportError {
+	return LiftFromRustBuffer[*ExportError](c, eb)
+}
+
+func (c FfiConverterExportError) Lower(value *ExportError) C.RustBuffer {
+	return LowerIntoRustBuffer[*ExportError](c, value)
+}
+
+func (c FfiConverterExportError) Read(reader io.Reader) *ExportError {
+	errorID := readUint32(reader)
+
+	message := FfiConverterStringINSTANCE.Read(reader)
+	switch errorID {
+	case 1:
+		return &ExportError{&ExportErrorFrontiersNotFound{message}}
+	case 2:
+		return &ExportError{&ExportErrorShallowSnapshotIncompatibleWithOldFormat{message}}
+	case 3:
+		return &ExportError{&ExportErrorUnknownContainer{message}}
+	case 4:
+		return &ExportError{&ExportErrorInternalError{message}}
+	default:
+		panic(fmt.Sprintf("Unknown error code %d in FfiConverterExportError.Read()", errorID))
+	}
+
+}
+
+func (c FfiConverterExportError) Write(writer io.Writer, value *ExportError) {
+	switch variantValue := value.err.(type) {
+	case *ExportErrorFrontiersNotFound:
+		writeInt32(writer, 1)
+	case *ExportErrorShallowSnapshotIncompatibleWithOldFormat:
+		writeInt32(writer, 2)
+	case *ExportErrorUnknownContainer:
+		writeInt32(writer, 3)
+	case *ExportErrorInternalError:
+		writeInt32(writer, 4)
+	default:
+		_ = variantValue
+		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterExportError.Write", value))
+	}
+}
+
+type FfiDestroyerExportError struct{}
+
+func (_ FfiDestroyerExportError) Destroy(value *ExportError) {
+	switch variantValue := value.err.(type) {
+	case ExportErrorFrontiersNotFound:
+		variantValue.destroy()
+	case ExportErrorShallowSnapshotIncompatibleWithOldFormat:
+		variantValue.destroy()
+	case ExportErrorUnknownContainer:
+		variantValue.destroy()
+	case ExportErrorInternalError:
+		variantValue.destroy()
+	default:
+		_ = variantValue
+		panic(fmt.Sprintf("invalid error value `%v` in FfiDestroyerExportError.Destroy", value))
+	}
 }
 
 type Index interface {
