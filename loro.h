@@ -434,6 +434,20 @@ static void call_UniffiCallbackInterfaceFirstCommitFromPeerCallbackMethod0(
 
 
 #endif
+#ifndef UNIFFI_FFIDEF_CALLBACK_INTERFACE_JSON_PATH_SUBSCRIBER_METHOD0
+#define UNIFFI_FFIDEF_CALLBACK_INTERFACE_JSON_PATH_SUBSCRIBER_METHOD0
+typedef void (*UniffiCallbackInterfaceJsonPathSubscriberMethod0)(uint64_t uniffi_handle, void* uniffi_out_return, RustCallStatus* callStatus );
+
+// Making function static works arround:
+// https://github.com/golang/go/issues/11263
+static void call_UniffiCallbackInterfaceJsonPathSubscriberMethod0(
+				UniffiCallbackInterfaceJsonPathSubscriberMethod0 cb, uint64_t uniffi_handle, void* uniffi_out_return, RustCallStatus* callStatus )
+{
+	return cb(uniffi_handle, uniffi_out_return, callStatus );
+}
+
+
+#endif
 #ifndef UNIFFI_FFIDEF_CALLBACK_INTERFACE_LOCAL_EPHEMERAL_LISTENER_METHOD0
 #define UNIFFI_FFIDEF_CALLBACK_INTERFACE_LOCAL_EPHEMERAL_LISTENER_METHOD0
 typedef void (*UniffiCallbackInterfaceLocalEphemeralListenerMethod0)(uint64_t uniffi_handle, RustBuffer update, void* uniffi_out_return, RustCallStatus* callStatus );
@@ -744,6 +758,14 @@ typedef struct UniffiVTableCallbackInterfaceFirstCommitFromPeerCallback {
     UniffiCallbackInterfaceFirstCommitFromPeerCallbackMethod0 onFirstCommitFromPeer;
     UniffiCallbackInterfaceFree uniffiFree;
 } UniffiVTableCallbackInterfaceFirstCommitFromPeerCallback;
+
+#endif
+#ifndef UNIFFI_FFIDEF_V_TABLE_CALLBACK_INTERFACE_JSON_PATH_SUBSCRIBER
+#define UNIFFI_FFIDEF_V_TABLE_CALLBACK_INTERFACE_JSON_PATH_SUBSCRIBER
+typedef struct UniffiVTableCallbackInterfaceJsonPathSubscriber {
+    UniffiCallbackInterfaceJsonPathSubscriberMethod0 onJsonpathChanged;
+    UniffiCallbackInterfaceFree uniffiFree;
+} UniffiVTableCallbackInterfaceJsonPathSubscriber;
 
 #endif
 #ifndef UNIFFI_FFIDEF_V_TABLE_CALLBACK_INTERFACE_LOCAL_EPHEMERAL_LISTENER
@@ -1165,9 +1187,9 @@ void* uniffi_loro_ffi_fn_constructor_fractionalindex_from_bytes(RustBuffer bytes
 void* uniffi_loro_ffi_fn_constructor_fractionalindex_from_hex_string(RustBuffer str, RustCallStatus *out_status
 );
 #endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRACTIONALINDEX_TO_STRING
-#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRACTIONALINDEX_TO_STRING
-RustBuffer uniffi_loro_ffi_fn_method_fractionalindex_to_string(void* ptr, RustCallStatus *out_status
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRACTIONALINDEX_UNIFFI_TRAIT_DISPLAY
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRACTIONALINDEX_UNIFFI_TRAIT_DISPLAY
+RustBuffer uniffi_loro_ffi_fn_method_fractionalindex_uniffi_trait_display(void* ptr, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_CLONE_FRONTIERS
@@ -1219,6 +1241,26 @@ int8_t uniffi_loro_ffi_fn_method_frontiers_is_empty(void* ptr, RustCallStatus *o
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRONTIERS_TO_VEC
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_FRONTIERS_TO_VEC
 RustBuffer uniffi_loro_ffi_fn_method_frontiers_to_vec(void* ptr, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_CLONE_JSONPATHSUBSCRIBER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_CLONE_JSONPATHSUBSCRIBER
+void* uniffi_loro_ffi_fn_clone_jsonpathsubscriber(void* ptr, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_FREE_JSONPATHSUBSCRIBER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_FREE_JSONPATHSUBSCRIBER
+void uniffi_loro_ffi_fn_free_jsonpathsubscriber(void* ptr, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_INIT_CALLBACK_VTABLE_JSONPATHSUBSCRIBER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_INIT_CALLBACK_VTABLE_JSONPATHSUBSCRIBER
+void uniffi_loro_ffi_fn_init_callback_vtable_jsonpathsubscriber(UniffiVTableCallbackInterfaceJsonPathSubscriber* vtable
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_JSONPATHSUBSCRIBER_ON_JSONPATH_CHANGED
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_JSONPATHSUBSCRIBER_ON_JSONPATH_CHANGED
+void uniffi_loro_ffi_fn_method_jsonpathsubscriber_on_jsonpath_changed(void* ptr, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_CLONE_LOCALEPHEMERALLISTENER
@@ -1513,6 +1555,11 @@ RustBuffer uniffi_loro_ffi_fn_method_lorodoc_get_change(void* ptr, RustBuffer id
 RustBuffer uniffi_loro_ffi_fn_method_lorodoc_get_changed_containers_in(void* ptr, RustBuffer id, uint32_t len, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_GET_CONTAINER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_GET_CONTAINER
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_get_container(void* ptr, RustBuffer id, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_GET_COUNTER
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_GET_COUNTER
 void* uniffi_loro_ffi_fn_method_lorodoc_get_counter(void* ptr, void* id, RustCallStatus *out_status
@@ -1721,6 +1768,11 @@ void* uniffi_loro_ffi_fn_method_lorodoc_subscribe(void* ptr, RustBuffer containe
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_SUBSCRIBE_FIRST_COMMIT_FROM_PEER
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_SUBSCRIBE_FIRST_COMMIT_FROM_PEER
 void* uniffi_loro_ffi_fn_method_lorodoc_subscribe_first_commit_from_peer(void* ptr, void* callback, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_SUBSCRIBE_JSONPATH
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_SUBSCRIBE_JSONPATH
+void* uniffi_loro_ffi_fn_method_lorodoc_subscribe_jsonpath(void* ptr, RustBuffer path, void* callback, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_SUBSCRIBE_LOCAL_UPDATE
@@ -2267,9 +2319,19 @@ void uniffi_loro_ffi_fn_method_lorotext_apply_delta(void* ptr, RustBuffer delta,
 RustBuffer uniffi_loro_ffi_fn_method_lorotext_char_at(void* ptr, uint32_t pos, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_CONVERT_POS
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_CONVERT_POS
+RustBuffer uniffi_loro_ffi_fn_method_lorotext_convert_pos(void* ptr, uint32_t index, RustBuffer from, RustBuffer to, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_DELETE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_DELETE
 void uniffi_loro_ffi_fn_method_lorotext_delete(void* ptr, uint32_t pos, uint32_t len, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_DELETE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_DELETE_UTF16
+void uniffi_loro_ffi_fn_method_lorotext_delete_utf16(void* ptr, uint32_t pos, uint32_t len, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_DELETE_UTF8
@@ -2312,6 +2374,11 @@ RustBuffer uniffi_loro_ffi_fn_method_lorotext_id(void* ptr, RustCallStatus *out_
 void uniffi_loro_ffi_fn_method_lorotext_insert(void* ptr, uint32_t pos, RustBuffer s, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_INSERT_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_INSERT_UTF16
+void uniffi_loro_ffi_fn_method_lorotext_insert_utf16(void* ptr, uint32_t pos, RustBuffer s, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_INSERT_UTF8
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_INSERT_UTF8
 void uniffi_loro_ffi_fn_method_lorotext_insert_utf8(void* ptr, uint32_t pos, RustBuffer s, RustCallStatus *out_status
@@ -2352,6 +2419,16 @@ uint32_t uniffi_loro_ffi_fn_method_lorotext_len_utf8(void* ptr, RustCallStatus *
 void uniffi_loro_ffi_fn_method_lorotext_mark(void* ptr, uint32_t from, uint32_t to, RustBuffer key, void* value, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_MARK_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_MARK_UTF16
+void uniffi_loro_ffi_fn_method_lorotext_mark_utf16(void* ptr, uint32_t from, uint32_t to, RustBuffer key, void* value, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_MARK_UTF8
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_MARK_UTF8
+void uniffi_loro_ffi_fn_method_lorotext_mark_utf8(void* ptr, uint32_t from, uint32_t to, RustBuffer key, void* value, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_PUSH_STR
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_PUSH_STR
 void uniffi_loro_ffi_fn_method_lorotext_push_str(void* ptr, RustBuffer s, RustCallStatus *out_status
@@ -2362,9 +2439,24 @@ void uniffi_loro_ffi_fn_method_lorotext_push_str(void* ptr, RustBuffer s, RustCa
 RustBuffer uniffi_loro_ffi_fn_method_lorotext_slice(void* ptr, uint32_t start_index, uint32_t end_index, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SLICE_DELTA
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SLICE_DELTA
+RustBuffer uniffi_loro_ffi_fn_method_lorotext_slice_delta(void* ptr, uint32_t start_index, uint32_t end_index, RustBuffer pos_type, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SLICE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SLICE_UTF16
+RustBuffer uniffi_loro_ffi_fn_method_lorotext_slice_utf16(void* ptr, uint32_t start_index, uint32_t end_index, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SPLICE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SPLICE
 RustBuffer uniffi_loro_ffi_fn_method_lorotext_splice(void* ptr, uint32_t pos, uint32_t len, RustBuffer s, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SPLICE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SPLICE_UTF16
+void uniffi_loro_ffi_fn_method_lorotext_splice_utf16(void* ptr, uint32_t pos, uint32_t len, RustBuffer s, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_SUBSCRIBE
@@ -2377,14 +2469,14 @@ RustBuffer uniffi_loro_ffi_fn_method_lorotext_subscribe(void* ptr, void* subscri
 RustBuffer uniffi_loro_ffi_fn_method_lorotext_to_delta(void* ptr, RustCallStatus *out_status
 );
 #endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_TO_STRING
-#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_TO_STRING
-RustBuffer uniffi_loro_ffi_fn_method_lorotext_to_string(void* ptr, RustCallStatus *out_status
-);
-#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNMARK
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNMARK
 void uniffi_loro_ffi_fn_method_lorotext_unmark(void* ptr, uint32_t from, uint32_t to, RustBuffer key, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNMARK_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNMARK_UTF16
+void uniffi_loro_ffi_fn_method_lorotext_unmark_utf16(void* ptr, uint32_t from, uint32_t to, RustBuffer key, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UPDATE
@@ -2395,6 +2487,11 @@ void uniffi_loro_ffi_fn_method_lorotext_update(void* ptr, RustBuffer s, RustBuff
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UPDATE_BY_LINE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UPDATE_BY_LINE
 void uniffi_loro_ffi_fn_method_lorotext_update_by_line(void* ptr, RustBuffer s, RustBuffer options, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNIFFI_TRAIT_DISPLAY
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LOROTEXT_UNIFFI_TRAIT_DISPLAY
+RustBuffer uniffi_loro_ffi_fn_method_lorotext_uniffi_trait_display(void* ptr, RustCallStatus *out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_CLONE_LOROTREE
@@ -3599,12 +3696,6 @@ uint16_t uniffi_loro_ffi_checksum_method_firstcommitfrompeercallback_on_first_co
     
 );
 #endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRACTIONALINDEX_TO_STRING
-#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRACTIONALINDEX_TO_STRING
-uint16_t uniffi_loro_ffi_checksum_method_fractionalindex_to_string(void
-    
-);
-#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRONTIERS_ENCODE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRONTIERS_ENCODE
 uint16_t uniffi_loro_ffi_checksum_method_frontiers_encode(void
@@ -3626,6 +3717,12 @@ uint16_t uniffi_loro_ffi_checksum_method_frontiers_is_empty(void
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRONTIERS_TO_VEC
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_FRONTIERS_TO_VEC
 uint16_t uniffi_loro_ffi_checksum_method_frontiers_to_vec(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_JSONPATHSUBSCRIBER_ON_JSONPATH_CHANGED
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_JSONPATHSUBSCRIBER_ON_JSONPATH_CHANGED
+uint16_t uniffi_loro_ffi_checksum_method_jsonpathsubscriber_on_jsonpath_changed(void
     
 );
 #endif
@@ -3905,6 +4002,12 @@ uint16_t uniffi_loro_ffi_checksum_method_lorodoc_get_changed_containers_in(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_GET_CONTAINER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_GET_CONTAINER
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_get_container(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_GET_COUNTER
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_GET_COUNTER
 uint16_t uniffi_loro_ffi_checksum_method_lorodoc_get_counter(void
@@ -4154,6 +4257,12 @@ uint16_t uniffi_loro_ffi_checksum_method_lorodoc_subscribe(void
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_SUBSCRIBE_FIRST_COMMIT_FROM_PEER
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_SUBSCRIBE_FIRST_COMMIT_FROM_PEER
 uint16_t uniffi_loro_ffi_checksum_method_lorodoc_subscribe_first_commit_from_peer(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_SUBSCRIBE_JSONPATH
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_SUBSCRIBE_JSONPATH
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_subscribe_jsonpath(void
     
 );
 #endif
@@ -4733,9 +4842,21 @@ uint16_t uniffi_loro_ffi_checksum_method_lorotext_char_at(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_CONVERT_POS
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_CONVERT_POS
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_convert_pos(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_DELETE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_DELETE
 uint16_t uniffi_loro_ffi_checksum_method_lorotext_delete(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_DELETE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_DELETE_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_delete_utf16(void
     
 );
 #endif
@@ -4787,6 +4908,12 @@ uint16_t uniffi_loro_ffi_checksum_method_lorotext_insert(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_INSERT_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_INSERT_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_insert_utf16(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_INSERT_UTF8
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_INSERT_UTF8
 uint16_t uniffi_loro_ffi_checksum_method_lorotext_insert_utf8(void
@@ -4835,6 +4962,18 @@ uint16_t uniffi_loro_ffi_checksum_method_lorotext_mark(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_MARK_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_MARK_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_mark_utf16(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_MARK_UTF8
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_MARK_UTF8
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_mark_utf8(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_PUSH_STR
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_PUSH_STR
 uint16_t uniffi_loro_ffi_checksum_method_lorotext_push_str(void
@@ -4847,9 +4986,27 @@ uint16_t uniffi_loro_ffi_checksum_method_lorotext_slice(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SLICE_DELTA
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SLICE_DELTA
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_slice_delta(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SLICE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SLICE_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_slice_utf16(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SPLICE
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SPLICE
 uint16_t uniffi_loro_ffi_checksum_method_lorotext_splice(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SPLICE_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_SPLICE_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_splice_utf16(void
     
 );
 #endif
@@ -4865,15 +5022,15 @@ uint16_t uniffi_loro_ffi_checksum_method_lorotext_to_delta(void
     
 );
 #endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_TO_STRING
-#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_TO_STRING
-uint16_t uniffi_loro_ffi_checksum_method_lorotext_to_string(void
-    
-);
-#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_UNMARK
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_UNMARK
 uint16_t uniffi_loro_ffi_checksum_method_lorotext_unmark(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_UNMARK_UTF16
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LOROTEXT_UNMARK_UTF16
+uint16_t uniffi_loro_ffi_checksum_method_lorotext_unmark_utf16(void
     
 );
 #endif
@@ -5630,6 +5787,8 @@ uint32_t ffi_loro_ffi_uniffi_contract_version(void
  void loro_ffi_cgo_dispatchCallbackInterfaceEphemeralSubscriberFree(uint64_t handle);
  void loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackMethod0(uint64_t uniffi_handle, RustBuffer payload, void* uniffi_out_return, RustCallStatus* callStatus );
  void loro_ffi_cgo_dispatchCallbackInterfaceFirstCommitFromPeerCallbackFree(uint64_t handle);
+ void loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberMethod0(uint64_t uniffi_handle, void* uniffi_out_return, RustCallStatus* callStatus );
+ void loro_ffi_cgo_dispatchCallbackInterfaceJsonPathSubscriberFree(uint64_t handle);
  void loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerMethod0(uint64_t uniffi_handle, RustBuffer update, void* uniffi_out_return, RustCallStatus* callStatus );
  void loro_ffi_cgo_dispatchCallbackInterfaceLocalEphemeralListenerFree(uint64_t handle);
  void loro_ffi_cgo_dispatchCallbackInterfaceLocalUpdateCallbackMethod0(uint64_t uniffi_handle, RustBuffer update, void* uniffi_out_return, RustCallStatus* callStatus );
