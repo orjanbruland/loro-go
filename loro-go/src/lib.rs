@@ -69,4 +69,46 @@ mod jemalloc_profiling {
             let _ = Vec::from_raw_parts(data, len, len);
         }
     }
+
+    #[repr(C)]
+    pub struct JemallocStats {
+        pub allocated: usize,
+        pub active: usize,
+        pub resident: usize,
+        pub mapped: usize,
+        pub retained: usize,
+        pub error_code: i32,
+    }
+
+    #[no_mangle]
+    pub extern "C" fn loro_jemalloc_stats() -> JemallocStats {
+        use tikv_jemalloc_ctl::{epoch, stats};
+
+        // Advance the epoch so stats are fresh.
+        if epoch::advance().is_err() {
+            return JemallocStats {
+                allocated: 0,
+                active: 0,
+                resident: 0,
+                mapped: 0,
+                retained: 0,
+                error_code: 1,
+            };
+        }
+
+        let allocated = stats::allocated::read().unwrap_or(0);
+        let active = stats::active::read().unwrap_or(0);
+        let resident = stats::resident::read().unwrap_or(0);
+        let mapped = stats::mapped::read().unwrap_or(0);
+        let retained = stats::retained::read().unwrap_or(0);
+
+        JemallocStats {
+            allocated,
+            active,
+            resident,
+            mapped,
+            retained,
+            error_code: 0,
+        }
+    }
 }

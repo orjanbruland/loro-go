@@ -18,7 +18,8 @@ uniffi-bindgen-go = { git = "https://github.com/NordSecurity/uniffi-bindgen-go.g
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 tikv-jemallocator = { version = "0.6", features = ["profiling"] }
-jemalloc_pprof = "0.8"
+tikv-jemalloc-ctl = { version = "0.6", features = ["stats"] }
+jemalloc_pprof = { version = "0.8", features = ["symbolize"] }
 
 [build-dependencies]
 uniffi = { version = "0.28.3", features = ["build"] }
@@ -30,4 +31,3 @@ cli = ["uniffi/cli"]
 lto = true
 codegen-units = 1
 panic = "unwind"
-strip = true

@@ -21,4 +21,17 @@ JemallocProfileResult loro_jemalloc_dump_pprof(void);
 // Free a profile buffer previously returned by loro_jemalloc_dump_pprof.
 void loro_jemalloc_free_profile(uint8_t *data, size_t len);
 
+typedef struct {
+    size_t allocated;
+    size_t active;
+    size_t resident;
+    size_t mapped;
+    size_t retained;
+    int32_t error_code;
+} JemallocStats;
+
+// Get jemalloc memory stats.
+// error_code: 0=ok, 1=mallctl failed
+JemallocStats loro_jemalloc_stats(void);
+
 #endif
