@@ -16,6 +16,9 @@ loro-ffi = { git = "https://github.com/loro-dev/loro-ffi.git", tag = "v1.10.3" }
 uniffi = { version = "0.28.3" }
 uniffi-bindgen-go = { git = "https://github.com/NordSecurity/uniffi-bindgen-go.git", tag = "v0.4.0+v0.28.3" }
 
+[target.'cfg(not(target_env = "msvc"))'.dependencies]
+tikv-jemallocator = "0.6"
+
 [build-dependencies]
 uniffi = { version = "0.28.3", features = ["build"] }
 
