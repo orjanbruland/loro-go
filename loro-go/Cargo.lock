@@ -970,9 +970,9 @@ dependencies = [
 
 [[package]]
 name = "loro"
-version = "1.10.3"
+version = "1.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d75216d8f99725531a30f7b00901ee154a4f8a9b7f125bfe032e197d4c7ffb8c"
+checksum = "362958777c7ed75d2e4c15c5c8974419e7ff977e7e1d5a98758a01af48d05b51"
 dependencies = [
  "enum-as-inner 0.6.1",
  "generic-btree",
@@ -1016,8 +1016,8 @@ dependencies = [
 
 [[package]]
 name = "loro-ffi"
-version = "1.10.3"
-source = "git+https://github.com/loro-dev/loro-ffi.git?tag=v1.10.3#1406e1ed36f2ac6816ef8637c2826af7e5c1c9e1"
+version = "1.10.8"
+source = "git+https://github.com/orjanbruland/loro-ffi.git?rev=36290c707b4e8bd041a95f255155064731202516#36290c707b4e8bd041a95f255155064731202516"
 dependencies = [
  "loro",
  "serde_json",
@@ -1026,7 +1026,7 @@ dependencies = [
 
 [[package]]
 name = "loro-go"
-version = "1.10.3"
+version = "1.10.8"
 dependencies = [
  "jemalloc_pprof",
  "loro-ffi",
@@ -1038,9 +1038,9 @@ dependencies = [
 
 [[package]]
 name = "loro-internal"
-version = "1.10.3"
+version = "1.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f447044ec3d3ba572623859add3334bd87b84340ee5fdf00315bfee0e3ad3e3f"
+checksum = "c5b521427fa7346ef7d9affd3cc7a6f3dc801c82feab45255cbc67603085f854"
 dependencies = [
  "append-only-bytes",
  "arref",
