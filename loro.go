@@ -1075,7 +1075,7 @@ func uniffiCheckChecksums() {
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_fork_at()
 		})
-		if checksum != 26280 {
+		if checksum != 5856 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_fork_at: UniFFI API checksum mismatch")
 		}
@@ -6166,7 +6166,7 @@ type LoroDocInterface interface {
 	// Fork the document at the given frontiers.
 	//
 	// The created doc will only contain the history before the specified frontiers.
-	ForkAt(frontiers *Frontiers) *LoroDoc
+	ForkAt(frontiers *Frontiers) (*LoroDoc, error)
 	// Free the cached diff calculator that is used for checkout.
 	FreeDiffCalculator()
 	// Free the history cache that is used for making checkout faster.
@@ -6917,13 +6917,19 @@ func (_self *LoroDoc) Fork() *LoroDoc {
 // Fork the document at the given frontiers.
 //
 // The created doc will only contain the history before the specified frontiers.
-func (_self *LoroDoc) ForkAt(frontiers *Frontiers) *LoroDoc {
+func (_self *LoroDoc) ForkAt(frontiers *Frontiers) (*LoroDoc, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
-	return FfiConverterLoroDocINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+	_uniffiRV, _uniffiErr := rustCallWithError[LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_loro_ffi_fn_method_lorodoc_fork_at(
 			_pointer, FfiConverterFrontiersINSTANCE.Lower(frontiers), _uniffiStatus)
-	}))
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *LoroDoc
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterLoroDocINSTANCE.Lift(_uniffiRV), nil
+	}
 }
 
 // Free the cached diff calculator that is used for checkout.

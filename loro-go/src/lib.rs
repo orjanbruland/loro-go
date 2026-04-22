@@ -1,10 +1,10 @@
-#[cfg(not(target_env = "msvc"))]
+#[cfg(target_os = "linux")]
 #[global_allocator]
 static GLOBAL: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
 
 loro_ffi::uniffi_reexport_scaffolding!();
 
-#[cfg(not(target_env = "msvc"))]
+#[cfg(target_os = "linux")]
 mod jemalloc_profiling {
     #[repr(C)]
     pub struct JemallocProfileResult {

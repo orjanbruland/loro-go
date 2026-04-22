@@ -7,7 +7,7 @@ RUST_FOLDER="$THIS_SCRIPT_DIR/../loro-go"
 FFI_FOLDER="$THIS_SCRIPT_DIR/../loro-ffi"
 GO_FOLDER="$THIS_SCRIPT_DIR/../"
 
-TARGETS="x86_64-unknown-linux-musl aarch64-unknown-linux-musl aarch64-apple-darwin x86_64-apple-darwin"
+TARGETS="x86_64-unknown-linux-musl aarch64-unknown-linux-musl aarch64-apple-darwin x86_64-apple-darwin i686-pc-windows-gnu x86_64-pc-windows-gnu"
 
 if ! command -v cross &> /dev/null; then
     echo "▸ Cross tool not found, installing"

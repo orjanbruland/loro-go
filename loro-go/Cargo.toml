@@ -12,11 +12,11 @@ name = "uniffi-bindgen-go"
 path = "src/uniffi-bindgen-go.rs"
 
 [dependencies]
-loro-ffi = { git = "https://github.com/orjanbruland/loro-ffi.git", rev = "36290c707b4e8bd041a95f255155064731202516" }
+loro-ffi = { git = "https://github.com/orjanbruland/loro-ffi.git", rev = "ae6fb19" }
 uniffi = { version = "0.28.3" }
 uniffi-bindgen-go = { git = "https://github.com/NordSecurity/uniffi-bindgen-go.git", tag = "v0.4.0+v0.28.3" }
 
-[target.'cfg(not(target_env = "msvc"))'.dependencies]
+[target.'cfg(target_os = "linux")'.dependencies]
 tikv-jemallocator = { version = "0.6", features = ["profiling"] }
 tikv-jemalloc-ctl = { version = "0.6", features = ["stats"] }
 jemalloc_pprof = { version = "0.8", features = ["symbolize"] }
