@@ -23,6 +23,35 @@ sed -i.bak "s/^version = \".*\"/version = \"${VERSION}\"/" loro-go/Cargo.toml
 sed -i.bak "s/loro-ffi = { git = \".*\", tag = \".*\" }/loro-ffi = { git = \"https:\/\/github.com\/loro-dev\/loro-ffi.git\", tag = \"v${VERSION}\" }/" loro-go/Cargo.toml
 rm -f loro-go/Cargo.toml.bak
 
+# Verify our uniffi pin matches loro-ffi's. Drift here causes uniffi-bindgen-go
+# to silently produce no output (exit 0, no files) — see commit history.
+FFI_UNIFFI=$(awk -F'"' '/^uniffi *= *\{ *version *= */ {print $2; exit}' loro-ffi/Cargo.toml)
+GO_UNIFFI=$(awk -F'"' '/^uniffi *= *\{ *version *= */ {print $2; exit}' loro-go/Cargo.toml)
+if [ -z "$FFI_UNIFFI" ] || [ -z "$GO_UNIFFI" ]; then
+	echo "ERROR: could not parse uniffi version from one of the Cargo.toml files" >&2
+	exit 1
+fi
+FFI_MINOR=$(echo "$FFI_UNIFFI" | cut -d. -f1-2)
+GO_MINOR=$(echo "$GO_UNIFFI" | cut -d. -f1-2)
+if [ "$FFI_MINOR" != "$GO_MINOR" ]; then
+	echo "ERROR: uniffi version mismatch — loro-ffi pins $FFI_UNIFFI, loro-go/Cargo.toml pins $GO_UNIFFI." >&2
+	echo "Bump loro-go/Cargo.toml's uniffi pin to ${FFI_UNIFFI} and the uniffi-bindgen-go tag to a release matching uniffi ${FFI_MINOR}.x" >&2
+	echo "(see https://github.com/NordSecurity/uniffi-bindgen-go/releases for the right tag)." >&2
+	exit 1
+fi
+
+# The uniffi-bindgen-go tag encodes the uniffi version it targets as "+vX.Y.Z".
+# Make sure that matches our uniffi pin's minor.
+BINDGEN_UNIFFI=$(awk -F'"' '/uniffi-bindgen-go *=/ {for (i=1;i<=NF;i++) if ($i ~ /\+v/) {sub(/.*\+v/, "", $i); print $i; exit}}' loro-go/Cargo.toml)
+if [ -n "$BINDGEN_UNIFFI" ]; then
+	BINDGEN_MINOR=$(echo "$BINDGEN_UNIFFI" | cut -d. -f1-2)
+	if [ "$BINDGEN_MINOR" != "$GO_MINOR" ]; then
+		echo "ERROR: uniffi-bindgen-go tag targets uniffi ${BINDGEN_UNIFFI}, but uniffi pin is ${GO_UNIFFI}." >&2
+		echo "Update the uniffi-bindgen-go tag in loro-go/Cargo.toml to a release matching uniffi ${GO_MINOR}.x." >&2
+		exit 1
+	fi
+fi
+
 # Update lockfile
 echo "Updating Cargo.lock..."
 cargo update --manifest-path loro-go/Cargo.toml

@@ -49,6 +49,7 @@ jobs:
         with:
           name: lib-${{ matrix.target }}
           path: loro-go/target/${{ matrix.target }}/release/libloro.a
+          if-no-files-found: error
 
   build-linux:
     runs-on: ubuntu-latest
@@ -88,6 +89,7 @@ jobs:
         with:
           name: lib-${{ matrix.target }}
           path: loro-go/target/${{ matrix.target }}/release/libloro.a
+          if-no-files-found: error
 
   generate-bindings:
     runs-on: ubuntu-latest
@@ -111,11 +113,14 @@ jobs:
             --bin uniffi-bindgen-go \
             ../loro-ffi/src/loro.udl \
             --out-dir target/go
+          test -f target/go/loro/loro.go
+          test -f target/go/loro/loro.h
 
       - uses: actions/upload-artifact@v4
         with:
           name: go-bindings
           path: loro-go/target/go/loro/
+          if-no-files-found: error
 
   smoke-test:
     needs: [build-darwin, build-linux, generate-bindings]
