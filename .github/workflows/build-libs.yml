@@ -42,6 +42,7 @@ jobs:
           cargo build \
             --manifest-path loro-go/Cargo.toml \
             --target ${{ matrix.target }} \
+            --lib \
             --locked \
             --release
 
@@ -82,6 +83,7 @@ jobs:
           cross build \
             --manifest-path loro-go/Cargo.toml \
             --target ${{ matrix.target }} \
+            --lib \
             --locked \
             --release
 
@@ -109,6 +111,7 @@ jobs:
         run: |
           cd loro-go
           cargo run \
+            --no-default-features \
             --features=cli \
             --bin uniffi-bindgen-go \
             ../loro-ffi/src/loro.udl \

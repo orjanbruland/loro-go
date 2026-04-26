@@ -24,10 +24,14 @@ fi
 echo "▸ Generate Go bindings"
 cd "$RUST_FOLDER"
 cargo run \
+    --no-default-features \
     --features=cli \
     --bin uniffi-bindgen-go \
     "$FFI_FOLDER/src/loro.udl" \
     --out-dir "target/go"
+
+test -f "${RUST_FOLDER}/target/go/loro/loro.go"
+test -f "${RUST_FOLDER}/target/go/loro/loro.h"
 
 cp -r "${RUST_FOLDER}/target/go/loro/" "${GO_FOLDER}"
 
@@ -36,7 +40,7 @@ export RUSTFLAGS="-C target-feature=+crt-static"
 for TARGET in $TARGETS; do
     echo "▸ Building for $TARGET"
     
-	cross build --manifest-path "$RUST_FOLDER/Cargo.toml" --target "$TARGET" --locked --release
+	cross build --manifest-path "$RUST_FOLDER/Cargo.toml" --target "$TARGET" --lib --locked --release
 
 	mkdir -p "${GO_FOLDER}/libs/${TARGET}"
 	cp "${RUST_FOLDER}/target/${TARGET}/release/${LIB_NAME}" "${GO_FOLDER}/libs/${TARGET}/${LIB_NAME}"
