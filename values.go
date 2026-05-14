@@ -2,6 +2,18 @@ package loro
 
 import "fmt"
 
+// Deref unwraps a double pointer returned by some generated bindings methods.
+// Returns nil if v is nil or *v is nil; otherwise returns *v.
+//
+// Useful as an escape hatch for the few `**T` returns not covered by typed
+// wrapper methods (e.g. LoroDoc.FrontiersToVv).
+func Deref[T any](v **T) *T {
+	if v == nil {
+		return nil
+	}
+	return *v
+}
+
 type simpleValue struct {
 	value LoroValue
 }
