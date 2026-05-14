@@ -20,7 +20,11 @@ git checkout "v${VERSION}"
 echo "Updating loro-go/Cargo.toml..."
 cd "$REPO_ROOT"
 sed -i.bak "s/^version = \".*\"/version = \"${VERSION}\"/" loro-go/Cargo.toml
-sed -i.bak "s/loro-ffi = { git = \".*\", tag = \".*\" }/loro-ffi = { git = \"https:\/\/github.com\/loro-dev\/loro-ffi.git\", tag = \"v${VERSION}\" }/" loro-go/Cargo.toml
+sed -i.bak "s/^\(loro-ffi = .*tag = \"\)v[^\"]*\(\".*\)$/\1v${VERSION}\2/" loro-go/Cargo.toml
+if ! grep -q "loro-ffi = .*tag = \"v${VERSION}\"" loro-go/Cargo.toml; then
+	echo "ERROR: failed to update loro-ffi tag to v${VERSION} in loro-go/Cargo.toml" >&2
+	exit 1
+fi
 rm -f loro-go/Cargo.toml.bak
 
 # Verify our uniffi pin matches loro-ffi's. Drift here causes uniffi-bindgen-go
