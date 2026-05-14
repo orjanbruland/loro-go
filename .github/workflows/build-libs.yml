@@ -6,11 +6,13 @@ on:
     paths:
       - "loro-go/**"
       - "loro-ffi/**"
+      - "libs.go"
       - ".github/workflows/build-libs.yml"
   pull_request:
     paths:
       - "loro-go/**"
       - "loro-ffi/**"
+      - "libs.go"
       - ".github/workflows/build-libs.yml"
 
 jobs:
