@@ -93,6 +93,48 @@ jobs:
           path: loro-go/target/${{ matrix.target }}/release/libloro.a
           if-no-files-found: error
 
+  build-windows:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - x86_64-pc-windows-gnu
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: loro-go
+          key: ${{ matrix.target }}
+
+      - name: Install cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
+
+      - name: Build static library
+        env:
+          RUSTFLAGS: "-C target-feature=+crt-static --print native-static-libs"
+        run: |
+          cross build \
+            --manifest-path loro-go/Cargo.toml \
+            --target ${{ matrix.target }} \
+            --lib \
+            --locked \
+            --release 2>&1 | tee build.log
+          echo "---- native-static-libs needed by libs.go cgo LDFLAGS ----"
+          grep "native-static-libs:" build.log || true
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lib-${{ matrix.target }}
+          path: loro-go/target/${{ matrix.target }}/release/libloro.a
+          if-no-files-found: error
+
   generate-bindings:
     runs-on: ubuntu-latest
     steps:
@@ -126,7 +168,7 @@ jobs:
           if-no-files-found: error
 
   smoke-test:
-    needs: [build-darwin, build-linux, generate-bindings]
+    needs: [build-darwin, build-linux, build-windows, generate-bindings]
     strategy:
       matrix:
         include:
@@ -138,7 +180,12 @@ jobs:
             target: x86_64-unknown-linux-musl
           - runner: ubuntu-24.04-arm
             target: aarch64-unknown-linux-musl
+          - runner: windows-latest
+            target: x86_64-pc-windows-gnu
     runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
@@ -163,14 +210,12 @@ jobs:
           cp artifacts/go-bindings/*.go .
           cp artifacts/go-bindings/*.h .
 
-      - name: Build and run smoke test
-        run: |
-          go build -o smoke-test ./examples/simple
-          ./smoke-test
+      - name: Run smoke test
+        run: go run ./examples/simple
 
   collect:
     if: github.event_name == 'push'
-    needs: [build-darwin, build-linux, generate-bindings, smoke-test]
+    needs: [build-darwin, build-linux, build-windows, generate-bindings, smoke-test]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -183,7 +228,7 @@ jobs:
 
       - name: Copy artifacts into place
         run: |
-          for target in aarch64-apple-darwin x86_64-apple-darwin x86_64-unknown-linux-musl aarch64-unknown-linux-musl; do
+          for target in aarch64-apple-darwin x86_64-apple-darwin x86_64-unknown-linux-musl aarch64-unknown-linux-musl x86_64-pc-windows-gnu; do
             mkdir -p libs/${target}
             cp artifacts/lib-${target}/libloro.a libs/${target}/libloro.a
           done
