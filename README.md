@@ -48,6 +48,15 @@ alice, err := users.GetOrCreateLoroMap("alice")
 alice.InsertAny("name", "Alice")
 ```
 
+### Collaborative text
+
+```go
+note := doc.GetText(loro.AsContainerId("note"))
+note.Insert(0, "Hello, world!")
+note.Insert(7, "Loro ")
+// note.String() == "Hello, Loro world!"
+```
+
 ### Syncing two documents
 
 ```go
