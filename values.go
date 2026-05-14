@@ -261,12 +261,7 @@ func GetStringValue(v **ValueOrContainer) (string, bool) {
 	if !ok {
 		return "", false
 	}
-
-	if str, ok := value.(LoroValueString); ok {
-		return str.Value, true
-	}
-
-	return "", false
+	return ValueAsString(value)
 }
 
 // GetBoolValue takes a pointer to a ValueOrContainer and returns the bool
@@ -276,12 +271,7 @@ func GetBoolValue(v **ValueOrContainer) (bool, bool) {
 	if !ok {
 		return false, false
 	}
-
-	if bool, ok := value.(LoroValueBool); ok {
-		return bool.Value, true
-	}
-
-	return false, false
+	return ValueAsBool(value)
 }
 
 // GetFloat64Value takes a pointer to a ValueOrContainer and returns the float64
@@ -291,12 +281,7 @@ func GetFloat64Value(v **ValueOrContainer) (float64, bool) {
 	if !ok {
 		return 0, false
 	}
-
-	if float, ok := value.(LoroValueDouble); ok {
-		return float.Value, true
-	}
-
-	return 0, false
+	return ValueAsFloat64(value)
 }
 
 // GetInt64Value takes a pointer to a ValueOrContainer and returns the int64
@@ -306,12 +291,7 @@ func GetInt64Value(v **ValueOrContainer) (int64, bool) {
 	if !ok {
 		return 0, false
 	}
-
-	if int, ok := value.(LoroValueI64); ok {
-		return int.Value, true
-	}
-
-	return 0, false
+	return ValueAsInt64(value)
 }
 
 // GetListValue takes a pointer to a ValueOrContainer and returns the list
@@ -321,37 +301,26 @@ func GetListValue(v **ValueOrContainer) ([]LoroValue, bool) {
 	if !ok {
 		return nil, false
 	}
-
-	if list, ok := value.(LoroValueList); ok {
-		return list.Value, true
-	}
-
-	return nil, false
+	return ValueAsList(value)
 }
 
 // GetListValueOfAny takes a pointer to a ValueOrContainer and returns a slice
 // of any if it is a list.
 func GetListValueOfAny(v **ValueOrContainer) ([]any, bool) {
-	value, ok := GetValue(v)
+	list, ok := GetListValue(v)
 	if !ok {
 		return nil, false
 	}
 
-	if list, ok := value.(LoroValueList); ok {
-		values := make([]any, len(list.Value))
-		for i, v := range list.Value {
-			v, ok := GetBasicValueAsAny(v)
-			if !ok {
-				return nil, false
-			}
-
-			values[i] = v
+	values := make([]any, len(list))
+	for i, v := range list {
+		v, ok := ValueAsAny(v)
+		if !ok {
+			return nil, false
 		}
-
-		return values, true
+		values[i] = v
 	}
-
-	return nil, false
+	return values, true
 }
 
 // GetMapValue takes a pointer to a ValueOrContainer and returns the map
@@ -361,37 +330,26 @@ func GetMapValue(v **ValueOrContainer) (map[string]LoroValue, bool) {
 	if !ok {
 		return nil, false
 	}
-
-	if mapValue, ok := value.(LoroValueMap); ok {
-		return mapValue.Value, true
-	}
-
-	return nil, false
+	return ValueAsMap(value)
 }
 
 // GetMapValueOfAny takes a pointer to a ValueOrContainer and returns a map
 // of string to any if it is a map.
 func GetMapValueOfAny(v **ValueOrContainer) (map[string]any, bool) {
-	value, ok := GetValue(v)
+	m, ok := GetMapValue(v)
 	if !ok {
 		return nil, false
 	}
 
-	if mapValue, ok := value.(LoroValueMap); ok {
-		values := make(map[string]any)
-		for k, v := range mapValue.Value {
-			v, ok := GetBasicValueAsAny(v)
-			if !ok {
-				return nil, false
-			}
-
-			values[k] = v
+	values := make(map[string]any, len(m))
+	for k, v := range m {
+		v, ok := ValueAsAny(v)
+		if !ok {
+			return nil, false
 		}
-
-		return values, true
+		values[k] = v
 	}
-
-	return nil, false
+	return values, true
 }
 
 // GetAnyValue takes a pointer to a ValueOrContainer and returns the value
@@ -403,8 +361,7 @@ func GetAnyValue(v **ValueOrContainer) (any, bool) {
 
 	value, ok := GetValue(v)
 	if ok {
-		// If this could be get as a LoroValue convert it to an any
-		return GetBasicValueAsAny(value)
+		return ValueAsAny(value)
 	}
 
 	v0 := *v
@@ -439,8 +396,75 @@ func GetAnyValue(v **ValueOrContainer) (any, bool) {
 	return nil, false
 }
 
-// GetBasicValueAsAny takes a LoroValue and returns the value as an any.
-func GetBasicValueAsAny(value LoroValue) (any, bool) {
+// ValueIsNil reports whether the LoroValue is an explicit null.
+func ValueIsNil(value LoroValue) bool {
+	_, ok := value.(LoroValueNull)
+	return ok
+}
+
+// ValueAsString returns the string contents of a LoroValue if it holds a string.
+func ValueAsString(value LoroValue) (string, bool) {
+	if s, ok := value.(LoroValueString); ok {
+		return s.Value, true
+	}
+	return "", false
+}
+
+// ValueAsBool returns the bool contents of a LoroValue if it holds a bool.
+func ValueAsBool(value LoroValue) (bool, bool) {
+	if b, ok := value.(LoroValueBool); ok {
+		return b.Value, true
+	}
+	return false, false
+}
+
+// ValueAsInt64 returns the int64 contents of a LoroValue if it holds an int64.
+// No implicit conversion from float is performed.
+func ValueAsInt64(value LoroValue) (int64, bool) {
+	if i, ok := value.(LoroValueI64); ok {
+		return i.Value, true
+	}
+	return 0, false
+}
+
+// ValueAsFloat64 returns the float64 contents of a LoroValue if it holds a
+// float. No implicit conversion from int is performed.
+func ValueAsFloat64(value LoroValue) (float64, bool) {
+	if f, ok := value.(LoroValueDouble); ok {
+		return f.Value, true
+	}
+	return 0, false
+}
+
+// ValueAsBinary returns the byte slice contents of a LoroValue if it holds
+// binary data.
+func ValueAsBinary(value LoroValue) ([]byte, bool) {
+	if b, ok := value.(LoroValueBinary); ok {
+		return b.Value, true
+	}
+	return nil, false
+}
+
+// ValueAsList returns the list contents of a LoroValue if it holds a list.
+func ValueAsList(value LoroValue) ([]LoroValue, bool) {
+	if l, ok := value.(LoroValueList); ok {
+		return l.Value, true
+	}
+	return nil, false
+}
+
+// ValueAsMap returns the map contents of a LoroValue if it holds a map.
+func ValueAsMap(value LoroValue) (map[string]LoroValue, bool) {
+	if m, ok := value.(LoroValueMap); ok {
+		return m.Value, true
+	}
+	return nil, false
+}
+
+// ValueAsAny converts a LoroValue to its idiomatic Go representation,
+// recursing into lists and maps. Returns false if the value is of an
+// unsupported variant.
+func ValueAsAny(value LoroValue) (any, bool) {
 	switch value := value.(type) {
 	case LoroValueNull:
 		return nil, true
@@ -452,31 +476,27 @@ func GetBasicValueAsAny(value LoroValue) (any, bool) {
 		return value.Value, true
 	case LoroValueI64:
 		return value.Value, true
+	case LoroValueBinary:
+		return value.Value, true
 	case LoroValueList:
 		values := make([]any, len(value.Value))
-
 		for i, v := range value.Value {
-			v, ok := GetBasicValueAsAny(v)
+			v, ok := ValueAsAny(v)
 			if !ok {
 				return nil, false
 			}
-
 			values[i] = v
 		}
-
 		return values, true
 	case LoroValueMap:
-		values := make(map[string]any)
-
+		values := make(map[string]any, len(value.Value))
 		for k, v := range value.Value {
-			v, ok := GetBasicValueAsAny(v)
+			v, ok := ValueAsAny(v)
 			if !ok {
 				return nil, false
 			}
-
 			values[k] = v
 		}
-
 		return values, true
 	}
 

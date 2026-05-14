@@ -213,6 +213,111 @@ func TestIsValueExplicitlyNil(t *testing.T) {
 	}
 }
 
+func TestValueAs_Typed(t *testing.T) {
+	if v, ok := ValueAsString(LoroValueString{Value: "hi"}); !ok || v != "hi" {
+		t.Fatalf("ValueAsString = (%q, %v)", v, ok)
+	}
+	if _, ok := ValueAsString(LoroValueI64{Value: 1}); ok {
+		t.Fatal("ValueAsString on int should be false")
+	}
+
+	if v, ok := ValueAsBool(LoroValueBool{Value: true}); !ok || !v {
+		t.Fatalf("ValueAsBool = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsBool(LoroValueString{Value: "x"}); ok {
+		t.Fatal("ValueAsBool on string should be false")
+	}
+
+	if v, ok := ValueAsInt64(LoroValueI64{Value: 42}); !ok || v != 42 {
+		t.Fatalf("ValueAsInt64 = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsInt64(LoroValueDouble{Value: 1.5}); ok {
+		t.Fatal("ValueAsInt64 should not implicitly convert from float")
+	}
+
+	if v, ok := ValueAsFloat64(LoroValueDouble{Value: 1.5}); !ok || v != 1.5 {
+		t.Fatalf("ValueAsFloat64 = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsFloat64(LoroValueI64{Value: 1}); ok {
+		t.Fatal("ValueAsFloat64 should not implicitly convert from int")
+	}
+
+	if v, ok := ValueAsBinary(LoroValueBinary{Value: []byte{1, 2, 3}}); !ok || !reflect.DeepEqual(v, []byte{1, 2, 3}) {
+		t.Fatalf("ValueAsBinary = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsBinary(LoroValueString{Value: "x"}); ok {
+		t.Fatal("ValueAsBinary on string should be false")
+	}
+
+	list := []LoroValue{LoroValueString{Value: "a"}, LoroValueI64{Value: 1}}
+	if v, ok := ValueAsList(LoroValueList{Value: list}); !ok || !reflect.DeepEqual(v, list) {
+		t.Fatalf("ValueAsList = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsList(LoroValueString{Value: "x"}); ok {
+		t.Fatal("ValueAsList on string should be false")
+	}
+
+	m := map[string]LoroValue{"k": LoroValueString{Value: "v"}}
+	if v, ok := ValueAsMap(LoroValueMap{Value: m}); !ok || !reflect.DeepEqual(v, m) {
+		t.Fatalf("ValueAsMap = (%v, %v)", v, ok)
+	}
+	if _, ok := ValueAsMap(LoroValueString{Value: "x"}); ok {
+		t.Fatal("ValueAsMap on string should be false")
+	}
+}
+
+func TestValueIsNil(t *testing.T) {
+	if !ValueIsNil(LoroValueNull{}) {
+		t.Fatal("ValueIsNil(null) should be true")
+	}
+	if ValueIsNil(LoroValueString{Value: "x"}) {
+		t.Fatal("ValueIsNil(string) should be false")
+	}
+}
+
+func TestValueAsAny(t *testing.T) {
+	cases := []struct {
+		name string
+		in   LoroValue
+		want any
+	}{
+		{"null", LoroValueNull{}, nil},
+		{"string", LoroValueString{Value: "hi"}, "hi"},
+		{"bool", LoroValueBool{Value: true}, true},
+		{"float", LoroValueDouble{Value: 1.5}, 1.5},
+		{"int", LoroValueI64{Value: 7}, int64(7)},
+		{"binary", LoroValueBinary{Value: []byte{1, 2}}, []byte{1, 2}},
+		{
+			"list",
+			LoroValueList{Value: []LoroValue{LoroValueString{Value: "a"}, LoroValueI64{Value: 1}}},
+			[]any{"a", int64(1)},
+		},
+		{
+			"map",
+			LoroValueMap{Value: map[string]LoroValue{"k": LoroValueString{Value: "v"}}},
+			map[string]any{"k": "v"},
+		},
+		{
+			"nested",
+			LoroValueMap{Value: map[string]LoroValue{
+				"list": LoroValueList{Value: []LoroValue{LoroValueBool{Value: false}}},
+			}},
+			map[string]any{"list": []any{false}},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got, ok := ValueAsAny(tc.in)
+			if !ok {
+				t.Fatalf("ValueAsAny(%#v) ok = false", tc.in)
+			}
+			if !reflect.DeepEqual(got, tc.want) {
+				t.Fatalf("ValueAsAny(%#v) = %#v, want %#v", tc.in, got, tc.want)
+			}
+		})
+	}
+}
+
 func TestGetAnyValue_BasicAndContainer(t *testing.T) {
 	doc, m := newDocWithMap(t)
 
