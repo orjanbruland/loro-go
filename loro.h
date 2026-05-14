@@ -1806,6 +1806,36 @@ uint64_t uniffi_loro_ffi_fn_method_lorodoc_subscribe_root(uint64_t ptr, uint64_t
 void uniffi_loro_ffi_fn_method_lorodoc_travel_change_ancestors(uint64_t ptr, RustBuffer ids, uint64_t f, RustCallStatus *out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_COUNTER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_COUNTER
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_counter(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_LIST
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_LIST
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_list(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_MAP
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_MAP
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_map(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_MOVABLE_LIST
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_MOVABLE_LIST
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_movable_list(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_TEXT
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_TEXT
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_text(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_TREE
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_TRY_GET_TREE
+RustBuffer uniffi_loro_ffi_fn_method_lorodoc_try_get_tree(uint64_t ptr, uint64_t id, RustCallStatus *out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_VV_TO_FRONTIERS
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_FN_METHOD_LORODOC_VV_TO_FRONTIERS
 uint64_t uniffi_loro_ffi_fn_method_lorodoc_vv_to_frontiers(uint64_t ptr, uint64_t vv, RustCallStatus *out_status
@@ -4284,6 +4314,42 @@ uint16_t uniffi_loro_ffi_checksum_method_lorodoc_subscribe_root(void
 #ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRAVEL_CHANGE_ANCESTORS
 #define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRAVEL_CHANGE_ANCESTORS
 uint16_t uniffi_loro_ffi_checksum_method_lorodoc_travel_change_ancestors(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_COUNTER
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_COUNTER
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_counter(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_LIST
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_LIST
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_list(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_MAP
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_MAP
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_map(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_MOVABLE_LIST
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_MOVABLE_LIST
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_movable_list(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_TEXT
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_TEXT
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_text(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_TREE
+#define UNIFFI_FFIDEF_UNIFFI_LORO_FFI_CHECKSUM_METHOD_LORODOC_TRY_GET_TREE
+uint16_t uniffi_loro_ffi_checksum_method_lorodoc_try_get_tree(void
     
 );
 #endif

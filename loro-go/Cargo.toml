@@ -1,6 +1,6 @@
 [package]
 name = "loro-go"
-version = "1.11.2"
+version = "1.12.0"
 edition = "2021"
 
 [lib]

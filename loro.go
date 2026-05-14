@@ -1609,6 +1609,60 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_counter()
+		})
+		if checksum != 9399 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_counter: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_list()
+		})
+		if checksum != 6950 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_list: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_map()
+		})
+		if checksum != 3034 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_map: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_movable_list()
+		})
+		if checksum != 10796 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_movable_list: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_text()
+		})
+		if checksum != 31311 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_text: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_get_tree()
+		})
+		if checksum != 13197 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_get_tree: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_vv_to_frontiers()
 		})
 		if checksum != 18612 {
@@ -6811,6 +6865,30 @@ type LoroDocInterface interface {
 	// * `ids` - The IDs of the Change to start the traversal from.
 	// * `f` - A mutable function that is called for each ancestor. It can return `ControlFlow::Break(())` to stop the traversal.
 	TravelChangeAncestors(ids []Id, f ChangeAncestorsTraveler) error
+	// Try to get a [LoroCounter] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetCounter(id ContainerIdLike) **LoroCounter
+	// Try to get a [LoroList] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetList(id ContainerIdLike) **LoroList
+	// Try to get a [LoroMap] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetMap(id ContainerIdLike) **LoroMap
+	// Try to get a [LoroMovableList] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetMovableList(id ContainerIdLike) **LoroMovableList
+	// Try to get a [LoroText] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetText(id ContainerIdLike) **LoroText
+	// Try to get a [LoroTree] by container id.
+	//
+	// Returns null if the container does not exist.
+	TryGetTree(id ContainerIdLike) **LoroTree
 	// Convert `VersionVector` into `Frontiers`
 	VvToFrontiers(vv *VersionVector) *Frontiers
 }
@@ -8131,6 +8209,90 @@ func (_self *LoroDoc) TravelChangeAncestors(ids []Id, f ChangeAncestorsTraveler)
 		return false
 	})
 	return _uniffiErr.AsError()
+}
+
+// Try to get a [LoroCounter] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetCounter(id ContainerIdLike) **LoroCounter {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroCounterINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_counter(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
+// Try to get a [LoroList] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetList(id ContainerIdLike) **LoroList {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_list(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
+// Try to get a [LoroMap] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetMap(id ContainerIdLike) **LoroMap {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroMapINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_map(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
+// Try to get a [LoroMovableList] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetMovableList(id ContainerIdLike) **LoroMovableList {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroMovableListINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_movable_list(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
+// Try to get a [LoroText] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetText(id ContainerIdLike) **LoroText {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroTextINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_text(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
+}
+
+// Try to get a [LoroTree] by container id.
+//
+// Returns null if the container does not exist.
+func (_self *LoroDoc) TryGetTree(id ContainerIdLike) **LoroTree {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalLoroTreeINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_get_tree(
+				_pointer, FfiConverterContainerIdLikeINSTANCE.Lower(id), _uniffiStatus),
+		}
+	}))
 }
 
 // Convert `VersionVector` into `Frontiers`
