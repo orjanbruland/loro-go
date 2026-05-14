@@ -1,6 +1,8 @@
 package loro
 
 import (
+	"fmt"
+	"io"
 	"reflect"
 	"testing"
 )
@@ -80,6 +82,73 @@ func TestLoroText_MarkAny(t *testing.T) {
 	must(t, text.MarkAny(0, 5, "bold", true))
 	if err := text.MarkAny(0, 5, "bad", struct{}{}); err == nil {
 		t.Fatal("expected error for unsupported type")
+	}
+}
+
+func TestLoroText_Append(t *testing.T) {
+	doc := NewLoroDoc()
+	text := doc.GetText(AsContainerId("t"))
+
+	must(t, text.Append("hello"))
+	must(t, text.Append(", "))
+	must(t, text.Append("world"))
+
+	if got := text.String(); got != "hello, world" {
+		t.Fatalf("text = %q, want %q", got, "hello, world")
+	}
+}
+
+func TestLoroText_Appendf(t *testing.T) {
+	doc := NewLoroDoc()
+	text := doc.GetText(AsContainerId("t"))
+
+	must(t, text.Appendf("count=%d ", 3))
+	must(t, text.Appendf("name=%s", "alice"))
+
+	if got := text.String(); got != "count=3 name=alice" {
+		t.Fatalf("text = %q", got)
+	}
+}
+
+func TestLoroText_Clear(t *testing.T) {
+	doc := NewLoroDoc()
+	text := doc.GetText(AsContainerId("t"))
+
+	// Clearing an empty text should not error.
+	must(t, text.Clear())
+
+	must(t, text.Insert(0, "hello, world"))
+	must(t, text.Clear())
+
+	if got := text.String(); got != "" {
+		t.Fatalf("text after Clear = %q, want empty", got)
+	}
+	if !text.IsEmpty() {
+		t.Fatal("IsEmpty = false after Clear")
+	}
+}
+
+func TestLoroText_Write(t *testing.T) {
+	doc := NewLoroDoc()
+	text := doc.GetText(AsContainerId("t"))
+
+	// Verify it satisfies io.Writer.
+	var w io.Writer = text
+
+	n, err := w.Write([]byte("hello"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if n != 5 {
+		t.Fatalf("Write returned n=%d, want 5", n)
+	}
+
+	if _, err := fmt.Fprintf(w, " %s #%d", "world", 7); err != nil {
+		t.Fatal(err)
+	}
+
+	if got := text.String(); got != "hello world #7" {
+		t.Fatalf("text = %q", got)
 	}
 }
 

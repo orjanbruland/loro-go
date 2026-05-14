@@ -1,5 +1,7 @@
 package loro
 
+import "fmt"
+
 // Convenience wrappers around Insert / Push / Set / Mark / SetLocalState that
 // accept plain `any` values instead of LoroValueLike. Each method runs the
 // argument through AsValue, so the supported types match AsValue's contract
@@ -124,4 +126,35 @@ func (t *LoroText) MarkUtf8Any(from uint32, to uint32, key string, v any) error 
 		return err
 	}
 	return t.MarkUtf8(from, to, key, val)
+}
+
+// Append appends s to the end of the text. It is an idiomatic alias for
+// PushStr.
+func (t *LoroText) Append(s string) error {
+	return t.PushStr(s)
+}
+
+// Appendf formats according to a format specifier and appends the result to
+// the end of the text.
+func (t *LoroText) Appendf(format string, args ...any) error {
+	return t.PushStr(fmt.Sprintf(format, args...))
+}
+
+// Clear removes all content from the text.
+func (t *LoroText) Clear() error {
+	n := t.LenUnicode()
+	if n == 0 {
+		return nil
+	}
+	return t.Delete(0, n)
+}
+
+// Write appends p to the end of the text, implementing io.Writer. The bytes
+// are interpreted as UTF-8; passing invalid UTF-8 will return an error from
+// the underlying append.
+func (t *LoroText) Write(p []byte) (int, error) {
+	if err := t.PushStr(string(p)); err != nil {
+		return 0, err
+	}
+	return len(p), nil
 }
