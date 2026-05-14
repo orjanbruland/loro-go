@@ -1,6 +1,9 @@
 package loro
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // Deref unwraps a double pointer returned by some generated bindings methods.
 // Returns nil if v is nil or *v is nil; otherwise returns *v.
@@ -65,6 +68,16 @@ func AsFloat64Value(v float64) LoroValueLike {
 func AsInt64Value(v int64) LoroValueLike {
 	return simpleValue{
 		value: LoroValueI64{
+			Value: v,
+		},
+	}
+}
+
+// AsBinaryValue converts a byte slice to a LoroValueLike which can be used in
+// most places that expect a value.
+func AsBinaryValue(v []byte) LoroValueLike {
+	return simpleValue{
+		value: LoroValueBinary{
 			Value: v,
 		},
 	}
@@ -158,14 +171,46 @@ func AsValue(v any) (LoroValueLike, error) {
 	}
 
 	switch v := v.(type) {
+	case LoroValueLike:
+		return v, nil
+	case LoroValue:
+		return simpleValue{value: v}, nil
 	case string:
 		return AsStringValue(v), nil
 	case bool:
 		return AsBoolValue(v), nil
 	case float64:
 		return AsFloat64Value(v), nil
+	case float32:
+		return AsFloat64Value(float64(v)), nil
 	case int64:
 		return AsInt64Value(v), nil
+	case int:
+		return AsInt64Value(int64(v)), nil
+	case int32:
+		return AsInt64Value(int64(v)), nil
+	case int16:
+		return AsInt64Value(int64(v)), nil
+	case int8:
+		return AsInt64Value(int64(v)), nil
+	case uint64:
+		if v > math.MaxInt64 {
+			return nil, fmt.Errorf("uint64 value %d exceeds math.MaxInt64", v)
+		}
+		return AsInt64Value(int64(v)), nil
+	case uint:
+		if uint64(v) > math.MaxInt64 {
+			return nil, fmt.Errorf("uint value %d exceeds math.MaxInt64", v)
+		}
+		return AsInt64Value(int64(v)), nil
+	case uint32:
+		return AsInt64Value(int64(v)), nil
+	case uint16:
+		return AsInt64Value(int64(v)), nil
+	case uint8:
+		return AsInt64Value(int64(v)), nil
+	case []byte:
+		return AsBinaryValue(v), nil
 	case []any:
 		return AsListValueFromAny(v)
 	case map[string]any:
