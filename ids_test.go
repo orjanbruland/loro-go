@@ -8,12 +8,12 @@ func TestRootHelpers_ContainerTypes(t *testing.T) {
 		id   ContainerId
 		want ContainerType
 	}{
-		{"MapRoot", MapRoot("m"), ContainerTypeMap{}},
-		{"ListRoot", ListRoot("l"), ContainerTypeList{}},
-		{"TextRoot", TextRoot("t"), ContainerTypeText{}},
-		{"TreeRoot", TreeRoot("tr"), ContainerTypeTree{}},
-		{"MovableListRoot", MovableListRoot("ml"), ContainerTypeMovableList{}},
-		{"CounterRoot", CounterRoot("c"), ContainerTypeCounter{}},
+		{"MapRoot", MapRoot("m"), MapType},
+		{"ListRoot", ListRoot("l"), ListType},
+		{"TextRoot", TextRoot("t"), TextType},
+		{"TreeRoot", TreeRoot("tr"), TreeType},
+		{"MovableListRoot", MovableListRoot("ml"), MovableListType},
+		{"CounterRoot", CounterRoot("c"), CounterType},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {

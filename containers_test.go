@@ -151,7 +151,7 @@ func TestLoroDoc_FindByPath_passthroughIndex(t *testing.T) {
 	root := doc.GetMap(AsContainerId("root"))
 	must(t, root.Insert("k", AsStringValue("v")))
 
-	v := doc.FindByPath(IndexKey{Key: "root"}, IndexKey{Key: "k"})
+	v := doc.FindByPath(PathKey("root"), PathKey("k"))
 	if v == nil {
 		t.Fatal("FindByPath returned nil for passthrough Index args")
 	}
@@ -177,6 +177,19 @@ func TestLoroDoc_FindByPath_unsupportedTypePanics(t *testing.T) {
 		}
 	}()
 	doc.FindByPath("root", 1.5) // float64 isn't supported
+}
+
+func TestPathConstructors(t *testing.T) {
+	if got, want := PathKey("k"), (IndexKey{Key: "k"}); got != want {
+		t.Fatalf("PathKey = %#v, want %#v", got, want)
+	}
+	if got, want := PathSeq(3), (IndexSeq{Index: 3}); got != want {
+		t.Fatalf("PathSeq = %#v, want %#v", got, want)
+	}
+	id := TreeId{Peer: 1, Counter: 2}
+	if got, want := PathNode(id), (IndexNode{Target: id}); got != want {
+		t.Fatalf("PathNode = %#v, want %#v", got, want)
+	}
 }
 
 func TestContainer_OwnerDoc(t *testing.T) {

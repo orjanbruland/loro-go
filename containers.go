@@ -143,6 +143,24 @@ func (d *LoroDoc) FindByPath(parts ...any) *ValueOrContainer {
 	return Deref(d.GetByPath(pathToIndices(parts)))
 }
 
+// PathKey returns an Index that selects a map key. Equivalent to
+// IndexKey{Key: k} but avoids the struct literal.
+func PathKey(k string) Index {
+	return IndexKey{Key: k}
+}
+
+// PathSeq returns an Index that selects a list/movable-list position.
+// Equivalent to IndexSeq{Index: i}.
+func PathSeq(i uint32) Index {
+	return IndexSeq{Index: i}
+}
+
+// PathNode returns an Index that selects a tree node by TreeId. Equivalent
+// to IndexNode{Target: id}.
+func PathNode(id TreeId) Index {
+	return IndexNode{Target: id}
+}
+
 func pathToIndices(parts []any) []Index {
 	out := make([]Index, len(parts))
 	for i, p := range parts {

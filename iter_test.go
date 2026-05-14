@@ -100,15 +100,15 @@ func TestLoroTree_Iterators(t *testing.T) {
 	doc := NewLoroDoc()
 	tr := doc.GetTree(AsContainerId("tree"))
 
-	root, err := tr.Create(TreeParentIdRoot{})
+	root, err := tr.Create(TreeParentRoot)
 	if err != nil {
 		t.Fatal(err)
 	}
-	child1, err := tr.Create(TreeParentIdNode{Id: root})
+	child1, err := tr.Create(TreeParentNode(root))
 	if err != nil {
 		t.Fatal(err)
 	}
-	child2, err := tr.Create(TreeParentIdNode{Id: root})
+	child2, err := tr.Create(TreeParentNode(root))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -130,7 +130,7 @@ func TestLoroTree_Iterators(t *testing.T) {
 	}
 
 	var children []TreeId
-	for id := range tr.AllChildren(TreeParentIdNode{Id: root}) {
+	for id := range tr.AllChildren(TreeParentNode(root)) {
 		children = append(children, id)
 	}
 	sort.Slice(children, func(i, j int) bool {
@@ -146,7 +146,7 @@ func TestLoroTree_Iterators(t *testing.T) {
 
 	// AllChildren on a leaf node yields nothing.
 	leafCount := 0
-	for range tr.AllChildren(TreeParentIdNode{Id: child1}) {
+	for range tr.AllChildren(TreeParentNode(child1)) {
 		leafCount++
 	}
 	if leafCount != 0 {
