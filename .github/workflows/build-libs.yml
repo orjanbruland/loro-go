@@ -215,6 +215,9 @@ jobs:
       - name: Run smoke test
         run: go run ./examples/simple
 
+      - name: Run tests
+        run: go test ./...
+
   collect:
     if: github.event_name == 'push'
     needs: [build-darwin, build-linux, build-windows, generate-bindings, smoke-test]
