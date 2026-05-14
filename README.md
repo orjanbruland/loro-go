@@ -4,7 +4,7 @@ This repository contains [Loro CRDT](https://github.com/loro-dev/loro) bindings 
 
 ⚠️ There is currently very little extra plumbing to make the bindings easier to use. I'm updating it as I need it.
 
-Current Loro version: 1.11.2
+Current Loro version: 1.12.0
 
 ## Updating the Loro version
 
