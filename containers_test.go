@@ -1,6 +1,9 @@
 package loro
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestLoroMap_Lookup(t *testing.T) {
 	_, m := newDocWithMap(t)
@@ -73,12 +76,107 @@ func TestLoroDoc_FindByPath(t *testing.T) {
 	must(t, m.InsertAny("k", "v"))
 	doc.Commit()
 
-	if v := doc.FindByPath([]Index{IndexKey{Key: "m"}, IndexKey{Key: "k"}}); v == nil {
+	if v := doc.FindByPath("m", "k"); v == nil {
 		t.Fatal("FindByPath should resolve m.k")
 	}
-	if v := doc.FindByPath([]Index{IndexKey{Key: "missing"}}); v != nil {
+	if v := doc.FindByPath("missing"); v != nil {
 		t.Fatal("FindByPath on missing should be nil")
 	}
+}
+
+func TestLoroDoc_FindByPath_mixedTypes(t *testing.T) {
+	doc := NewLoroDoc()
+
+	root := doc.GetMap(AsContainerId("root"))
+	users, err := root.InsertListContainer("users", NewLoroList())
+	if err != nil {
+		t.Fatalf("insert users list: %v", err)
+	}
+	alice, err := users.InsertMapContainer(0, NewLoroMap())
+	if err != nil {
+		t.Fatalf("insert alice map: %v", err)
+	}
+	must(t, alice.Insert("name", AsStringValue("Alice")))
+
+	v := doc.FindByPath("root", "users", 0, "name")
+	if v == nil {
+		t.Fatal("FindByPath returned nil for present nested path")
+	}
+	got, ok := GetStringValue(&v)
+	if !ok || got != "Alice" {
+		t.Fatalf("got (%q, %v), want (Alice, true)", got, ok)
+	}
+}
+
+func TestLoroDoc_FindByPath_intWidths(t *testing.T) {
+	doc := NewLoroDoc()
+	root := doc.GetMap(AsContainerId("root"))
+	list, err := root.InsertListContainer("items", NewLoroList())
+	if err != nil {
+		t.Fatalf("insert list: %v", err)
+	}
+	must(t, list.Push(AsStringValue("first")))
+
+	cases := []struct {
+		name string
+		idx  any
+	}{
+		{"int", int(0)},
+		{"int8", int8(0)},
+		{"int16", int16(0)},
+		{"int32", int32(0)},
+		{"int64", int64(0)},
+		{"uint", uint(0)},
+		{"uint8", uint8(0)},
+		{"uint16", uint16(0)},
+		{"uint32", uint32(0)},
+		{"uint64", uint64(0)},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			v := doc.FindByPath("root", "items", c.idx)
+			if v == nil {
+				t.Fatalf("nil for %s index", c.name)
+			}
+			got, ok := GetStringValue(&v)
+			if !ok || got != "first" {
+				t.Fatalf("got (%q, %v), want (first, true)", got, ok)
+			}
+		})
+	}
+}
+
+func TestLoroDoc_FindByPath_passthroughIndex(t *testing.T) {
+	doc := NewLoroDoc()
+	root := doc.GetMap(AsContainerId("root"))
+	must(t, root.Insert("k", AsStringValue("v")))
+
+	v := doc.FindByPath(IndexKey{Key: "root"}, IndexKey{Key: "k"})
+	if v == nil {
+		t.Fatal("FindByPath returned nil for passthrough Index args")
+	}
+	got, ok := GetStringValue(&v)
+	if !ok || got != "v" {
+		t.Fatalf("got (%q, %v), want (v, true)", got, ok)
+	}
+}
+
+func TestLoroDoc_FindByPath_unsupportedTypePanics(t *testing.T) {
+	doc := NewLoroDoc()
+	defer func() {
+		r := recover()
+		if r == nil {
+			t.Fatal("expected panic for unsupported path part type")
+		}
+		msg, ok := r.(string)
+		if !ok {
+			t.Fatalf("panic value is not a string: %#v", r)
+		}
+		if !strings.Contains(msg, "unsupported path part type") {
+			t.Fatalf("panic message %q missing expected text", msg)
+		}
+	}()
+	doc.FindByPath("root", 1.5) // float64 isn't supported
 }
 
 func TestContainer_OwnerDoc(t *testing.T) {

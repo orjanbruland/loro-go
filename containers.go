@@ -1,5 +1,7 @@
 package loro
 
+import "fmt"
+
 // This file adds single-pointer wrappers around generated methods that return
 // `**T` (UniFFI's representation of `Option<Arc<T>>`). Each wrapper returns
 // `*T`, which is nil when the value is absent — the idiomatic Go shape.
@@ -129,10 +131,56 @@ func (d *LoroDoc) FindTree(id ContainerIdLike) *LoroTree {
 	return Deref(d.TryGetTree(id))
 }
 
-// FindByPath returns the value or container at the given index path, or nil
-// if the path does not resolve.
-func (d *LoroDoc) FindByPath(path []Index) *ValueOrContainer {
-	return Deref(d.GetByPath(path))
+// FindByPath returns the value or container at the given path, or nil if the
+// path does not resolve.
+//
+// Path parts are converted to Index values: strings become IndexKey, signed
+// and unsigned integer types become IndexSeq, and TreeId becomes IndexNode.
+// Index values are passed through unchanged. Any other type panics.
+//
+//	v := doc.FindByPath("users", 0, "name")
+func (d *LoroDoc) FindByPath(parts ...any) *ValueOrContainer {
+	return Deref(d.GetByPath(pathToIndices(parts)))
+}
+
+func pathToIndices(parts []any) []Index {
+	out := make([]Index, len(parts))
+	for i, p := range parts {
+		out[i] = toIndex(p)
+	}
+	return out
+}
+
+func toIndex(p any) Index {
+	switch v := p.(type) {
+	case Index:
+		return v
+	case string:
+		return IndexKey{Key: v}
+	case TreeId:
+		return IndexNode{Target: v}
+	case int:
+		return IndexSeq{Index: uint32(v)}
+	case int8:
+		return IndexSeq{Index: uint32(v)}
+	case int16:
+		return IndexSeq{Index: uint32(v)}
+	case int32:
+		return IndexSeq{Index: uint32(v)}
+	case int64:
+		return IndexSeq{Index: uint32(v)}
+	case uint:
+		return IndexSeq{Index: uint32(v)}
+	case uint8:
+		return IndexSeq{Index: uint32(v)}
+	case uint16:
+		return IndexSeq{Index: uint32(v)}
+	case uint32:
+		return IndexSeq{Index: v}
+	case uint64:
+		return IndexSeq{Index: uint32(v)}
+	}
+	panic(fmt.Sprintf("loro: unsupported path part type: %T", p))
 }
 
 // FindByStrPath returns the value or container at the given string path, or
