@@ -1,0 +1,6 @@
+# jemalloc's configure script unconditionally compiles with -g3, which bloats
+# the Linux static archives with ~30MB of DWARF. We don't use symbolized heap
+# profiles, so override it for the C toolchain on the Linux targets.
+[env]
+"CFLAGS_x86_64-unknown-linux-musl" = "-g0"
+"CFLAGS_aarch64-unknown-linux-musl" = "-g0"
