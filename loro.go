@@ -1033,6 +1033,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_pending_updates()
+		})
+		if checksum != 11778 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_export_pending_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_loro_ffi_checksum_method_lorodoc_export_shallow_snapshot()
 		})
 		if checksum != 39593 {
@@ -1605,6 +1614,24 @@ func uniffiCheckChecksums() {
 		if checksum != 32967 {
 			// If this happens try cleaning and rebuilding your project
 			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_travel_change_ancestors: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_export_json_updates()
+		})
+		if checksum != 16562 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_export_json_updates: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_loro_ffi_checksum_method_lorodoc_try_export_json_updates_without_peer_compression()
+		})
+		if checksum != 7325 {
+			// If this happens try cleaning and rebuilding your project
+			panic("loro: uniffi_loro_ffi_checksum_method_lorodoc_try_export_json_updates_without_peer_compression: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -6588,12 +6615,40 @@ type LoroDocInterface interface {
 	// Compared to [`export_json_updates`], this method does not compress the peer IDs in the updates.
 	// So the operations are easier to be processed by application code.
 	ExportJsonUpdatesWithoutPeerCompression(startVv *VersionVector, endVv *VersionVector) string
+	// Export imported remote updates waiting for missing causal dependencies.
+	//
+	// These are received remote operations, not uncommitted local transactions.
+	// Returns native nil/None when none remain pending, not empty bytes, or bytes
+	// in the ordinary updates format. The bytes preserve the pending operations,
+	// not necessarily the original blob.
+	//
+	// This is read-only: it does not consume pending updates, commit local edits,
+	// emit events, or advance the applied version vector/frontiers. Ordinary
+	// snapshot/update exports exclude these updates; snapshot export still
+	// commits local edits as usual.
+	//
+	// Prevent mutations/imports between exporting a snapshot and these bytes:
+	// the calls are not an atomic pair. Save or replace both as one consistent
+	// checkpoint, only after both exports succeed. nil/None must clear any older
+	// pending record; an export error must not replace the previous checkpoint.
+	// Encoding failures, including `LoroEncodeError.InternalError`, are thrown
+	// with the core's error message rather than returned as absent bytes.
+	//
+	// Restore the snapshot first, then pass any pending bytes to ordinary `import`.
+	// They remain pending until the real missing dependencies arrive. This API
+	// does not fetch or invent those dependencies, establish that the document
+	// is synced, or make advancing a transport cursor or compaction safe.
+	ExportPendingUpdates() (*[]byte, error)
 	ExportShallowSnapshot(frontiers *Frontiers) ([]byte, error)
 	// Export the current state and history of the document.
+	// Remote updates waiting for missing dependencies are excluded; save them
+	// separately with `export_pending_updates`. This export commits local edits.
 	ExportSnapshot() ([]byte, error)
 	ExportSnapshotAt(frontiers *Frontiers) ([]byte, error)
 	ExportStateOnly(frontiers **Frontiers) ([]byte, error)
-	// Export all the ops not included in the given `VersionVector`
+	// Export all applied ops not included in the given `VersionVector`.
+	// Remote updates waiting for missing dependencies are excluded; save them
+	// separately with `export_pending_updates`.
 	ExportUpdates(vv *VersionVector) ([]byte, error)
 	ExportUpdatesInRange(spans []IdSpan) ([]byte, error)
 	// Find the operation id spans that between the `from` version and the `to` version.
@@ -6744,14 +6799,16 @@ type LoroDocInterface interface {
 	// if it has ever been created on the doc.
 	HasContainer(id ContainerId) bool
 	HasHistoryCache() bool
-	// Import updates/snapshot exported by [`LoroDoc::export_snapshot`] or [`LoroDoc::export_from`].
+	// Import a snapshot, ordinary updates, or bytes from `export_pending_updates`.
+	// Pending updates still wait for their actual missing causal dependencies.
 	Import(bytes []byte) (ImportStatus, error)
 	// Import a batch of updates/snapshot.
 	//
 	// The data can be in arbitrary order. The import result will be the same.
 	ImportBatch(bytes [][]byte) (ImportStatus, error)
 	ImportJsonUpdates(json string) (ImportStatus, error)
-	// Import updates/snapshot exported by [`LoroDoc::export_snapshot`] or [`LoroDoc::export_from`].
+	// Import a snapshot, ordinary updates, or bytes from `export_pending_updates`.
+	// Pending updates still wait for their actual missing causal dependencies.
 	//
 	// It marks the import with a custom `origin` string. It can be used to track the import source
 	// in the generated events.
@@ -6919,6 +6976,10 @@ type LoroDocInterface interface {
 	// * `ids` - The IDs of the Change to start the traversal from.
 	// * `f` - A mutable function that is called for each ancestor. It can return `ControlFlow::Break(())` to stop the traversal.
 	TravelChangeAncestors(ids []Id, f ChangeAncestorsTraveler) error
+	// Export JSON updates, reporting unreadable history as LoroError.
+	TryExportJsonUpdates(startVv *VersionVector, endVv *VersionVector) (string, error)
+	// Export JSON updates without peer compression, reporting unreadable history as LoroError.
+	TryExportJsonUpdatesWithoutPeerCompression(startVv *VersionVector, endVv *VersionVector) (string, error)
 	// Try to get a [LoroCounter] by container id.
 	//
 	// Returns null if the container does not exist.
@@ -7267,6 +7328,46 @@ func (_self *LoroDoc) ExportJsonUpdatesWithoutPeerCompression(startVv *VersionVe
 	}))
 }
 
+// Export imported remote updates waiting for missing causal dependencies.
+//
+// These are received remote operations, not uncommitted local transactions.
+// Returns native nil/None when none remain pending, not empty bytes, or bytes
+// in the ordinary updates format. The bytes preserve the pending operations,
+// not necessarily the original blob.
+//
+// This is read-only: it does not consume pending updates, commit local edits,
+// emit events, or advance the applied version vector/frontiers. Ordinary
+// snapshot/update exports exclude these updates; snapshot export still
+// commits local edits as usual.
+//
+// Prevent mutations/imports between exporting a snapshot and these bytes:
+// the calls are not an atomic pair. Save or replace both as one consistent
+// checkpoint, only after both exports succeed. nil/None must clear any older
+// pending record; an export error must not replace the previous checkpoint.
+// Encoding failures, including `LoroEncodeError.InternalError`, are thrown
+// with the core's error message rather than returned as absent bytes.
+//
+// Restore the snapshot first, then pass any pending bytes to ordinary `import`.
+// They remain pending until the real missing dependencies arrive. This API
+// does not fetch or invent those dependencies, establish that the document
+// is synced, or make advancing a transport cursor or compaction safe.
+func (_self *LoroDoc) ExportPendingUpdates() (*[]byte, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[*LoroEncodeError](FfiConverterLoroEncodeError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_export_pending_updates(
+				_pointer, _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *[]byte
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterOptionalBytesINSTANCE.Lift(_uniffiRV), nil
+	}
+}
+
 func (_self *LoroDoc) ExportShallowSnapshot(frontiers *Frontiers) ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
@@ -7285,6 +7386,8 @@ func (_self *LoroDoc) ExportShallowSnapshot(frontiers *Frontiers) ([]byte, error
 }
 
 // Export the current state and history of the document.
+// Remote updates waiting for missing dependencies are excluded; save them
+// separately with `export_pending_updates`. This export commits local edits.
 func (_self *LoroDoc) ExportSnapshot() ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
@@ -7336,7 +7439,9 @@ func (_self *LoroDoc) ExportStateOnly(frontiers **Frontiers) ([]byte, error) {
 	}
 }
 
-// Export all the ops not included in the given `VersionVector`
+// Export all applied ops not included in the given `VersionVector`.
+// Remote updates waiting for missing dependencies are excluded; save them
+// separately with `export_pending_updates`.
 func (_self *LoroDoc) ExportUpdates(vv *VersionVector) ([]byte, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
@@ -7757,7 +7862,8 @@ func (_self *LoroDoc) HasHistoryCache() bool {
 	}))
 }
 
-// Import updates/snapshot exported by [`LoroDoc::export_snapshot`] or [`LoroDoc::export_from`].
+// Import a snapshot, ordinary updates, or bytes from `export_pending_updates`.
+// Pending updates still wait for their actual missing causal dependencies.
 func (_self *LoroDoc) Import(bytes []byte) (ImportStatus, error) {
 	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
 	defer _self.ffiObject.decrementPointer()
@@ -7812,7 +7918,8 @@ func (_self *LoroDoc) ImportJsonUpdates(json string) (ImportStatus, error) {
 	}
 }
 
-// Import updates/snapshot exported by [`LoroDoc::export_snapshot`] or [`LoroDoc::export_from`].
+// Import a snapshot, ordinary updates, or bytes from `export_pending_updates`.
+// Pending updates still wait for their actual missing causal dependencies.
 //
 // It marks the import with a custom `origin` string. It can be used to track the import source
 // in the generated events.
@@ -8263,6 +8370,42 @@ func (_self *LoroDoc) TravelChangeAncestors(ids []Id, f ChangeAncestorsTraveler)
 		return false
 	})
 	return _uniffiErr.AsError()
+}
+
+// Export JSON updates, reporting unreadable history as LoroError.
+func (_self *LoroDoc) TryExportJsonUpdates(startVv *VersionVector, endVv *VersionVector) (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[*LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_export_json_updates(
+				_pointer, FfiConverterVersionVectorINSTANCE.Lower(startVv), FfiConverterVersionVectorINSTANCE.Lower(endVv), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue string
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
+	}
+}
+
+// Export JSON updates without peer compression, reporting unreadable history as LoroError.
+func (_self *LoroDoc) TryExportJsonUpdatesWithoutPeerCompression(startVv *VersionVector, endVv *VersionVector) (string, error) {
+	_pointer := _self.ffiObject.incrementPointer("*LoroDoc")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[*LoroError](FfiConverterLoroError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_loro_ffi_fn_method_lorodoc_try_export_json_updates_without_peer_compression(
+				_pointer, FfiConverterVersionVectorINSTANCE.Lower(startVv), FfiConverterVersionVectorINSTANCE.Lower(endVv), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue string
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterStringINSTANCE.Lift(_uniffiRV), nil
+	}
 }
 
 // Try to get a [LoroCounter] by container id.
@@ -15009,6 +15152,7 @@ func (err CannotFindRelativePosition) Unwrap() error {
 var ErrCannotFindRelativePositionContainerDeleted = fmt.Errorf("CannotFindRelativePositionContainerDeleted")
 var ErrCannotFindRelativePositionHistoryCleared = fmt.Errorf("CannotFindRelativePositionHistoryCleared")
 var ErrCannotFindRelativePositionIdNotFound = fmt.Errorf("CannotFindRelativePositionIdNotFound")
+var ErrCannotFindRelativePositionHistoryUnreadable = fmt.Errorf("CannotFindRelativePositionHistoryUnreadable")
 
 // Variant structs
 type CannotFindRelativePositionContainerDeleted struct {
@@ -15068,6 +15212,25 @@ func (self CannotFindRelativePositionIdNotFound) Is(target error) bool {
 	return target == ErrCannotFindRelativePositionIdNotFound
 }
 
+type CannotFindRelativePositionHistoryUnreadable struct {
+	message string
+}
+
+func NewCannotFindRelativePositionHistoryUnreadable() *CannotFindRelativePosition {
+	return &CannotFindRelativePosition{err: &CannotFindRelativePositionHistoryUnreadable{}}
+}
+
+func (e CannotFindRelativePositionHistoryUnreadable) destroy() {
+}
+
+func (err CannotFindRelativePositionHistoryUnreadable) Error() string {
+	return fmt.Sprintf("HistoryUnreadable: %s", err.message)
+}
+
+func (self CannotFindRelativePositionHistoryUnreadable) Is(target error) bool {
+	return target == ErrCannotFindRelativePositionHistoryUnreadable
+}
+
 type FfiConverterCannotFindRelativePosition struct{}
 
 var FfiConverterCannotFindRelativePositionINSTANCE = FfiConverterCannotFindRelativePosition{}
@@ -15095,6 +15258,8 @@ func (c FfiConverterCannotFindRelativePosition) Read(reader io.Reader) *CannotFi
 		return &CannotFindRelativePosition{&CannotFindRelativePositionHistoryCleared{message}}
 	case 3:
 		return &CannotFindRelativePosition{&CannotFindRelativePositionIdNotFound{message}}
+	case 4:
+		return &CannotFindRelativePosition{&CannotFindRelativePositionHistoryUnreadable{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterCannotFindRelativePosition.Read()", errorID))
 	}
@@ -15109,6 +15274,8 @@ func (c FfiConverterCannotFindRelativePosition) Write(writer io.Writer, value *C
 		writeInt32(writer, 2)
 	case *CannotFindRelativePositionIdNotFound:
 		writeInt32(writer, 3)
+	case *CannotFindRelativePositionHistoryUnreadable:
+		writeInt32(writer, 4)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterCannotFindRelativePosition.Write", value))
@@ -15124,6 +15291,8 @@ func (_ FfiDestroyerCannotFindRelativePosition) Destroy(value *CannotFindRelativ
 	case CannotFindRelativePositionHistoryCleared:
 		variantValue.destroy()
 	case CannotFindRelativePositionIdNotFound:
+		variantValue.destroy()
+	case CannotFindRelativePositionHistoryUnreadable:
 		variantValue.destroy()
 	default:
 		_ = variantValue
@@ -15156,6 +15325,7 @@ func (err ChangeTravelError) Unwrap() error {
 // Err* are used for checking error type with `errors.Is`
 var ErrChangeTravelErrorTargetIdNotFound = fmt.Errorf("ChangeTravelErrorTargetIdNotFound")
 var ErrChangeTravelErrorTargetVersionNotIncluded = fmt.Errorf("ChangeTravelErrorTargetVersionNotIncluded")
+var ErrChangeTravelErrorHistoryUnreadable = fmt.Errorf("ChangeTravelErrorHistoryUnreadable")
 
 // Variant structs
 type ChangeTravelErrorTargetIdNotFound struct {
@@ -15196,6 +15366,25 @@ func (self ChangeTravelErrorTargetVersionNotIncluded) Is(target error) bool {
 	return target == ErrChangeTravelErrorTargetVersionNotIncluded
 }
 
+type ChangeTravelErrorHistoryUnreadable struct {
+	message string
+}
+
+func NewChangeTravelErrorHistoryUnreadable() *ChangeTravelError {
+	return &ChangeTravelError{err: &ChangeTravelErrorHistoryUnreadable{}}
+}
+
+func (e ChangeTravelErrorHistoryUnreadable) destroy() {
+}
+
+func (err ChangeTravelErrorHistoryUnreadable) Error() string {
+	return fmt.Sprintf("HistoryUnreadable: %s", err.message)
+}
+
+func (self ChangeTravelErrorHistoryUnreadable) Is(target error) bool {
+	return target == ErrChangeTravelErrorHistoryUnreadable
+}
+
 type FfiConverterChangeTravelError struct{}
 
 var FfiConverterChangeTravelErrorINSTANCE = FfiConverterChangeTravelError{}
@@ -15221,6 +15410,8 @@ func (c FfiConverterChangeTravelError) Read(reader io.Reader) *ChangeTravelError
 		return &ChangeTravelError{&ChangeTravelErrorTargetIdNotFound{message}}
 	case 2:
 		return &ChangeTravelError{&ChangeTravelErrorTargetVersionNotIncluded{message}}
+	case 3:
+		return &ChangeTravelError{&ChangeTravelErrorHistoryUnreadable{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterChangeTravelError.Read()", errorID))
 	}
@@ -15233,6 +15424,8 @@ func (c FfiConverterChangeTravelError) Write(writer io.Writer, value *ChangeTrav
 		writeInt32(writer, 1)
 	case *ChangeTravelErrorTargetVersionNotIncluded:
 		writeInt32(writer, 2)
+	case *ChangeTravelErrorHistoryUnreadable:
+		writeInt32(writer, 3)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterChangeTravelError.Write", value))
@@ -15246,6 +15439,8 @@ func (_ FfiDestroyerChangeTravelError) Destroy(value *ChangeTravelError) {
 	case ChangeTravelErrorTargetIdNotFound:
 		variantValue.destroy()
 	case ChangeTravelErrorTargetVersionNotIncluded:
+		variantValue.destroy()
+	case ChangeTravelErrorHistoryUnreadable:
 		variantValue.destroy()
 	default:
 		_ = variantValue
@@ -16144,6 +16339,8 @@ func (err LoroEncodeError) Unwrap() error {
 var ErrLoroEncodeErrorFrontiersNotFound = fmt.Errorf("LoroEncodeErrorFrontiersNotFound")
 var ErrLoroEncodeErrorShallowSnapshotIncompatibleWithOldFormat = fmt.Errorf("LoroEncodeErrorShallowSnapshotIncompatibleWithOldFormat")
 var ErrLoroEncodeErrorUnknownContainer = fmt.Errorf("LoroEncodeErrorUnknownContainer")
+var ErrLoroEncodeErrorInternalError = fmt.Errorf("LoroEncodeErrorInternalError")
+var ErrLoroEncodeErrorDecodeError = fmt.Errorf("LoroEncodeErrorDecodeError")
 
 // Variant structs
 type LoroEncodeErrorFrontiersNotFound struct {
@@ -16203,6 +16400,44 @@ func (self LoroEncodeErrorUnknownContainer) Is(target error) bool {
 	return target == ErrLoroEncodeErrorUnknownContainer
 }
 
+type LoroEncodeErrorInternalError struct {
+	message string
+}
+
+func NewLoroEncodeErrorInternalError() *LoroEncodeError {
+	return &LoroEncodeError{err: &LoroEncodeErrorInternalError{}}
+}
+
+func (e LoroEncodeErrorInternalError) destroy() {
+}
+
+func (err LoroEncodeErrorInternalError) Error() string {
+	return fmt.Sprintf("InternalError: %s", err.message)
+}
+
+func (self LoroEncodeErrorInternalError) Is(target error) bool {
+	return target == ErrLoroEncodeErrorInternalError
+}
+
+type LoroEncodeErrorDecodeError struct {
+	message string
+}
+
+func NewLoroEncodeErrorDecodeError() *LoroEncodeError {
+	return &LoroEncodeError{err: &LoroEncodeErrorDecodeError{}}
+}
+
+func (e LoroEncodeErrorDecodeError) destroy() {
+}
+
+func (err LoroEncodeErrorDecodeError) Error() string {
+	return fmt.Sprintf("DecodeError: %s", err.message)
+}
+
+func (self LoroEncodeErrorDecodeError) Is(target error) bool {
+	return target == ErrLoroEncodeErrorDecodeError
+}
+
 type FfiConverterLoroEncodeError struct{}
 
 var FfiConverterLoroEncodeErrorINSTANCE = FfiConverterLoroEncodeError{}
@@ -16230,6 +16465,10 @@ func (c FfiConverterLoroEncodeError) Read(reader io.Reader) *LoroEncodeError {
 		return &LoroEncodeError{&LoroEncodeErrorShallowSnapshotIncompatibleWithOldFormat{message}}
 	case 3:
 		return &LoroEncodeError{&LoroEncodeErrorUnknownContainer{message}}
+	case 4:
+		return &LoroEncodeError{&LoroEncodeErrorInternalError{message}}
+	case 5:
+		return &LoroEncodeError{&LoroEncodeErrorDecodeError{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterLoroEncodeError.Read()", errorID))
 	}
@@ -16244,6 +16483,10 @@ func (c FfiConverterLoroEncodeError) Write(writer io.Writer, value *LoroEncodeEr
 		writeInt32(writer, 2)
 	case *LoroEncodeErrorUnknownContainer:
 		writeInt32(writer, 3)
+	case *LoroEncodeErrorInternalError:
+		writeInt32(writer, 4)
+	case *LoroEncodeErrorDecodeError:
+		writeInt32(writer, 5)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterLoroEncodeError.Write", value))
@@ -16259,6 +16502,10 @@ func (_ FfiDestroyerLoroEncodeError) Destroy(value *LoroEncodeError) {
 	case LoroEncodeErrorShallowSnapshotIncompatibleWithOldFormat:
 		variantValue.destroy()
 	case LoroEncodeErrorUnknownContainer:
+		variantValue.destroy()
+	case LoroEncodeErrorInternalError:
+		variantValue.destroy()
+	case LoroEncodeErrorDecodeError:
 		variantValue.destroy()
 	default:
 		_ = variantValue
@@ -18299,6 +18546,47 @@ type FfiDestroyerOptionalString struct{}
 func (_ FfiDestroyerOptionalString) Destroy(value *string) {
 	if value != nil {
 		FfiDestroyerString{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalBytes struct{}
+
+var FfiConverterOptionalBytesINSTANCE = FfiConverterOptionalBytes{}
+
+func (c FfiConverterOptionalBytes) Lift(rb RustBufferI) *[]byte {
+	return LiftFromRustBuffer[*[]byte](c, rb)
+}
+
+func (_ FfiConverterOptionalBytes) Read(reader io.Reader) *[]byte {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterBytesINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalBytes) Lower(value *[]byte) C.RustBuffer {
+	return LowerIntoRustBuffer[*[]byte](c, value)
+}
+
+func (c FfiConverterOptionalBytes) LowerExternal(value *[]byte) ExternalCRustBuffer {
+	return RustBufferFromC(LowerIntoRustBuffer[*[]byte](c, value))
+}
+
+func (_ FfiConverterOptionalBytes) Write(writer io.Writer, value *[]byte) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterBytesINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalBytes struct{}
+
+func (_ FfiDestroyerOptionalBytes) Destroy(value *[]byte) {
+	if value != nil {
+		FfiDestroyerBytes{}.Destroy(*value)
 	}
 }
 

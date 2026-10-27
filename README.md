@@ -7,7 +7,7 @@
 
 This repository contains [Loro CRDT](https://github.com/loro-dev/loro) bindings for Go. Contains pre-built binaries for MacOS (ARM64, AMD64), Linux (ARM64, AMD64), and Windows (AMD64).
 
-Current Loro version: 1.16.0
+Current Loro version: 1.17.1
 
 **Note:** The API is pre-1.0 and may change.
 
