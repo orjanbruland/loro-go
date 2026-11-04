@@ -113,3 +113,6 @@ mod jemalloc_profiling {
         }
     }
 }
+
+#[cfg(feature = "staticlib")]
+mod redact;

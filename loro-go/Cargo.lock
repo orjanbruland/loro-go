@@ -1081,6 +1081,7 @@ name = "loro-go"
 version = "1.17.1"
 dependencies = [
  "jemalloc_pprof",
+ "loro",
  "loro-ffi",
  "tikv-jemalloc-ctl",
  "tikv-jemallocator",
