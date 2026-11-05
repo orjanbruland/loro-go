@@ -81,8 +81,12 @@ jobs:
       - name: Build static library
         env:
           RUSTFLAGS: "-C target-feature=+crt-static"
+          BUILD_TARGET: ${{ matrix.target }}
         run: |
-          cross build \
+          # jemalloc's configure adds -g3, about 19 MiB of debug info per archive.
+          # A hyphenated CFLAGS_<target> does not reach cargo inside the cross container.
+          cflags_var="CFLAGS_${BUILD_TARGET//-/_}"
+          env "$cflags_var=-g0" CROSS_BUILD_ENV_PASSTHROUGH="$cflags_var" cross build \
             --manifest-path loro-go/Cargo.toml \
             --target ${{ matrix.target }} \
             --lib \

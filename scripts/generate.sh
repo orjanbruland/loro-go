@@ -39,8 +39,16 @@ export RUSTFLAGS="-C target-feature=+crt-static"
 
 for TARGET in $TARGETS; do
     echo "▸ Building for $TARGET"
-    
-	cross build --manifest-path "$RUST_FOLDER/Cargo.toml" --target "$TARGET" --lib --locked --release
+
+	# jemalloc's configure adds -g3, about 19 MiB of debug info per Linux archive.
+	# A hyphenated CFLAGS_<target> does not reach cargo inside the cross container.
+	BUILD_ENV=""
+	if [[ "$TARGET" == *-linux-* ]]; then
+		CFLAGS_VAR="CFLAGS_${TARGET//-/_}"
+		BUILD_ENV="$CFLAGS_VAR=-g0 CROSS_BUILD_ENV_PASSTHROUGH=$CFLAGS_VAR"
+	fi
+
+	env $BUILD_ENV cross build --manifest-path "$RUST_FOLDER/Cargo.toml" --target "$TARGET" --lib --locked --release
 
 	mkdir -p "${GO_FOLDER}/libs/${TARGET}"
 	cp "${RUST_FOLDER}/target/${TARGET}/release/${LIB_NAME}" "${GO_FOLDER}/libs/${TARGET}/${LIB_NAME}"
