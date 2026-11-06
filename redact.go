@@ -59,7 +59,8 @@ type RedactResult struct {
 	// Doc is the rebuilt document, owned by the caller, or nil when no op
 	// needed redacting.
 	Doc *LoroDoc
-	// RedactedOps counts ops whose content was replaced.
+	// RedactedOps counts ops whose content was replaced, in deleted containers
+	// and as overwritten map values.
 	RedactedOps uint64
 	// RedactedContainers counts deleted containers with at least one
 	// replaced op.
@@ -73,7 +74,10 @@ type RedactResult struct {
 // in a container that is deleted at head replaced, the way RedactJsonUpdates
 // replaces it: text becomes U+FFFD per character, list, map and mark values
 // become null, and child container references, deletes, moves and tree ops
-// stay. Op IDs, lamports, deps and timestamps are unchanged, so peers holding
+// stay. In a live map, every value that lost to a later write or delete of its
+// key becomes null too. A loser stays a loser whatever arrives later, so this
+// never shows on a live key. Op IDs, lamports, deps and timestamps are
+// unchanged, so peers holding
 // the original history keep syncing with the rebuilt document both ways, as
 // long as they exchange deltas from each other's version vector: Loro checks
 // an import that brings new ops against every op ID it shares with the
@@ -85,7 +89,9 @@ type RedactResult struct {
 //
 // The rebuilt document carries the source's peer ID and pending ops, and its
 // oplog version vector, frontiers and deep value are checked against the
-// source's before it is returned; a mismatch returns ErrRedactVerification.
+// source's before it is returned; a mismatch returns ErrRedactVerification. The
+// deep values are compared without their empty root containers, because reading
+// a root creates it with no op, so a rebuilt document may not have it.
 // The source document is left as it was, apart from committing an open
 // transaction. Document configuration (text styles,
 // timestamp recording, merge interval) is not copied.

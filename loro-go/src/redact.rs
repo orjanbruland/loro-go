@@ -1,7 +1,7 @@
-//! Rebuilds a document with the content of every op in a deleted container
-//! replaced by placeholders, keeping op IDs, lamports and deps. Works on the
-//! owned `JsonSchema` structs, so no JSON text is produced and floats stay
-//! exact.
+//! Rebuilds a document with the content of every op in a deleted container,
+//! and every map value that lost to a later write of its key, replaced by
+//! placeholders, keeping op IDs, lamports and deps. Works on the owned
+//! `JsonSchema` structs, so no JSON text is produced and floats stay exact.
 
 use std::collections::{HashMap, HashSet};
 use std::panic::{catch_unwind, AssertUnwindSafe};
@@ -141,12 +141,15 @@ fn redact_deleted_containers(
         .export_json_updates_without_peer_compression(&VersionVector::new(), &oplog_vv)
         .map_err(|e| Failure::new(ERR_REBUILD, e.to_string()))?;
     let parents = container_parents(&schema);
+    let winners = map_key_winners(&schema);
 
     let mut stats = Stats::default();
     // Whether each container's ops are redacted.
     let mut decisions: HashMap<ContainerID, bool> = HashMap::new();
     let mut redacted: HashSet<ContainerID> = HashSet::new();
     for change in schema.changes.iter_mut() {
+        let (peer, first_counter, first_lamport) =
+            (change.id.peer, change.id.counter, change.lamport);
         for op in change.ops.iter_mut() {
             let redact = match decisions.get(&op.container) {
                 Some(d) => *d,
@@ -158,6 +161,16 @@ fn redact_deleted_containers(
                 }
             };
             if !redact {
+                if let JsonOpContent::Map(JsonMapOp::Insert { key, value }) = &mut op.content {
+                    let lamport = first_lamport + (op.counter - first_counter) as u32;
+                    let won = winners
+                        .get(&op.container)
+                        .and_then(|keys| keys.get(key.as_str()))
+                        .is_some_and(|w| *w == (lamport, peer));
+                    if !won && redact_value(value) {
+                        stats.redacted_ops += 1;
+                    }
+                }
                 continue;
             }
             if redact_op(&mut op.content)
@@ -201,7 +214,9 @@ fn redact_deleted_containers(
     if rebuilt.oplog_frontiers() != src.oplog_frontiers() {
         return Err(Failure::new(ERR_VERIFY, "oplog frontiers differ"));
     }
-    if rebuilt.get_deep_value() != src.get_deep_value() {
+    // Asking for a root creates it empty with no op, so the source can hold
+    // empty roots that nothing in the history brings to the rebuilt doc.
+    if non_empty_roots(&rebuilt.get_deep_value()) != non_empty_roots(&src.get_deep_value()) {
         return Err(Failure::new(ERR_VERIFY, "deep value differs"));
     }
     Ok((Some(rebuilt_ffi), stats))
@@ -250,6 +265,47 @@ fn is_revivable(
         }
         current = parent;
     }
+}
+
+/// The write that holds each map key at head, by Loro's last-writer-wins order
+/// (lamport, then peer). A delete can win, and then every insert lost. A write
+/// arriving later can only outrank the winner, so a value that lost stays lost.
+fn map_key_winners(schema: &JsonSchema) -> HashMap<ContainerID, HashMap<String, (u32, u64)>> {
+    let mut winners: HashMap<ContainerID, HashMap<String, (u32, u64)>> = HashMap::new();
+    for change in &schema.changes {
+        for op in &change.ops {
+            let key = match &op.content {
+                JsonOpContent::Map(JsonMapOp::Insert { key, .. })
+                | JsonOpContent::Map(JsonMapOp::Delete { key }) => key.to_string(),
+                _ => continue,
+            };
+            let lamport = change.lamport + (op.counter - change.id.counter) as u32;
+            let candidate = (lamport, change.id.peer);
+            let winner = winners
+                .entry(op.container.clone())
+                .or_default()
+                .entry(key)
+                .or_insert(candidate);
+            *winner = (*winner).max(candidate);
+        }
+    }
+    winners
+}
+
+fn non_empty_roots(deep: &LoroValue) -> HashMap<&str, &LoroValue> {
+    let LoroValue::Map(roots) = deep else {
+        unreachable!("a document's deep value is a map");
+    };
+    roots
+        .iter()
+        .filter(|(_, v)| match v {
+            LoroValue::Map(m) => !m.is_empty(),
+            LoroValue::List(l) => !l.is_empty(),
+            LoroValue::String(s) => !s.is_empty(),
+            _ => true,
+        })
+        .map(|(k, v)| (k.as_str(), v))
+        .collect()
 }
 
 /// Parent of every container created in the history: container values

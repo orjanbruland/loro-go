@@ -215,6 +215,201 @@ func TestRedactDeletedContainers_SyncsWithOriginalHistory(t *testing.T) {
 	}
 }
 
+// Reading a root creates it with no op, and the rebuilt doc has no such root.
+func TestRedactDeletedContainers_RootCreatedByAReader(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	segments := doc.GetList(AsContainerId("segments"))
+	addSegment(t, segments, "GONE")
+	addSegment(t, segments, "KEPT")
+	must(t, segments.Delete(0, 1))
+	doc.GetMap(AsContainerId("content")).Destroy()
+	doc.GetTree(AsContainerId("sections")).Destroy()
+
+	res := mustRedact(t, doc, RedactOptions{})
+	if res.Doc == nil {
+		t.Fatal("expected a rebuilt doc")
+	}
+	assertAbsent(t, res.Doc, "GONE")
+	assertPresent(t, res.Doc, "KEPT")
+}
+
+// A root emptied by its own ops is on the rebuilt doc, and a reader's root is
+// only on the source.
+func TestRedactDeletedContainers_RootEmptiedByItsOps(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	sections := doc.GetTree(AsContainerId("sections"))
+	node, err := sections.Create(TreeParentIdRoot{})
+	must(t, err)
+	meta, err := sections.GetMeta(node)
+	must(t, err)
+	must(t, meta.InsertAny("title", "GONE"))
+	must(t, sections.Delete(node))
+	doc.GetMap(AsContainerId("content")).Destroy()
+
+	res := mustRedact(t, doc, RedactOptions{IncludeRevivable: true})
+	if res.Doc == nil {
+		t.Fatal("expected a rebuilt doc")
+	}
+	assertAbsent(t, res.Doc, "GONE")
+}
+
+func TestRedactDeletedContainers_OverwrittenMapValue(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	segments := doc.GetList(AsContainerId("segments"))
+	seg, err := segments.InsertLoroMap(0)
+	must(t, err)
+	must(t, seg.InsertAny("text", "OLDTEXT"))
+	must(t, seg.InsertAny("speaker", "SPEAKER"))
+	doc.Commit()
+	must(t, seg.InsertAny("text", "NEWTEXT"))
+
+	res := mustRedact(t, doc, RedactOptions{})
+	if res.Doc == nil || res.RedactedOps != 1 || res.RedactedContainers != 0 {
+		t.Fatalf("got %+v, want one redacted op in no deleted container", res)
+	}
+	assertAbsent(t, res.Doc, "OLDTEXT")
+	rebuiltSeg, ok := res.Doc.GetList(AsContainerId("segments")).GetLoroMap(0)
+	if !ok {
+		t.Fatal("rebuilt segment missing")
+	}
+	if s, ok := rebuiltSeg.GetString("text"); !ok || s != "NEWTEXT" {
+		t.Errorf("text = (%q, %v), want NEWTEXT", s, ok)
+	}
+	if s, ok := rebuiltSeg.GetString("speaker"); !ok || s != "SPEAKER" {
+		t.Errorf("speaker = (%q, %v), want SPEAKER", s, ok)
+	}
+
+	second := mustRedact(t, res.Doc, RedactOptions{})
+	if second.Doc != nil || second.RedactedOps != 0 {
+		t.Fatalf("second pass = %+v, want no rebuild", second)
+	}
+}
+
+func TestRedactDeletedContainers_DeletedMapKey(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	m := doc.GetMap(AsContainerId("meta"))
+	must(t, m.InsertAny("summary", "OLDSUMMARY"))
+	must(t, m.InsertAny("kept", "KEPT"))
+	doc.Commit()
+	must(t, m.Delete("summary"))
+
+	res := mustRedact(t, doc, RedactOptions{})
+	if res.Doc == nil {
+		t.Fatal("expected a rebuilt doc")
+	}
+	assertAbsent(t, res.Doc, "OLDSUMMARY")
+	assertPresent(t, res.Doc, "KEPT")
+}
+
+// An op's lamport is its change's plus its offset in the change, and ops of
+// other containers in the change move that offset.
+func TestRedactDeletedContainers_OverwriteInsideOneChange(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	words := doc.GetList(AsContainerId("words"))
+	must(t, words.PushAny("one"))
+	must(t, words.PushAny("two"))
+	m := doc.GetMap(AsContainerId("meta"))
+	must(t, m.InsertAny("text", "OLDTEXT"))
+	must(t, words.PushAny("three"))
+	must(t, m.InsertAny("text", "NEWTEXT"))
+
+	res := mustRedact(t, doc, RedactOptions{})
+	if res.Doc == nil || res.RedactedOps != 1 {
+		t.Fatalf("got %+v, want one redacted op", res)
+	}
+	assertAbsent(t, res.Doc, "OLDTEXT")
+	if s, ok := res.Doc.GetMap(AsContainerId("meta")).GetString("text"); !ok || s != "NEWTEXT" {
+		t.Errorf("text = (%q, %v), want NEWTEXT", s, ok)
+	}
+}
+
+// Two writes at one lamport: the higher peer holds the key on every copy, and
+// the other value is the one to go, whichever way the peers are numbered.
+func TestRedactDeletedContainers_ConcurrentWritesTieOnPeer(t *testing.T) {
+	for _, tc := range []struct {
+		name          string
+		peerA, peerB  uint64
+		winner, loser string
+	}{
+		{"second peer higher", 1, 2, "FROMB", "FROMA"},
+		{"first peer higher", 2, 1, "FROMA", "FROMB"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			a := NewLoroDoc()
+			defer a.Destroy()
+			must(t, a.SetPeerId(tc.peerA))
+			b := NewLoroDoc()
+			defer b.Destroy()
+			must(t, b.SetPeerId(tc.peerB))
+			must(t, a.GetMap(AsContainerId("meta")).InsertAny("text", "FROMA"))
+			must(t, b.GetMap(AsContainerId("meta")).InsertAny("text", "FROMB"))
+			_, err := a.Import(mustSnapshot(t, b))
+			must(t, err)
+
+			res := mustRedact(t, a, RedactOptions{})
+			if res.Doc == nil || res.RedactedOps != 1 {
+				t.Fatalf("got %+v, want one redacted op", res)
+			}
+			assertAbsent(t, res.Doc, tc.loser)
+			if s, ok := res.Doc.GetMap(AsContainerId("meta")).GetString("text"); !ok || s != tc.winner {
+				t.Errorf("text = (%q, %v), want %q", s, ok, tc.winner)
+			}
+		})
+	}
+}
+
+// A delta from a peer that has not seen the winner arrives after the pass. It
+// loses on the redacted copy as it does on the original, and the next pass
+// removes it.
+func TestRedactDeletedContainers_LateConcurrentWriteLosesToo(t *testing.T) {
+	doc := NewLoroDoc()
+	defer doc.Destroy()
+	must(t, doc.SetPeerId(5))
+	m := doc.GetMap(AsContainerId("meta"))
+	must(t, m.InsertAny("text", "FIRST"))
+	doc.Commit()
+
+	stale := NewLoroDoc()
+	defer stale.Destroy()
+	must(t, stale.SetPeerId(1))
+	_, err := stale.Import(mustSnapshot(t, doc))
+	must(t, err)
+
+	must(t, m.InsertAny("text", "SECOND"))
+	doc.Commit()
+	must(t, m.InsertAny("text", "THIRD"))
+	doc.Commit()
+	res := mustRedact(t, doc, RedactOptions{})
+	if res.Doc == nil {
+		t.Fatal("expected a rebuilt doc")
+	}
+
+	must(t, stale.GetMap(AsContainerId("meta")).InsertAny("text", "LATE"))
+	for _, target := range []*LoroDoc{res.Doc, doc} {
+		vv := target.OplogVv()
+		late, err := stale.Export(UpdatesMode(vv))
+		vv.Destroy()
+		must(t, err)
+		_, err = target.Import(late)
+		must(t, err)
+		if s, ok := target.GetMap(AsContainerId("meta")).GetString("text"); !ok || s != "THIRD" {
+			t.Errorf("text = (%q, %v), want THIRD", s, ok)
+		}
+	}
+
+	again := mustRedact(t, res.Doc, RedactOptions{})
+	if again.Doc == nil || again.RedactedOps != 1 {
+		t.Fatalf("second pass = %+v, want one redacted op", again)
+	}
+	assertAbsent(t, again.Doc, "LATE")
+	assertPresent(t, again.Doc, "THIRD")
+}
+
 // Pins Loro's guard against peer ID reuse: an import that brings a new op
 // is checked against every op ID it shares with the doc, and a redacted op
 // never matches its original. Peers must exchange deltas from the version
